@@ -26,15 +26,13 @@
   <section class="hero reveal">
     <p class="eyebrow">Chapter 3 · Slides 34–64</p>
     <h1>SQA Management</h1>
-    <p class="lede">Software quality is conformance to explicitly stated functional and
-       performance requirements, documented development standards, and the implicit
-       characteristics expected of professionally developed software. This chapter
-       reviews what software quality is, the SQA activities that ensure it, quality
+    <p class="lede">Software quality is conformance to explicit requirements, documented
+       standards, and implicit expectations. This chapter covers SQA activities, quality
        reviews, defect amplification, the formal technical review (FTR), and software
        reliability.</p>
     <div class="meta">
       <span>Theory review</span>
-      <span>18-question quiz</span>
+      <span>26-question quiz</span>
       <span>Immediate feedback</span>
     </div>
   </section>
@@ -477,6 +475,94 @@ window.STUDY = {
       ],
       answer: 1,
       explain: "The Review Summary Report answers: <strong>What was reviewed? Who reviewed it? What were the findings and conclusions?</strong>"
+    },
+    {
+      q: "Which statement best describes a challenge in specifying software quality attributes?",
+      options: [
+        "Quality attributes are universally understood and applied.",
+        "All quality attributes are easy to quantify.",
+        "Some quality attributes are difficult to specify due to their abstract nature.",
+        "Quality attributes have no impact on software performance."
+      ],
+      answer: 2,
+      explain: "The slides note that <strong>some quality attributes are difficult to specify</strong> — one reason the simple “meets its specification” definition is inadequate."
+    },
+    {
+      q: "What does the tension between software quality attributes like efficiency and reliability suggest?",
+      options: [
+        "Software can be both efficient and reliable without compromise.",
+        "Improving one attribute may negatively impact another.",
+        "All quality attributes can be maximized simultaneously.",
+        "Software development does not require trade-offs."
+      ],
+      answer: 1,
+      explain: "<strong>Tension exists between some quality attributes</strong> (e.g. efficiency vs. reliability) — improving one may come at the expense of another."
+    },
+    {
+      q: "What do specified standards define in software development?",
+      options: [
+        "A set of testing procedures.",
+        "A guide for software design.",
+        "Development criteria that guide software engineering.",
+        "The user interface layout."
+      ],
+      answer: 2,
+      explain: "Specified standards define <strong>a set of development criteria that guide the manner in which software is engineered</strong>."
+    },
+    {
+      q: "Why do standards exist in the context of software quality assurance?",
+      options: [
+        "To limit innovation in software development",
+        "To make software development more expensive",
+        "To confuse the development team",
+        "To help an organization draft an appropriate software quality assurance plan"
+      ],
+      answer: 3,
+      explain: "Standards exist <strong>to help an organization draft an appropriate software quality assurance plan</strong> (e.g. ISO 9000-3, ANSI/IEEE)."
+    },
+    {
+      q: "What is the purpose of applying technical methods during software development?",
+      options: [
+        "To reduce development costs",
+        "To help the analyst achieve a high-quality specification and design",
+        "To minimize user involvement",
+        "To automate the coding process"
+      ],
+      answer: 1,
+      explain: "Applying technical methods helps the analyst <strong>achieve a high quality specification and a high quality design</strong>."
+    },
+    {
+      q: "What impact does SQA have on maintenance costs?",
+      options: [
+        "SQA increases maintenance costs.",
+        "SQA has no impact on maintenance costs.",
+        "SQA can reduce maintenance costs.",
+        "SQA only affects development costs."
+      ],
+      answer: 2,
+      explain: "Among the SQA advantages: <strong>maintenance costs can be reduced.</strong>"
+    },
+    {
+      q: "Which statement is correct about software reliability improvements?",
+      options: [
+        "Removing any faults will result in a proportional improvement in reliability.",
+        "Software reliability improves only when all faults are removed.",
+        "Removing faults in the most critical areas is more important than the quantity of faults removed.",
+        "A 60% fault removal always results in a 60% reliability improvement."
+      ],
+      answer: 2,
+      explain: "Reliability improves when faults in the most frequently used portions are removed, and <strong>removing faults with the most serious consequences is the primary objective</strong> — quality matters more than quantity."
+    },
+    {
+      q: "What is a sign-off in the context of the review meeting?",
+      options: [
+        "A final report summarizing the review",
+        "An approval process that requires the manager's signature",
+        "A document indicating participation and concurrence with the review team's findings",
+        "A record of all the errors found during the review"
+      ],
+      answer: 2,
+      explain: "A sign-off is completed <strong>indicating participation and concurrence with the review team's findings</strong>."
     }
   ]
 };

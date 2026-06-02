@@ -27,14 +27,12 @@
     <p class="eyebrow">Chapter 4 · Slides 65–101</p>
     <h1>Introduction to Software Testing</h1>
     <p class="lede">Software quality is the degree to which a system, component, or process
-       meets specified requirements. This chapter reviews the IEEE definition of quality;
-       the distinction between error, fault and failure; the causes and high cost of
-       software defects; the definitions of software testing; the 7 principles of testing;
-       why testing is necessary and its objectives; and the five stages of the fundamental
-       test process.</p>
+       meets specified requirements. This chapter covers error vs. fault vs. failure, the
+       causes and cost of defects, the definitions and 7 principles of testing, its objectives,
+       and the five-stage fundamental test process.</p>
     <div class="meta">
       <span>Theory review</span>
-      <span>18-question quiz</span>
+      <span>26-question quiz</span>
       <span>Immediate feedback</span>
     </div>
   </section>
@@ -51,15 +49,14 @@
            which a <strong>system</strong>, <strong>component</strong>, or
            <strong>process</strong> meets <strong>specified requirements</strong>.</em></p>
       </div>
-      <p>Quality is ultimately reflected in <strong>customer satisfaction</strong>, which the
-         slides rate on a scale from <em>Very Poor</em> and <em>Poor</em>, through
-         <em>Average</em>, up to <em>Good</em> and <em>Excellent</em>.</p>
+      <p>Quality is reflected in <strong>customer satisfaction</strong>, rated on a scale:
+         <em>Very Poor</em> → <em>Poor</em> → <em>Average</em> → <em>Good</em> → <em>Excellent</em>.</p>
     </section>
 
     <section class="sec">
       <p class="kicker">02 — Error · Fault · Failure</p>
       <h2>Error? Fault? Failure?</h2>
-      <p>These three terms are distinct and must not be used interchangeably:</p>
+      <p>Three distinct terms — never interchangeable:</p>
       <div class="def">
         <span class="label">Definition</span>
         <p><span class="term">Error</span> — also known as a <em>mistake</em>. A software
@@ -87,21 +84,20 @@
     <section class="sec">
       <p class="kicker">03 — The Chain</p>
       <h2>A Person Makes an Error</h2>
-      <p>The slides illustrate a three-step chain of causation:</p>
+      <p>A three-step chain of causation:</p>
       <ol>
         <li><strong>A person makes an error …</strong></li>
         <li><strong>… that creates a fault in the software …</strong></li>
         <li><strong>… that can cause a failure in operation.</strong></li>
       </ol>
-      <p>Viewed across the <span class="term">software development process</span>, errors
-         lead to faults, and <em>some</em> of those faults propagate down to failures — but
-         not all of them do.</p>
+      <p>Across the <span class="term">software development process</span>, errors lead to
+         faults, and <em>some</em> faults propagate to failures — but not all do.</p>
     </section>
 
     <section class="sec">
       <p class="kicker">04 — Causes</p>
       <h2>Causes of Software Errors</h2>
-      <p>Errors may occur for many reasons, such as:</p>
+      <p>Errors occur for many reasons, such as:</p>
       <ul>
         <li><span class="term">Time pressure</span>;</li>
         <li><span class="term">Human is error prone</span>;</li>
@@ -111,7 +107,7 @@
         <li><span class="term">New, unfamiliar technologies</span>.</li>
       </ul>
       <h3>The 5 Causes of Software Errors</h3>
-      <p>The slides' mind map groups the causes into five categories:</p>
+      <p>The mind map groups causes into five categories:</p>
       <div class="tbl-wrap">
         <table class="t">
           <thead><tr><th>#</th><th>Cause</th></tr></thead>
@@ -129,8 +125,7 @@
     <section class="sec">
       <p class="kicker">05 — The Cost</p>
       <h2>High Cost of Software Defects</h2>
-      <p>Testing is <strong>the way to remove defects</strong>, and the economic stakes are
-         enormous:</p>
+      <p>Testing is <strong>the way to remove defects</strong>; the economic stakes are enormous:</p>
       <ul>
         <li><strong>$59.5 billion / year</strong> in the USA — <em>"The Economic Impacts of
            Inadequate Infrastructure for Software Testing"</em> report for the National
@@ -146,7 +141,7 @@
     <section class="sec">
       <p class="kicker">06 — Definitions</p>
       <h2>Definitions of Software Testing</h2>
-      <p>There is a variety of definitions for software testing:</p>
+      <p>A variety of definitions exist:</p>
       <ul>
         <li>Testing is the process of <strong>executing a program with intention of finding errors</strong> (<em>Myers</em>).</li>
         <li>The purpose of testing is to find errors; testing is the process of trying to discover <strong>every conceivable fault or weakness</strong> in a work product (<em>Myers, Kit</em>).</li>
@@ -204,9 +199,9 @@
         </table>
       </div>
       <h3>Why Exhaustive Testing is Impossible</h3>
-      <p>The slides estimate the effort for a system with 20 screens, an average of 4 menus
-         with 3 options per menu, 10 fields per screen, and 2 input types per field with
-         around 100 possible values:</p>
+      <p>Effort estimate for a system with 20 screens, an average of 4 menus with 3 options
+         per menu, 10 fields per screen, and 2 input types per field with around 100 possible
+         values:</p>
       <pre><code>20 × 4 × 3 × 10 × 2 × 100 = 480,000 tests
 
 At 1 second per test  →  8000 mins  →  133 hrs  →  17.7 days
@@ -226,14 +221,12 @@ At 10 min per test    →  40 years</code></pre>
         <li>Some problems might be trivial, but others can be <strong>costly and damaging</strong> — loss of money, time, or business reputation — and may even result in <strong>injury or death</strong>;</li>
         <li>Not all software systems carry the <strong>same level of risk</strong>, and not all problems have the same impact when they occur.</li>
       </ul>
-      <p>The <span class="term">cost of defects</span> rises considerably across the life
-         cycle — on a logarithmic scale, the cost of repair grows from roughly
-         <strong>1</strong> at <em>Specification</em>, to <strong>10</strong> at
-         <em>Design</em>, to <strong>100</strong> at <em>Programming</em>, to
-         <strong>1000</strong> in <em>Production</em>. Testing therefore looks to find the
-         <strong>most important defects as early as possible</strong>, increasing confidence
-         that the software meets specification and helping to <strong>measure the quality</strong>
-         of software.</p>
+      <p>The <span class="term">cost of defects</span> rises considerably across the life cycle.
+         On a logarithmic scale, the cost of repair grows: <strong>1</strong> at
+         <em>Specification</em> → <strong>10</strong> at <em>Design</em> → <strong>100</strong>
+         at <em>Programming</em> → <strong>1000</strong> in <em>Production</em>. Testing therefore
+         finds the <strong>most important defects as early as possible</strong>, increasing
+         confidence that software meets specification and helping <strong>measure quality</strong>.</p>
       <h3>Software Testing Objectives</h3>
       <ul>
         <li>To <strong>identify and reveal as many errors as possible</strong>;</li>
@@ -250,8 +243,7 @@ At 10 min per test    →  40 years</code></pre>
       <p class="kicker">09 — The Process</p>
       <h2>The Fundamental Test Process</h2>
       <p>The fundamental test process has <strong>five stages</strong>, running in sequence
-         with feedback loops back up and a <strong>Control</strong> activity running
-         alongside throughout:</p>
+         with feedback loops and a <strong>Control</strong> activity running alongside throughout:</p>
       <div class="tbl-wrap">
         <table class="t">
           <thead><tr><th>#</th><th>Stage</th></tr></thead>
@@ -266,49 +258,57 @@ At 10 min per test    →  40 years</code></pre>
       </div>
 
       <h3>1. Test Planning</h3>
-      <p><em>"A goal without a plan is just a wish."</em> Major tasks are: identify the
-         objectives of testing; determine scope; determine the test approach; determine the
-         required test resources; implement the test policy and/or the test strategy;
-         schedule test analysis and design tasks; schedule test implementation, execution and
-         evaluation; and <strong>determine the exit criteria</strong>.</p>
+      <p><em>"A goal without a plan is just a wish."</em> Major tasks:</p>
+      <ul>
+        <li>Identify the objectives of testing; determine scope; determine the test approach;</li>
+        <li>Determine the required test resources; implement the test policy and/or test strategy;</li>
+        <li>Schedule test analysis and design; schedule implementation, execution and evaluation;</li>
+        <li><strong>Determine the exit criteria</strong>.</li>
+      </ul>
       <p><span class="term">Test Control</span> is the ongoing activity of comparing actual
-         progress against the plan, reporting status (including deviations from the plan), and
-         taking actions necessary to meet the mission and objectives of the project. Major
-         control tasks: measure and analyze results; monitor and document progress, test
-         coverage and exit criteria; initiate corrective actions; and make decisions.</p>
+         progress against the plan, reporting status (including deviations), and taking actions
+         to meet the project's mission and objectives. Major control tasks: measure and analyze
+         results; monitor and document progress, test coverage and exit criteria; initiate
+         corrective actions; make decisions.</p>
 
       <h3>2. Analysis and Design</h3>
-      <p><em>"Analysis gain better understanding."</em> Review the <span class="term">Test
-         Basis</span> — evaluating the testability of the Test Basis and Test Object(s);
-         identify and prioritize <span class="term">Test Conditions</span> and associated Test
-         Data (documented in a <strong>Test Design Specification</strong>); design and
-         prioritize the <span class="term">Test Cases</span>; identify required test data;
-         design the test environment set-up; and identify any required infrastructure and
-         tools.</p>
+      <p><em>"Analysis gain better understanding."</em></p>
+      <ul>
+        <li>Review the <span class="term">Test Basis</span> — evaluate testability of the Test Basis and Test Object(s);</li>
+        <li>Identify and prioritize <span class="term">Test Conditions</span> and associated Test Data (documented in a <strong>Test Design Specification</strong>);</li>
+        <li>Design and prioritize the <span class="term">Test Cases</span>; identify required test data;</li>
+        <li>Design the test environment set-up; identify any required infrastructure and tools.</li>
+      </ul>
 
       <h3>3. Implementation and Execution</h3>
-      <p><em>"Ideas are easy. Implementation is hard."</em> Develop, implement and prioritize
-         test cases; create the <span class="term">Test Scripts</span>; create test data;
-         write automated test scripts; and <strong>check the environment</strong> — verify
-         that the test environment has been set up correctly.</p>
+      <p><em>"Ideas are easy. Implementation is hard."</em></p>
+      <ul>
+        <li>Develop, implement and prioritize test cases; create the <span class="term">Test Scripts</span>;</li>
+        <li>Create test data; write automated test scripts;</li>
+        <li><strong>Check the environment</strong> — verify the test environment has been set up correctly.</li>
+      </ul>
 
       <h3>4. Evaluating Exit Criteria and Reporting</h3>
-      <p><em>"Evaluation — learning tool to improve."</em> Evaluating exit criteria is the
-         activity where test execution is <strong>assessed against the defined
-         objectives</strong>. Exit criteria should be set and evaluated for each
-         <strong>test level</strong>; check test logs against the exit criteria specified in
-         the test planning; assess if more tests are needed or if the exit criteria should be
-         changed; and write a <strong>test summary report</strong> to stakeholders.</p>
-      <p>How to measure exit criteria? All planned requirements must be met; all high
-         priority bugs should be closed; all test cases should be executed; if the scheduled
-         time out is arrived; and the <strong>test manager must sign off the release</strong>.
+      <p><em>"Evaluation — learning tool to improve."</em> Test execution is
+         <strong>assessed against the defined objectives</strong>:</p>
+      <ul>
+        <li>Exit criteria should be set and evaluated for each <strong>test level</strong>;</li>
+        <li>Check test logs against the exit criteria specified in test planning;</li>
+        <li>Assess if more tests are needed or if exit criteria should be changed;</li>
+        <li>Write a <strong>test summary report</strong> to stakeholders.</li>
+      </ul>
+      <p>How to measure exit criteria? All planned requirements met; all high priority bugs
+         closed; all test cases executed; if the scheduled time out is arrived; and the
+         <strong>test manager must sign off the release</strong>.
          <em>Note: all these parameters can be met by percentages (not 100%).</em></p>
 
       <h3>5. Test Closure Activities</h3>
-      <p><em>"Closure — way to start a new beginning."</em> Collect data from the complete
-         test activity; finalize and <strong>archive the test ware</strong> (scripts, test
-         environment, etc.); and evaluate how testing went, analyzing
-         <strong>lessons learned</strong> for future releases and projects.</p>
+      <p><em>"Closure — way to start a new beginning."</em></p>
+      <ul>
+        <li>Collect data from the complete test activity;</li>
+        <li>Finalize and <strong>archive the test ware</strong> (scripts, test environment, etc.);</li>
+        <li>Evaluate how testing went, analyzing <strong>lessons learned</strong> for future releases and projects.</li>
+      </ul>
     </section>
 
     <section class="sec">
@@ -550,6 +550,94 @@ window.STUDY = {
       ],
       answer: 1,
       explain: "The five stages run: <strong>Test Planning → Analysis and Design → Implementation and Execution → Evaluating Exit Criteria and Reporting → Test Closure Activities</strong>, with Control running throughout."
+    },
+    {
+      q: "The IEEE definition of software quality refers to meeting specified requirements for which three things?",
+      options: [
+        "Code, tests, and documentation",
+        "A system, a component, or a process",
+        "Hardware, software, and firmware",
+        "Developers, testers, and managers"
+      ],
+      answer: 1,
+      explain: "IEEE: software quality is the degree to which a <strong>system, component, or process</strong> meets specified requirements."
+    },
+    {
+      q: "A software error (mistake) can be of which two kinds?",
+      options: [
+        "Dormant or active",
+        "Static or dynamic",
+        "Syntax (grammatical) or logic",
+        "Critical or trivial"
+      ],
+      answer: 2,
+      explain: "An error can be a <strong>Syntax (grammatical) error or a Logic error</strong>."
+    },
+    {
+      q: "Which of the following is one of the five categories of causes of software errors in the slides' mind map?",
+      options: [
+        "Excessive documentation",
+        "Logical design errors",
+        "Over-testing of modules",
+        "Too many code reviews"
+      ],
+      answer: 1,
+      explain: "The five causes are: inadequate requirements, <strong>logical design errors</strong>, coding errors, non-compliance with documentation/coding procedures, and deliberate deviation from requirements."
+    },
+    {
+      q: "According to the CISQ research cited in the slides, how much did poor quality software cost organizations in the US alone in 2018?",
+      options: [
+        "$59.5 billion",
+        "$2.8 trillion",
+        "$100 million",
+        "$2.8 billion"
+      ],
+      answer: 1,
+      explain: "CISQ found that in 2018, poor quality software cost organizations <strong>$2.8 trillion</strong> in the US alone. (The 2002 NIST figure was $59.5 billion/year.)"
+    },
+    {
+      q: "Which principle states that testing activities should start as early as possible in the life cycle and be focused on defined objectives?",
+      options: [
+        "Defects clustering",
+        "Early testing",
+        "Pesticide paradox",
+        "Absence of errors fallacy"
+      ],
+      answer: 1,
+      explain: "Principle 3, <strong>Early testing</strong>: testing activities should start as early as possible in the life cycle and be focused on defined objectives."
+    },
+    {
+      q: "Which principle states that a small number of modules contain most of the defects discovered during pre-release testing?",
+      options: [
+        "Defects clustering",
+        "Exhaustive testing is impossible",
+        "Testing is context dependent",
+        "Early testing"
+      ],
+      answer: 0,
+      explain: "Principle 4, <strong>Defects clustering</strong>: a small number of modules contain most of the defects discovered during pre-release testing or show the most operational failures."
+    },
+    {
+      q: "What does Principle 7, the 'absence of errors fallacy', warn about?",
+      options: [
+        "That repeated tests stop finding new bugs",
+        "That testing can never prove there are no defects",
+        "That finding and fixing defects does not help if the system is unusable and does not meet users' needs",
+        "That exhaustive testing of all inputs is impossible"
+      ],
+      answer: 2,
+      explain: "Principle 7, <strong>Absence of errors fallacy</strong>: finding and fixing defects does not help if the system is <strong>unusable</strong> and does not fulfill the users' needs and expectations."
+    },
+    {
+      q: "In the fundamental test process, the activity of comparing actual progress against the plan, reporting deviations, and taking corrective actions is called:",
+      options: [
+        "Test Closure",
+        "Test Control",
+        "Analysis and Design",
+        "Test Implementation"
+      ],
+      answer: 1,
+      explain: "<strong>Test Control</strong> is the ongoing activity of comparing actual progress against the plan, reporting status (including deviations), and taking actions to meet the project's objectives — it runs alongside throughout the process."
     }
   ]
 };

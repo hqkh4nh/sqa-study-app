@@ -26,13 +26,12 @@
   <section class="hero reveal">
     <p class="eyebrow">Chapter 1–2 · Slides 5–33</p>
     <h1>Introduction to Software Quality Assurance</h1>
-    <p class="lede">Quality software does not just happen — it has to be planned,
-       measured, and built into the development process. This chapter reviews the
-       people, process, product and project view of quality, software metrics,
-       reviews, and software configuration management.</p>
+    <p class="lede">Quality software does not just happen — it must be planned,
+       measured, and built into the process. This chapter covers the four-P view of
+       quality, software metrics, reviews, and software configuration management.</p>
     <div class="meta">
       <span>Theory review</span>
-      <span>16-question quiz</span>
+      <span>24-question quiz</span>
       <span>Immediate feedback</span>
     </div>
   </section>
@@ -43,8 +42,8 @@
     <section class="sec">
       <p class="kicker">01 — Foundations</p>
       <h2>The Four P's in Software Development</h2>
-      <p>The central question of the chapter is: <em>“How can we achieve software
-         quality?”</em> Quality emerges from the interaction of four P's:</p>
+      <p>Central question: <em>“How can we achieve software quality?”</em>
+         Quality emerges from four P's:</p>
       <ul>
         <li><span class="term">Process</span> — a set of activities; provides a <em>template</em> for the project, guided by measurement &amp; feedback.</li>
         <li><span class="term">People</span> — the software engineers who <em>participate</em> in the project; developed through education &amp; training.</li>
@@ -78,8 +77,8 @@
          <span class="term">Software Configuration Management</span>, and <span class="term">Testing</span>.</p>
 
       <h3>Why SQA activities pay off</h3>
-      <p>The cost to find and fix a defect rises sharply across the lifecycle —
-         SQA pays off in the early phases because defects are cheap to fix:</p>
+      <p>The cost to find and fix a defect rises sharply across the lifecycle — SQA
+         pays off early because defects are cheap to fix then:</p>
       <div class="tbl-wrap">
         <table class="t">
           <thead><tr><th>Phase</th><th>Reqmts</th><th>Design</th><th>Code</th><th>Test</th><th>System&nbsp;test</th><th>Field&nbsp;use</th></tr></thead>
@@ -130,9 +129,13 @@
         <div class="box teal"><h4>Process standards</h4>
           define how the software process should be conducted to ensure quality software.</div>
       </div>
-      <p>Standards matter because they encapsulate <strong>best practices</strong>, provide a
-         framework around which to implement the SQA process, and assist in ensuring
-         continuity of project work. Each project decides which standards should be
+      <p>Standards matter because they:</p>
+      <ul>
+        <li>encapsulate <strong>best practices</strong>;</li>
+        <li>provide a framework around which to implement the SQA process;</li>
+        <li>assist in ensuring continuity of project work.</li>
+      </ul>
+      <p>Each project decides which standards should be
          <em>ignored, used as is, modified, or created</em>.</p>
 
       <h2>Software Metrics</h2>
@@ -165,8 +168,8 @@
         <li><span class="term">understandability</span> — how easy is it to understand what the component does?</li>
         <li><span class="term">adaptability</span> — how easy is it to change the component?</li>
       </ul>
-      <p>Most of these cannot be measured directly, so we infer a relationship with a
-         component's <strong>complexity</strong>. Using <strong>fan-in / fan-out</strong>:</p>
+      <p>Most cannot be measured directly, so we infer a relationship with a component's
+         <strong>complexity</strong>. Using <strong>fan-in / fan-out</strong>:</p>
       <ul>
         <li><span class="term">fan-in</span> — number of calls to a component by other components → high fan-in ⇒ high coupling.</li>
         <li><span class="term">fan-out</span> — number of components called by a component → high fan-out ⇒ high complexity.</li>
@@ -187,10 +190,15 @@
     <section class="sec">
       <p class="kicker">05 — Reviews</p>
       <h2>Project Quality: Reviews</h2>
-      <p>Reviews are the principal method of validating the quality of a project, and
-         lead to early discovery of defects — each phase is paired with a walkthrough
-         or review (requirements walkthroughs, analysis walkthroughs, design
-         walkthroughs, code walkthroughs, test plan review).</p>
+      <p>Reviews are the <strong>principal method of validating the quality of a project</strong>
+         and lead to early discovery of defects. Each phase is paired with a walkthrough or review:</p>
+      <ul>
+        <li>Requirements → requirements walkthroughs</li>
+        <li>Analysis → analysis walkthroughs</li>
+        <li>Design → design walkthroughs</li>
+        <li>Implementation → code walkthroughs</li>
+        <li>Testing → test plan review</li>
+      </ul>
       <div class="note">Requirements, Analysis and Design introduce <b>50–60%</b> of all
         defects — and formal technical reviews can uncover <b>75%</b> of these!</div>
     </section>
@@ -198,8 +206,8 @@
     <section class="sec">
       <p class="kicker">06 — Configuration Management</p>
       <h2>Software Configuration Management (SCM)</h2>
-      <p>SCM is an activity executed throughout the system life cycle to control change
-         of products and life cycle artifacts. Its activities are
+      <p>SCM is an activity executed <strong>throughout the system life cycle</strong> to
+         control change of products and life cycle artifacts. Its activities:
          <span class="term">identify, control, audit, report,</span> and <span class="term">support</span>.</p>
       <div class="def">
         <span class="label">Definition</span>
@@ -218,7 +226,8 @@
       </div>
       <p>To become a baseline, a configuration item must first pass a set of formal review
          procedures and join the project software library; afterwards a check-out
-         procedure controls access and change.</p>
+         procedure controls access and change. Any modified item must again pass formal
+         review before it can replace the baselined item.</p>
 
       <h3>Version control</h3>
       <div class="duo">
@@ -256,18 +265,24 @@
       <p class="kicker">07 — Process &amp; People</p>
       <h2>Process Quality</h2>
       <p>Does process quality ⇒ product quality? Software development has unique factors
-         that affect quality: software is <strong>designed, not manufactured</strong>;
-         development is <strong>creative, not mechanical</strong>; individual skills and
-         experience have significant influence; and external factors (novelty, commercial
-         pressure) intrude. So processes are organization specific, people and technology
-         may matter more than process, and insufficient resources always hurt quality.</p>
+         that affect quality:</p>
+      <ul>
+        <li>software is <strong>designed, not manufactured</strong>;</li>
+        <li>development is <strong>creative, not mechanical</strong>;</li>
+        <li>individual skills and experience have significant influence;</li>
+        <li>external factors (application novelty, commercial pressure) intrude.</li>
+      </ul>
+      <p>Consequences: processes are organization specific; people and technology may
+         matter more than process; insufficient resources always adversely affect quality.</p>
 
       <h3>ISO 9001 / 9000-3 and the SEI CMM</h3>
-      <p>The <span class="term">ISO 9000 quality model</span> is a generic quality model,
-         instantiated as an organizational quality process — its focus is on
-         <strong>process management</strong> (certification is easy and can be a marketing ploy).
-         The <span class="term">SEI Capability Maturity Model (CMM)</span> helps an organization
-         improve its development processes — its focus is on <strong>process improvement</strong>:</p>
+      <ul>
+        <li><span class="term">ISO 9000 quality model</span> — a generic quality model,
+            instantiated as an organizational quality process. Focus:
+            <strong>process management</strong> (certification is easy and can be a marketing ploy).</li>
+        <li><span class="term">SEI Capability Maturity Model (CMM)</span> — helps an organization
+            improve its development processes. Focus: <strong>process improvement</strong>.</li>
+      </ul>
       <div class="tbl-wrap">
         <table class="t">
           <thead><tr><th>Level</th><th>CMM process</th></tr></thead>
@@ -292,10 +307,14 @@
       <p class="kicker">08 — Takeaways</p>
       <h2>Summary — Software Quality</h2>
       <div class="note"><b>Quality software does not just happen!</b></div>
-      <p>Quality assurance mechanisms should be built into the software development
-         process. Developing quality software requires management support and
-         involvement, the gathering and use of software metrics, policies and procedures
-         that everyone follows, and commitment to following them even when things get rough.</p>
+      <p>Quality assurance mechanisms should be built into the development process.
+         Developing quality software requires:</p>
+      <ul>
+        <li>management support and involvement;</li>
+        <li>the gathering and use of software metrics;</li>
+        <li>policies and procedures that everyone follows;</li>
+        <li>commitment to following them even when things get rough.</li>
+      </ul>
       <div class="def">
         <span class="label">Remember</span>
         <p>Testing is an important part of quality assurance, but it's not all there is
@@ -468,6 +487,74 @@ window.STUDY = {
       ],
       answer: 0,
       explain: "PCMM is intended to improve the knowledge and skill of people — its focus is on <strong>people improvement</strong>. (ISO 9000's focus is process management; CMM's is process improvement.)"
+    },
+    {
+      q: "According to the slides, what is the <em>overall goal</em> of SQA?",
+      options: [
+        "Removing every defect before release",
+        "Continuous improvement",
+        "Achieving ISO 9000 certification",
+        "Minimizing testing effort"
+      ],
+      answer: 1,
+      explain: "The SQA slide lists <strong>continuous improvement</strong> as the overall goal. SQA must also be planned and systematic and built into the development process."
+    },
+    {
+      q: "On the “cost to find and fix a defect” scale, what is the relative cost during <em>System test</em>?",
+      options: [ "2.00", "4.00", "13.00", "80–130" ],
+      answer: 2,
+      explain: "The scale runs 1.00 (Reqmts), 1.30 (Design), 2.00 (Code), 4.00 (Test), <strong>13.00 (System test)</strong>, 80–130 (Field use)."
+    },
+    {
+      q: "In the design quality metric <code>complexity = component-length × (fan-in × fan-out)²</code>, a high <em>fan-out</em> implies that the calling component has high ___.",
+      options: [ "coupling", "complexity", "cohesion", "maintainability" ],
+      answer: 1,
+      explain: "High <strong>fan-out ⇒ the calling component has high complexity</strong>; high fan-in ⇒ high coupling. The formula was validated using the Unix system."
+    },
+    {
+      q: "The software maturity index (SMI) ranges from 0–1. What does it indicate as it approaches 1?",
+      options: [
+        "The product begins to stabilize",
+        "Coupling is increasing",
+        "The design must be reworked",
+        "Defect density is rising"
+      ],
+      answer: 0,
+      explain: "As <strong>SMI approaches 1, the product begins to stabilize</strong>. The DSQI (also 0–1, from IEEE Std 982.1-1988) is used to compare with past designs."
+    },
+    {
+      q: "Which formal approach to product quality is described as “a combination of” proving programs correct and Statistical Quality Assurance?",
+      options: [
+        "The DSQI method",
+        "The Cleanroom Process",
+        "Fan-in / fan-out analysis",
+        "The 80-20 rule"
+      ],
+      answer: 1,
+      explain: "<strong>The Cleanroom Process</strong> is a combination of (a) proving programs/specifications correct and (b) Statistical Quality Assurance."
+    },
+    {
+      q: "A time or phase in development (usually a project milestone) after which any changes must be formalized is called a ___.",
+      options: [ "variant", "baseline", "configuration item", "branch" ],
+      answer: 1,
+      explain: "A <strong>baseline</strong> is a time/phase (usually a project milestone) after which changes must be formalized, e.g., go through a formal change control procedure."
+    },
+    {
+      q: "In SCM change control, who evaluates a change request and issues an engineering change order if it is approved?",
+      options: [
+        "The change control authority",
+        "The single developer who owns the workspace",
+        "The end users who submitted it",
+        "The QA audit group"
+      ],
+      answer: 0,
+      explain: "The <strong>change control authority</strong> evaluates the request, decides, and issues an engineering change order if approved; the item is then checked-out, changed, checked-in after SQA, and version controlled."
+    },
+    {
+      q: "In the SEI CMM, which level is the “Initial process”, characterized as ad hoc with no formal procedures or project plans?",
+      options: [ "Level 1", "Level 2", "Level 3", "Level 5" ],
+      answer: 0,
+      explain: "<strong>Level 1 — Initial process (ad hoc)</strong>: no formal procedures, no cost estimates, no project plans. Level 5 is the Optimizing process."
     }
   ]
 };
