@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.7 · White-Box Testing — SQA Study Journal</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="reading-progress" id="rprog"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span>SQA&nbsp;Study&nbsp;Journal</a>
+  <span class="spacer"></span>
+  <span class="score-chip" id="scoreChip">Quiz <b>0</b>/0</span>
+  <a class="back" href="index.html">← Contents</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển Sáng/Tối" title="Sáng / Tối">
+    <span class="moon">🌙</span><span class="sun">☀️</span>
+  </button>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero reveal">
+    <p class="eyebrow">Chapter 7 · Slides 288–322</p>
+    <h1>White-Box Testing</h1>
+    <p class="lede">White-box test techniques look inside the program and exercise its
+       internal logic. Tests are derived from the code's structure — its statements,
+       branches, conditions and loops — using a control flow graph, coverage criteria,
+       cyclomatic complexity and basis path testing to decide which paths and test data
+       are needed.</p>
+    <div class="meta">
+      <span>Theory review</span>
+      <span>18-question quiz</span>
+      <span>Immediate feedback</span>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY ===================== -->
+  <article class="theory">
+
+    <section class="sec">
+      <p class="kicker">01 — Coverage Criteria</p>
+      <h2>Basic Coverage Criteria</h2>
+      <p>White-box testing measures how thoroughly the code's structure is exercised. The
+         basic coverage criteria are:</p>
+      <ul>
+        <li><span class="term">Function coverage</span> — has each function (or subroutine) in the program been called?</li>
+        <li><span class="term">Statement coverage</span> — has each statement in the program been executed?</li>
+        <li><span class="term">Branch / Decision coverage</span> — has each branch (also called a <span class="term">DD-path</span>) of each control structure (such as in <code>if</code> and <code>case</code> statements) been executed? Given an <code>if</code>, have both the true and false branches been executed? Another way of saying this: has every edge in the program been executed?</li>
+        <li><span class="term">Condition coverage</span> (or predicate coverage) — has each Boolean sub-expression evaluated both to true and false?</li>
+        <li><span class="term">Basic-Path coverage</span>.</li>
+      </ul>
+      <p>Consider the C function <code>foo(int x, int y)</code> whose body is
+         <code>if ((x &gt; 0) &amp;&amp; (y &gt; 0)) z = x;</code> The slides illustrate each
+         criterion with this example:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Criterion</th><th>Satisfying tests</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Function coverage</td><td><code>foo</code> called at least once</td><td>The function is invoked.</td></tr>
+            <tr><td>Statement coverage</td><td><code>foo(1,1)</code></td><td>Every line — including <code>z = x;</code> — is executed.</td></tr>
+            <tr><td>Branch coverage</td><td><code>foo(1,1)</code> and <code>foo(0,1)</code></td><td>First runs the true branch (<code>z = x;</code>); second fails <code>(x&gt;0)</code> so the assignment is skipped.</td></tr>
+            <tr><td>Condition coverage</td><td><code>foo(1,0)</code> and <code>foo(0,1)</code></td><td>Each Boolean sub-expression <code>(x&gt;0)</code> and <code>(y&gt;0)</code> is made both true and false.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><b>Branch coverage subsumes statement coverage; condition coverage forces each Boolean sub-expression to take both values.</b></div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">02 — The CFG</p>
+      <h2>Control Flow Graph (CFG)</h2>
+      <p>A <span class="term">Control Flow Graph</span> models the possible flow of control
+         through a program. It has three kinds of <strong>nodes</strong> and directed
+         <strong>edges</strong>:</p>
+      <ul>
+        <li><span class="term">Statement nodes</span> — represent single-entry-single-exit sequences of statements;</li>
+        <li><span class="term">Predicate nodes</span> — represent conditions for branching;</li>
+        <li><span class="term">Auxiliary nodes</span> — optional, for easier understanding (e.g. "join points" for an <code>IF</code>).</li>
+      </ul>
+      <p><span class="term">Edges</span> represent the possible flow of control. It is
+         relatively easy to map standard programming-language constructs to elements of a CFG:
+         a <strong>sequence</strong> becomes one node arrowing down to the next; a
+         <strong>branch/merge</strong> (an <code>IF</code>) becomes a predicate node that
+         splits to a then-node and an else-node which rejoin at a join point; and a
+         <strong>loop</strong> becomes a predicate node whose body loops back up to the
+         condition.</p>
+
+      <h3>Constructing a CFG — example</h3>
+      <p>For the <code>while</code>/<code>if</code>-<code>else</code> snippet (slide 292), the
+         statements/predicates map to numbered nodes 1–8 connected top to bottom. The
+         <code>while</code> condition is node 2; the <code>if</code> condition is node 4,
+         which branches to the then-branch (node 5) and the else-branch (node 6); these
+         rejoin at node 7; back-edges loop the lower nodes up to node 2; node 8 is the
+         exit node.</p>
+
+      <h3>Paths and the CFG expression</h3>
+      <p>A <span class="term">path</span> is a route through the graph from entry to exit.
+         A <span class="term">CFG expression</span> writes the set of paths algebraically.
+         For the nested <code>if</code>-<code>else</code> with entry node n₀ and exit node nₑ
+         (slide 293/294), where node 1 is <code>a==0</code>, node 2 is <code>b==0</code>,
+         node 3 is <code>x=-b/a</code>, node 4 is "Countless solutions" and node 5 is
+         "No solution":</p>
+      <pre><code>G1 = n₀ 1 2 4 nₑ + n₀ 1 2 5 nₑ + n₀ 1 3 nₑ
+G1 = n₀ 1 (2 4 + 2 5 + 3) nₑ
+G1 = n₀ 1 (2 (4 + 5) + 3) nₑ</code></pre>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">03 — Nodes</p>
+      <h2>Node-Coverage / Statement-Coverage Testing</h2>
+      <p>For the snippet <code>if(x==0) x++; g=1/x;</code> the control flow graph has entry
+         n₀ → node 1 (the predicate <code>x==0</code>). From node 1 the <code>x=0</code>
+         edge goes to node 2 (<code>x++</code>) and the <code>x!=0</code> edge goes to node 3
+         (<code>g=1/x</code>); node 2 also flows to node 3, then node 3 → exit nₑ.</p>
+      <p>To <strong>cover all nodes</strong> we need the path that visits node 2, i.e. test
+         data with <code>x==0</code> following n₀ 1 2 3 nₑ. Comment from the slides: covering
+         all nodes (all statements) does not necessarily exercise both branches — node
+         coverage is the weakest of the criteria.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">04 — Branches</p>
+      <h2>Branch / Decision-Coverage Testing</h2>
+      <p>For <code>if(a &lt; 2 &amp;&amp; a==b) x = 2-a; else x = a-2;</code> the CFG has
+         n₀ → node 1 (the decision). The branch <code>a&lt;2 và a=b</code> (true) goes to
+         node 3 (<code>x=2-a</code>); the branch <code>a≥2 hoặc b≠a</code> (false) goes to
+         node 2 (<code>x=a-2</code>); both converge at exit nₑ.</p>
+      <p><span class="term">Branch coverage</span> requires test data that drives the
+         decision to <strong>true and to false</strong> — every edge of the decision must be
+         taken at least once.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">05 — Conditions</p>
+      <h2>Condition-Coverage Testing</h2>
+      <p><span class="term">Condition coverage</span> requires each Boolean sub-expression in
+         a compound decision to evaluate both to true and to false. Because a decision such
+         as <code>a&lt;2 &amp;&amp; a==b</code> is built from two atomic conditions, the CFG
+         splits each predicate (<code>a&lt;2 ?</code> then <code>a=b ?</code>) into separate
+         nodes, each with its own T and F edges leading toward the <code>x=2-a</code> or
+         <code>x=a-2</code> outcomes.</p>
+      <p>The triangle classifier (slide 301/302) shows a chain of conditions: each
+         sub-expression of <code>(a+b&lt;=c) || (b+c&lt;=a) || (a+c&lt;=b)</code> is a
+         decision node whose <strong>T</strong> branch goes to the <em>Error</em> node and
+         whose <strong>F</strong> branch continues to the next condition, before the later
+         <code>Equilateral</code> / <code>Isoceles</code> / <code>Scalene</code> tests. The
+         <code>IsInValidDate</code> example (slide 303/304) chains
+         <code>year==1582</code>, <code>month==10</code>, <code>day&gt;=5</code> and
+         <code>day&lt;=14</code>: each true edge cascades to the next condition and finally to
+         <code>return True</code>, while any false edge converges to the
+         <code>return False</code> node.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">06 — Loops</p>
+      <h2>Loop Testing</h2>
+      <p><span class="term">Loop testing</span> exercises the iteration constructs of a
+         program. In the CFG a loop appears as a predicate node (the loop condition) with a
+         body that <strong>loops back</strong> to the condition and an exit edge when the
+         condition fails. For the <code>while(n&lt;=m)</code> example (slide 306/307), node
+         <em>a</em> is the loop condition: the <code>n≤m</code> edge enters the body node
+         <em>b</em> (<code>i=n; s=s+a[i]; n++</code>) which loops back to <em>a</em>, while the
+         <code>n&gt;m</code> edge exits toward node <em>e</em> (<code>1/s</code>) and on to nₑ.
+         The <code>IsThirtyDayMonth</code> <code>for</code>-loop (slide 308) is the same idea
+         applied to a counted loop that scans <code>{4,6,9,11}</code>.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">07 — Complexity</p>
+      <h2>Cyclomatic Complexity</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p>The <span class="term">cyclomatic complexity</span> of the flow chart indicates
+           the <em>number of independent paths</em> of the program.</p>
+      </div>
+      <p>It can be computed three equivalent ways:</p>
+      <pre><code>1.  V(G) = Number of closed regions (including the surrounding rectangle) + 1
+2.  V(G) = Number of binary predicates + 1
+3.  V(G) = E − N + 2      (Edges − Nodes + 2)</code></pre>
+      <p>All three methods give the same value for the same flow graph.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">08 — Basis Paths</p>
+      <h2>Basis Path Testing</h2>
+      <p><span class="term">Basis path testing</span> derives a set of independent paths from
+         the program's decision logic. Its steps are:</p>
+      <ol>
+        <li>Construct a flow graph based on the program's decision logic.</li>
+        <li>Compute the cyclomatic complexity of the flow graph.</li>
+        <li>Determine the basis paths.</li>
+        <li>Design test cases to go through these basis paths.</li>
+      </ol>
+
+      <h3>Baseline Path Method</h3>
+      <p>A simple approach to identify basis paths:</p>
+      <ol>
+        <li>Find the shortest path from entry to exit.</li>
+        <li>Return to the function entry point.</li>
+        <li>Change one conditional expression to its alternate outcome.</li>
+        <li>Follow the shortest path to the exit point.</li>
+        <li>Repeat until all basis paths are defined.</li>
+        <li>Identify data to execute the paths.</li>
+      </ol>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">09 — Worked Example</p>
+      <h2>White-Box Testing Example — FindMean</h2>
+      <p>The <code>FindMean</code> function reads scores from a file, sums the positive ones,
+         then computes and prints the mean (or reports that no scores were found). It is taken
+         through the full method.</p>
+
+      <h3>Prepare the flow graph</h3>
+      <p>The code is partitioned into nine flow-graph nodes:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Node</th><th>Code it represents</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Initialization block (declarations and the first <code>Read</code>)</td></tr>
+            <tr><td>2</td><td><code>while (! EOF(ScoreFile))</code> — loop condition</td></tr>
+            <tr><td>3</td><td><code>if (Score &gt; 0.0)</code> — condition</td></tr>
+            <tr><td>4</td><td>Loop body: <code>SumOfScores += Score; NumberOfScores++;</code></td></tr>
+            <tr><td>5</td><td><code>Read(ScoreFile, Score);</code> inside the loop</td></tr>
+            <tr><td>6</td><td><code>if (NumberOfScores &gt; 0)</code> — condition</td></tr>
+            <tr><td>7</td><td>True branch: compute and print the mean</td></tr>
+            <tr><td>8</td><td>Else branch: print "No scores found in file"</td></tr>
+            <tr><td>9</td><td>Exit / final node</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Construct the CFG</h3>
+      <p>Node 1 flows to node 2 (the <code>while</code>). The loop region contains the inner
+         <code>if</code> (node 3) which branches to node 4 (then) and skips to node 5 (else),
+         with node 5 looping back to node 2. On exit, node 6 (the final <code>if</code>)
+         branches in a diamond to node 7 and node 8, which reconverge at the exit node 9.</p>
+
+      <h3>Cyclomatic complexity</h3>
+      <p>All three formulas agree on the same value for this graph:</p>
+      <pre><code>V(G) = 4 (closed regions)                 = 4
+V(G) = 3 (conditional nodes) + 1          = 4
+V(G) = E − N + 2 = 11 − 9 + 2             = 4</code></pre>
+
+      <h3>Basis path / paths analysis</h3>
+      <p>Because of the dependency <em>"if node 4 is included then node 7 must be included"</em>
+         (a positive score must have been counted), some path shapes are not feasible:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Path</th><th>Feasible?</th><th>Test data</th></tr></thead>
+          <tbody>
+            <tr><td>1, 2, 6, 8, 9</td><td>ok</td><td>No records in the file</td></tr>
+            <tr><td>1, 2, 6, <strong>7</strong>, 9</td><td>not possible</td><td>—</td></tr>
+            <tr><td>1, 2, 3, 4, 5, 2, 6, 7, 9</td><td>ok</td><td>One positive score</td></tr>
+            <tr><td>1, 2, 3, 4, 5, 2, 6, <strong>8</strong>, 9</td><td>not possible</td><td>—</td></tr>
+            <tr><td>1, 2, 3, 5, 2, 6, 8, 9</td><td>ok</td><td>One negative score</td></tr>
+            <tr><td>1, 2, 3, 5, 2, 6, <strong>7</strong>, 9</td><td>not possible</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><b>These 3 feasible tests cover all paths — we did not need 4! Every line of code is tested.</b></div>
+
+      <h3>Further practice</h3>
+      <p>The chapter closes with additional methods to apply white-box techniques to —
+         <code>average()</code>, <code>CountC()</code>, <code>GetMaxDay()</code>,
+         <code>funWithNumbers()</code> and <code>blammo()</code> — each asking you to draw the
+         control flow diagram and derive the test cases.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">10 — Takeaways</p>
+      <h2>Summary</h2>
+      <div class="note"><b>White-box testing derives tests from the code's structure: build the CFG, choose a coverage criterion, compute cyclomatic complexity, and use basis paths to pick the test data.</b></div>
+      <p>Function, statement, branch, condition and basic-path coverage form a ladder of
+         increasing thoroughness. The control flow graph turns code into nodes and edges;
+         cyclomatic complexity <code>V(G)=E−N+2</code> counts the independent paths; and basis
+         path testing with the baseline path method selects exactly those paths — feasibility
+         permitting — so that every line is exercised with the fewest tests.</p>
+    </section>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section class="quiz-sec">
+    <div class="quiz-head">
+      <h2>Check your understanding</h2>
+    </div>
+    <p class="quiz-intro">A focused set of questions drawn from the course question bank,
+       covering each topic in this chapter. Pick an answer to lock it in — you'll get
+       immediate feedback and a short explanation. Your running score is shown in the top bar.</p>
+
+    <div id="quiz"></div>
+
+    <div class="results" id="results">
+      <div class="ring"><i>0%</i></div>
+      <div class="msg">
+        <h3>You scored 0 / 0</h3>
+        <p>Review and try again any time.</p>
+      </div>
+      <button class="btn" onclick="location.reload()">Retake quiz ↺</button>
+    </div>
+  </section>
+
+  <nav class="footnav">
+    <a href="chapter-06-2-black-box.html">← Chapter 6.2 · Black-Box Testing</a>
+    <a href="index.html">All chapters →</a>
+  </nav>
+</main>
+
+<script>
+window.STUDY = {
+  quiz: [
+    {
+      q: "What does <strong>function coverage</strong> ask?",
+      options: [
+        "Has each statement in the program been executed?",
+        "Has each function (or subroutine) in the program been called?",
+        "Has each Boolean sub-expression evaluated to both true and false?",
+        "Has every edge in the program been executed?"
+      ],
+      answer: 1,
+      explain: "Function coverage asks whether <strong>each function (or subroutine) in the program has been called</strong>."
+    },
+    {
+      q: "What does <strong>statement coverage</strong> measure?",
+      options: [
+        "Whether each function has been called",
+        "Whether each branch has been taken",
+        "Whether each statement in the program has been executed",
+        "Whether each condition is both true and false"
+      ],
+      answer: 2,
+      explain: "Statement coverage asks whether <strong>each statement in the program has been executed</strong>."
+    },
+    {
+      q: "Branch / decision coverage is also described as ensuring what?",
+      options: [
+        "Every edge in the program has been executed",
+        "Every function has been called once",
+        "Every loop runs at least 100 times",
+        "Every variable has been assigned"
+      ],
+      answer: 0,
+      explain: "Branch/Decision coverage means each branch (DD-path) of each control structure is executed — another way of saying <strong>every edge in the program has been executed</strong>."
+    },
+    {
+      q: "A branch of a control structure is also called a what?",
+      options: [ "Node-path", "DD-path", "Basis-path", "Join-point" ],
+      answer: 1,
+      explain: "A branch of each control structure (such as in <code>if</code> and <code>case</code> statements) is also called a <strong>DD-path</strong>."
+    },
+    {
+      q: "What does <strong>condition (predicate) coverage</strong> require?",
+      options: [
+        "Each statement is executed at least once",
+        "Each function returns a value",
+        "Each Boolean sub-expression has evaluated both to true and to false",
+        "Each loop is executed zero and one times"
+      ],
+      answer: 2,
+      explain: "Condition coverage requires that <strong>each Boolean sub-expression has evaluated both to true and false</strong>."
+    },
+    {
+      q: "For <code>foo</code> with body <code>if ((x&gt;0) &amp;&amp; (y&gt;0)) z = x;</code>, which calls satisfy <strong>branch coverage</strong>?",
+      options: [
+        "Only foo(1,1)",
+        "foo(1,1) and foo(0,1)",
+        "foo(1,0) and foo(0,1)",
+        "Only foo(0,0)"
+      ],
+      answer: 1,
+      explain: "<code>foo(1,1)</code> runs the true branch (<code>z=x;</code>); <code>foo(0,1)</code> fails <code>(x&gt;0)</code> so the assignment is skipped — together they cover both branches."
+    },
+    {
+      q: "Which calls satisfy <strong>condition coverage</strong> for that same <code>foo</code>?",
+      options: [
+        "foo(1,1) and foo(1,1)",
+        "foo(1,1) only",
+        "foo(1,0) and foo(0,1)",
+        "foo(0,0) and foo(1,1)"
+      ],
+      answer: 2,
+      explain: "<code>foo(1,0)</code> and <code>foo(0,1)</code> make each sub-expression <code>(x&gt;0)</code> and <code>(y&gt;0)</code> take both true and false values."
+    },
+    {
+      q: "Which is NOT one of the three kinds of nodes in a Control Flow Graph?",
+      options: [
+        "Statement nodes",
+        "Predicate nodes",
+        "Auxiliary nodes",
+        "Coverage nodes"
+      ],
+      answer: 3,
+      explain: "A CFG has <strong>statement nodes</strong>, <strong>predicate nodes</strong>, and (optional) <strong>auxiliary nodes</strong>. There is no \"coverage node\"."
+    },
+    {
+      q: "In a CFG, what does an <strong>edge</strong> represent?",
+      options: [
+        "A single statement",
+        "A possible flow of control",
+        "A Boolean condition",
+        "A join point for an IF"
+      ],
+      answer: 1,
+      explain: "Edges represent the <strong>possible flow of control</strong> between nodes."
+    },
+    {
+      q: "What do <strong>predicate nodes</strong> represent?",
+      options: [
+        "Single-entry-single-exit sequences of statements",
+        "Conditions for branching",
+        "Join points for an IF",
+        "The exit of the program"
+      ],
+      answer: 1,
+      explain: "Predicate nodes represent <strong>conditions for branching</strong>; statement nodes represent single-entry-single-exit sequences of statements."
+    },
+    {
+      q: "For the nested if-else, which CFG expression is equivalent to <code>n₀ 1 2 4 nₑ + n₀ 1 2 5 nₑ + n₀ 1 3 nₑ</code>?",
+      options: [
+        "n₀ 1 (2 (4 + 5) + 3) nₑ",
+        "n₀ + 1 + 2 + 3 + nₑ",
+        "n₀ 1 2 3 4 5 nₑ",
+        "n₀ (1 + 2 + 3) nₑ"
+      ],
+      answer: 0,
+      explain: "Factoring out the common prefix gives <code>G1 = n₀ 1 (2 (4 + 5) + 3) nₑ</code>."
+    },
+    {
+      q: "In node-coverage testing of <code>if(x==0) x++; g=1/x;</code>, which path is required to cover all nodes?",
+      options: [
+        "The path that takes x!=0 only",
+        "The path that visits node 2 (x++), i.e. with x==0",
+        "Any single execution covers all nodes",
+        "No test data can cover all nodes"
+      ],
+      answer: 1,
+      explain: "To cover all nodes you must visit node 2 (<code>x++</code>), which needs test data where <code>x==0</code>, following <code>n₀ 1 2 3 nₑ</code>."
+    },
+    {
+      q: "What does <strong>branch coverage</strong> require of a decision such as <code>a&lt;2 &amp;&amp; a==b</code>?",
+      options: [
+        "Test data that drives the decision to both true and false",
+        "Test data that only makes it true",
+        "Each atomic condition evaluated both ways",
+        "The loop executed at least twice"
+      ],
+      answer: 0,
+      explain: "Branch/decision coverage requires test data that drives the decision to <strong>both true and false</strong> — every edge of the decision is taken."
+    },
+    {
+      q: "In the CFG, how does a <strong>loop</strong> appear?",
+      options: [
+        "As a single statement node with no edges",
+        "As a predicate node whose body loops back to the condition, with an exit edge when it fails",
+        "As two disconnected nodes",
+        "As an auxiliary join point only"
+      ],
+      answer: 1,
+      explain: "A loop is a predicate node (the loop condition) whose body <strong>loops back</strong> to the condition, with an exit edge when the condition fails."
+    },
+    {
+      q: "How is <strong>cyclomatic complexity</strong> defined?",
+      options: [
+        "The number of statements in the program",
+        "The number of independent paths of the program",
+        "The number of functions called",
+        "The number of test cases written"
+      ],
+      answer: 1,
+      explain: "Cyclomatic complexity of the flow chart indicates the <strong>number of independent paths</strong> of the program."
+    },
+    {
+      q: "Which formula correctly computes cyclomatic complexity from edges and nodes?",
+      options: [
+        "V(G) = N − E + 2",
+        "V(G) = E − N + 2",
+        "V(G) = E + N − 2",
+        "V(G) = E × N"
+      ],
+      answer: 1,
+      explain: "One of the three formulas is <code>V(G) = E − N + 2</code> (Edges − Nodes + 2). The others use closed regions + 1 and binary predicates + 1."
+    },
+    {
+      q: "What is the FIRST step of <strong>basis path testing</strong>?",
+      options: [
+        "Compute the cyclomatic complexity",
+        "Design test cases",
+        "Construct a flow graph based on the program's decision logic",
+        "Determine the basis paths"
+      ],
+      answer: 2,
+      explain: "Step 1 is to <strong>construct a flow graph based on the program's decision logic</strong>; then compute complexity, determine basis paths, and design test cases."
+    },
+    {
+      q: "In the FindMean example, the CFG had cyclomatic complexity 4 but only 3 tests were needed. Why?",
+      options: [
+        "Two of the candidate paths were infeasible (e.g. node 4 requires node 7)",
+        "The formula was applied incorrectly",
+        "Statement coverage was skipped",
+        "The loop never executed"
+      ],
+      answer: 0,
+      explain: "Some path shapes are not possible — \"if node 4 is included then node 7 must be included\" — so the 3 feasible tests (no records, one positive score, one negative score) cover all paths; we did not need 4."
+    }
+  ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

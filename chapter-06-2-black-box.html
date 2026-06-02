@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.6.2 · Black-Box Testing — SQA Study Journal</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="reading-progress" id="rprog"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span>SQA&nbsp;Study&nbsp;Journal</a>
+  <span class="spacer"></span>
+  <span class="score-chip" id="scoreChip">Quiz <b>0</b>/0</span>
+  <a class="back" href="index.html">← Contents</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển Sáng/Tối" title="Sáng / Tối">
+    <span class="moon">🌙</span><span class="sun">☀️</span>
+  </button>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero reveal">
+    <p class="eyebrow">Chapter 6.2 · Slides 187–287</p>
+    <h1>Black-Box Testing</h1>
+    <p class="lede">Black-box testing is a software testing method in which the functionalities
+       of an application are tested without knowledge of internal code structure,
+       implementation details and internal paths. The tester focuses on <em>what the software
+       does</em>, not how it does it, testing against requirements and specifications. This
+       chapter reviews the six common black-box techniques: equivalence class, boundary value,
+       combinatorial/pairwise, state transition, decision table, and use case testing.</p>
+    <div class="meta">
+      <span>Theory review</span>
+      <span>24-question quiz</span>
+      <span>Immediate feedback</span>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY ===================== -->
+  <article class="theory">
+
+    <section class="sec">
+      <p class="kicker">01 — The Method</p>
+      <h2>What is Black-Box Testing?</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Black box testing</span> is a software testing method in which
+           the functionalities of software applications are tested <em>without having knowledge
+           of internal code structure, implementation details and internal paths.</em></p>
+      </div>
+      <p>It is also known as <span class="term">specification-based testing</span> and
+         <span class="term">behavior-based testing</span>. The tester focuses on
+         <strong>what the software does</strong>, not how it does it — testing is based on
+         software requirements and specifications. Inputs go into the "black box" and outputs
+         come out, without knowledge of the internal workings.</p>
+      <p>Black-box testing consists of <span class="term">functional testing</span> and
+         <span class="term">non-functional testing</span>.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">02 — Overview</p>
+      <h2>Black-Box Testing Techniques</h2>
+      <p>The common techniques of black box testing are:</p>
+      <ol>
+        <li><span class="term">Equivalence Class Testing</span></li>
+        <li><span class="term">Boundary Value Testing</span></li>
+        <li><span class="term">Combinatorial / Pairwise / All-Pairs Testing</span></li>
+        <li><span class="term">State Transition Testing</span></li>
+        <li><span class="term">Decision Tables Testing</span></li>
+        <li><span class="term">Use Case Testing</span></li>
+      </ol>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">03 — Technique 1</p>
+      <h2>Equivalence Class Testing</h2>
+      <p>Also known as <span class="term">Equivalence Partitioning</span>.</p>
+      <div class="def">
+        <span class="label">Idea</span>
+        <p>Divide or partition the <em>input domain</em> of a program into classes of data,
+           and derive test cases based on these partitions.</p>
+      </div>
+      <p><strong>Goal:</strong> to reduce the total number of test cases to a finite set of
+         testable test cases, still covering maximum requirements.</p>
+      <p>The system handles all the test input variations <strong>within a partition in the
+         same way</strong>:</p>
+      <ul>
+        <li>If one input condition in a partition passes, then all other input conditions within the partition will pass as well;</li>
+        <li>If one input condition fails, then all other input conditions within the partition will fail as well.</li>
+      </ul>
+      <p>The procedure is: <strong>first-level partitioning</strong> separates
+         <span class="term">Valid</span> vs. <span class="term">Invalid</span> test cases; then
+         valid and invalid test cases are partitioned into equivalence classes; finally a test
+         case is created for at least one value randomly selected from each equivalence class.</p>
+
+      <h3>Weak vs. Strong Equivalence Class Test Cases</h3>
+      <p>Consider a program with 2 input variables x and y, where x lies in 3 possible domains
+         (<code>a ≤ x &lt; b</code>, <code>b ≤ x &lt; c</code>, <code>c ≤ x ≤ d</code>) and y in 2
+         possible domains (<code>e ≤ y &lt; f</code>, <code>f ≤ y ≤ g</code>).</p>
+      <div class="duo">
+        <div class="box accent"><h4>Weak equivalence class test cases</h4>
+          A small set that covers <strong>each variable's classes</strong> but not all
+          combinations — one test per class per variable.</div>
+        <div class="box teal"><h4>Strong equivalence class test cases</h4>
+          The full <strong>Cartesian product</strong> of equivalence classes — one test for
+          every combination of an x-class and a y-class (the larger set).</div>
+      </div>
+
+      <h3>The Triangle Problem</h3>
+      <p>A program takes 3 integer inputs representing the lengths of the sides of a triangle
+         and determines whether they form an <span class="term">equilateral</span>,
+         <span class="term">scalene</span>, or <span class="term">isosceles</span> triangle, or
+         whether the inputs do <span class="term">not represent a triangle</span>. For 3 integers
+         a, b, c to be the sides of a triangle: <code>a + b > c</code>, <code>a + c > b</code>,
+         and <code>b + c > a</code>.</p>
+      <p>We define the input test data by defining equivalence classes through the
+         <strong>5 output groups</strong>: inputs do not form a triangle; form an isosceles
+         triangle; form a scalene triangle; form an equilateral triangle; and error inputs. The
+         test conditions are:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Class</th><th>Condition</th></tr></thead>
+          <tbody>
+            <tr><td>Error Input</td><td><code>a &lt;= 0 || b &lt;= 0 || c &lt;= 0</code></td></tr>
+            <tr><td>Not a Triangle</td><td><code>a + b &lt;= c || b + c &lt;= a || a + c &lt;= b</code></td></tr>
+            <tr><td>Equilateral</td><td><code>a == b &amp;&amp; b == c</code></td></tr>
+            <tr><td>Scalene</td><td><code>a != b &amp;&amp; b != c &amp;&amp; a != c</code></td></tr>
+            <tr><td>Isosceles</td><td><code>(a == b &amp;&amp; b != c) || (b == c &amp;&amp; c != a) || (a == c &amp;&amp; a != b)</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Simpler example — a field accepting Age 18–56 yields 3 equivalence classes and 3 test
+         cases: Valid Class 18–56, Invalid Class 1 (&lt;=17), Invalid Class 2 (&gt;=57).</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">04 — Technique 2</p>
+      <h2>Boundary Value Testing</h2>
+      <p><span class="term">Boundary / Limits Testing</span> tests values, sizes or quantities
+         near the design limits (value limits, length limits, volume limits, null strings vs
+         empty strings). <strong>Errors tend to occur near the extreme values of inputs.</strong>
+         <span class="term">Robustness</span> asks: how does the software react when boundaries
+         are exceeded?</p>
+      <div class="def">
+        <span class="label">Basic idea (BVA)</span>
+        <p>Use input variable values at their <em>minimum</em>, <em>just above the minimum</em>,
+           at a <em>nominal value</em>, <em>just below the maximum</em>, and at the
+           <em>maximum</em> — for a variable x where <code>a ≤ x ≤ b</code>, the five values are
+           x(min), x(min+), x(nom), x(max-), x(max).</p>
+      </div>
+
+      <h3>Single Fault Assumption</h3>
+      <div class="note"><b>The Single Fault assumption from reliability states: "Failures are
+        rarely the result of the simultaneous occurrence of two (or more) faults."</b></div>
+      <p>For <strong>2 variables</strong> (<code>a ≤ x₁ ≤ b</code> and <code>c ≤ x₂ ≤ d</code>),
+         the test cases form a <strong>plus/cross shape</strong>: one variable takes its extreme
+         values while the other is held at nominal, plus a central nominal point — because two
+         variables rarely assume their extreme values simultaneously.</p>
+
+      <h3>Extensions of Boundary Testing</h3>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Technique</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td><span class="term">Boundary value testing</span></td><td>Stay within the limits.</td></tr>
+            <tr><td><span class="term">Robustness testing</span></td><td>Exceed the limits — include values below the minimum and above the maximum.</td></tr>
+            <tr><td><span class="term">Worst-case testing</span></td><td>Like boundary value testing, but <strong>discard the Single Fault Assumption</strong> — allow input values to simultaneously approach their boundaries.</td></tr>
+            <tr><td><span class="term">Robust worst-case testing</span></td><td>Like robustness testing, but <strong>discard the Single Fault Assumption</strong> (the largest set of combinations).</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><span class="term">Robustness testing</span> is a form of <em>negative testing</em> —
+         how does the program handle errors in the input? It stresses input boundaries, checks for
+         acceptable responses to invalid inputs, and leads to exploratory testing. It may not be
+         possible with some strongly-typed languages, GUIs with fixed palette values, or drop-down
+         lists.</p>
+      <p><strong>Example — Triangle Program:</strong> side lengths are integers from 1 to 200.
+         BVA requires 5 values per variable (min, min+, nominal, max-, max), so input boundary
+         testing for 3 variables requires <strong>5 × 3 = 15 test cases</strong> (values
+         1, 2, 100, 199, 200).</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">05 — Technique 3</p>
+      <h2>Combinatorial / Pairwise / All-Pairs Testing</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Pairwise testing</span> (also known as All-Pairs or Combinatorial
+           testing) is a black-box test design technique in which test cases are designed to
+           execute all possible discrete <em>combinations of each pair of input parameters.</em></p>
+      </div>
+      <p>Pairwise-generated test suites cover all combinations of two parameters, therefore they
+         are <strong>much smaller than exhaustive ones</strong> yet still very effective in finding
+         defects. For example, a GUI with List Box (10 values), Check Box (2), Radio Button (2) and
+         Text Box (1–100) gives an exhaustive Cartesian count of 10·2·2·100 = <strong>4000</strong>
+         test cases; reducing each parameter (e.g. Text Box → Valid/Invalid/Alpha-Special) and then
+         applying the all-pairs technique brings this down to just <strong>6 test cases</strong>.</p>
+
+      <h3>PICT and Other Automation Tools</h3>
+      <p>Pairwise testing tools automate the test case design process by generating a compact set
+         of parameter value choices. The key tool is <span class="term">PICT</span> — "Pairwise
+         Independent Combinatorial Testing", provided by Microsoft. Others include IBM
+         <span class="term">FoCuS</span>, NIST <span class="term">ACTS</span>, Pairwise by Inductive
+         AS, and VPTag.</p>
+
+      <h3>Modeling Steps</h3>
+      <p>To model a system for PICT, list parameters that affect a single common output (e.g. font,
+         style, effects, color, size). Then refine the model:</p>
+      <ul>
+        <li><span class="term">Abstraction</span> — simplify the model by grouping parameters,
+            e.g. <code>style == bold and italic</code>, <code>effects == underline and strikethrough</code>.</li>
+        <li><span class="term">Equivalence-partition ranges of values</span> — avoid hard-coding
+            variables in a range; map continuous ranges (e.g. size 1–1637.5) onto symbolic values
+            (small, nominal, medium, large, larger, largest).</li>
+        <li><span class="term">Aliasing</span> — alias (equivalence) similar variables, e.g.
+            <code>font: arial | tahoma, brushScript, monotypeCorsive</code>, when two fonts are
+            similar but both should be tested.</li>
+        <li><span class="term">Constraints</span> — tweak the <em>model, not the output</em>;
+            constrain invalid combinations with conditional rules (e.g.
+            <code>if [Font] = "BrushScript" then [Style] in {"Italic","Bold/Italic"}</code>).</li>
+        <li><span class="term">Weighting</span> — increases the probability of a variable's use,
+            but does not guarantee increased use.</li>
+        <li><span class="term">Increase order of combinations</span> — use the PICT
+            <code>/o:n</code> switch to go from 2-wise to 3-wise for greater depth; the
+            <code>/r:n</code> switch randomizes output to increase breadth.</li>
+      </ul>
+      <p>Always verify the output for mutually exclusive (invalid) combinations, and use only one
+         negative value per test, separating negative and positive tests.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">06 — Technique 4</p>
+      <h2>State Transition Testing (STT)</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">State Transition testing</span> is the software testing technique in
+           which <em>changes in input conditions cause state changes</em>. It is helpful where you
+           need to test different system transitions.</p>
+      </div>
+      <p>Tests are designed to execute <strong>valid and invalid state transitions</strong>:</p>
+      <ol>
+        <li><strong>Step 1:</strong> Understand the various states and transitions and mark each valid and invalid state.</li>
+        <li><strong>Step 2:</strong> Define a sequence of events that leads to an allowed test ending state.</li>
+        <li><strong>Step 3:</strong> Each visited state and traversed transition should be noted down.</li>
+      </ol>
+      <p>Steps 2 and 3 are repeated until all states have been visited and all transitions
+         traversed. For good coverage, actual input and output values have to be generated.</p>
+
+      <div class="duo">
+        <div class="box accent"><h4>When to use STT</h4>
+          Testing for a <strong>finite set of input values</strong>; testing a
+          <strong>sequence of events</strong> that occur in the application; when the system has a
+          <strong>dependency on past events/values</strong>.</div>
+        <div class="box teal"><h4>When NOT to use STT</h4>
+          When testing is <strong>not done for sequential input combinations</strong>; when
+          testing different functionalities like <strong>exploratory testing</strong>.</div>
+      </div>
+
+      <h3>Steps of STT</h3>
+      <ul>
+        <li>Identify the States / Events / Actions;</li>
+        <li>Identify the <span class="term">Transitions</span> between them;</li>
+        <li>Create the <span class="term">diagram</span>;</li>
+        <li>Create the <span class="term">State Transition Table</span>;</li>
+        <li>Create the <span class="term">Test Scenario</span>;</li>
+        <li>Create the set of test cases.</li>
+      </ul>
+
+      <h3>Components of an STT Diagram</h3>
+      <p>A diagram has two components: <span class="term">States/Events/Actions</span> (drawn as
+         a named oval node) and <span class="term">Transitions</span> (drawn as a named arrow
+         between states).</p>
+      <p>For the ATM PIN example (the account locks after three invalid attempts), the state
+         transition table is:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>State / Conditions</th><th>Correct PIN</th><th>Incorrect PIN</th></tr></thead>
+          <tbody>
+            <tr><td>S1 — Start / Card inserted / Wait for PIN</td><td>—</td><td>—</td></tr>
+            <tr><td>S2 — 1st enter the PIN</td><td>S5</td><td>S3</td></tr>
+            <tr><td>S3 — 2nd enter the PIN</td><td>S5</td><td>S4</td></tr>
+            <tr><td>S4 — 3rd enter the PIN</td><td>S5</td><td>S6</td></tr>
+            <tr><td>S5 — Access Granted</td><td>—</td><td>—</td></tr>
+            <tr><td>S6 — Account Blocked</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">07 — Technique 5</p>
+      <h2>Decision Table Testing</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Decision table testing</span> is a black-box test design technique
+           to <em>determine the test scenarios for complex business logic.</em> It helps testers
+           search the effects of <em>combinations of different inputs</em>.</p>
+      </div>
+      <p>Equivalence Partitioning and Boundary Value Analysis can be applied to only specific
+         conditions or inputs. A decision table identifies conditions/inputs and expected
+         outcomes/actions in a table, then creates a set of tests from the table rules. It is an
+         effective way to <strong>model programmatic logic</strong>: a table that specifies the
+         actions to be taken when certain conditions arise.</p>
+
+      <h3>Limited Entry vs. Extended Entry</h3>
+      <div class="duo">
+        <div class="box accent"><h4>Limited entry decision table</h4>
+          Each condition value is <strong>binary</strong> (T/F).</div>
+        <div class="box teal"><h4>Extended entry decision table</h4>
+          Conditions can have <strong>values</strong> (more abstract condition entries).</div>
+      </div>
+
+      <h3>Structure of a Decision Table</h3>
+      <ul>
+        <li>The <span class="term">condition stub</span> is a list of names of conditions.</li>
+        <li>The <span class="term">action stub</span> names the actions the routine will take or initiate if the rule is satisfied.</li>
+        <li>The <span class="term">condition entry</span> is the combination of conditions.</li>
+        <li>The <span class="term">action entry</span> are the actions that take place under combinations of conditions.</li>
+        <li>Each column is a <span class="term">rule</span>; each rule is a test case.</li>
+      </ul>
+      <div class="note"><b>A redundant table has identical rules with identical action entries
+        (no ambiguity, just redundancy). An inconsistent table has identical condition entries but
+        different action entries — implying non-determinism, so you can't tell which rule to apply.</b></div>
+
+      <h3>Triangle Problem (Limited Entry)</h3>
+      <p>A limited entry decision table for the triangle problem builds rules from binary
+         conditions (<code>A+B≤C</code>, <code>B+C≤A</code>, <code>A+C≤B</code>, <code>A=B</code>,
+         <code>B=C</code>, <code>A=C</code>) producing actions Invalid, Equilateral, Scalene,
+         Isosceles and N/A. Impossible conditions are <strong>trimmed to prevent false
+         positives</strong>, leaving <strong>eight test cases</strong> that test only the logic of
+         the software (e.g. Rule 4 → (60,60,60) Equilateral; Rule 11 → (30,40,50) Scalene).</p>
+
+      <h3>Extended Entry — Next Date</h3>
+      <p>The Next Date program takes month, day and year and computes the next date; a limited
+         entry table would require approximately <strong>256 rules</strong>. Using equivalence
+         partitions to group similar inputs (Months M1–M4, Days D1–D5, Years Y1–Y2) and pruning
+         the N/A rules, the condition entries become more abstract and the table shrinks
+         dramatically.</p>
+
+      <h3>Another Example — Disc Space Access</h3>
+      <p>For a system checking <em>valid username</em>, <em>valid password</em>, and
+         <em>account in credit</em>, the eight T/F combinations are rationalised using a hyphen for
+         "don't care", expected output conditions are determined per column, and each column
+         (tagged A, B, C, D) becomes at least one test case:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Conditions / Outputs</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+          <tbody>
+            <tr><td>Valid username</td><td>F</td><td>T</td><td>T</td><td>T</td></tr>
+            <tr><td>Valid password</td><td>–</td><td>F</td><td>T</td><td>T</td></tr>
+            <tr><td>Account in credit</td><td>–</td><td>–</td><td>F</td><td>T</td></tr>
+            <tr><td>Login accepted</td><td>F</td><td>F</td><td>T</td><td>T</td></tr>
+            <tr><td>Restricted access</td><td>–</td><td>–</td><td>T</td><td>F</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">08 — Technique 6</p>
+      <h2>Use Case Testing</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Use case testing</span> is a black-box testing technique that helps
+           identify test cases that <em>cover the entire system.</em></p>
+      </div>
+      <p>It is helpful for deriving test cases for <span class="term">integration testing</span>,
+         <span class="term">system testing</span> and <span class="term">acceptance testing</span>.
+         Each use case describes the <strong>interaction between the actor and the system</strong>
+         to achieve a specific task.</p>
+      <p>A use case specifies a <strong>Use case Name</strong>, <strong>Actors</strong>, and
+         <strong>Pre-Conditions</strong>, then a <strong>Main Scenario</strong> (normal flow of
+         actor/system steps) plus <strong>Extensions</strong> (alternative or error flows). Test
+         cases are derived from the normal flow and each extension — for example, the "Show Student
+         Marks" case derives a normal-flow test and an invalid-ID test from its main scenario and
+         its extension steps (3a invalid ID shows an error; 3b invalid ID entered 4 times closes
+         the application).</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">09 — Takeaways</p>
+      <h2>Summary</h2>
+      <div class="note"><b>Black-box testing checks behavior against specifications — choose the
+        technique that fits the input domain, the combinations, the sequences, or the logic under
+        test.</b></div>
+      <p>Equivalence class testing partitions the input domain; boundary value testing probes the
+         extremes (with robustness, worst-case and robust worst-case extensions governed by the
+         Single Fault Assumption); combinatorial/pairwise testing (via PICT) shrinks an exhaustive
+         combination set while still covering all pairs; state transition testing covers
+         event-driven state changes; decision tables model complex logic as rules; and use case
+         testing derives end-to-end tests from actor–system interactions.</p>
+    </section>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section class="quiz-sec">
+    <div class="quiz-head">
+      <h2>Check your understanding</h2>
+    </div>
+    <p class="quiz-intro">A focused set of questions drawn from the course question bank,
+       covering each topic in this chapter. Pick an answer to lock it in — you'll get
+       immediate feedback and a short explanation. Your running score is shown in the top bar.</p>
+
+    <div id="quiz"></div>
+
+    <div class="results" id="results">
+      <div class="ring"><i>0%</i></div>
+      <div class="msg">
+        <h3>You scored 0 / 0</h3>
+        <p>Review and try again any time.</p>
+      </div>
+      <button class="btn" onclick="location.reload()">Retake quiz ↺</button>
+    </div>
+  </section>
+
+  <nav class="footnav">
+    <a href="chapter-06-1-methods-techniques.html">← Chapter 6.1 · Methods &amp; Techniques</a>
+    <a href="chapter-07-white-box.html">Chapter 7 · White-Box Testing →</a>
+  </nav>
+</main>
+
+<script>
+window.STUDY = {
+  quiz: [
+    {
+      q: "What is black-box testing?",
+      options: [
+        "A method that tests software functionalities without knowledge of internal code structure, implementation details and internal paths.",
+        "A method that tests every internal path and statement of the code.",
+        "A method that reviews the source code line by line.",
+        "A method that measures CPU and memory usage of the program."
+      ],
+      answer: 0,
+      explain: "Black box testing tests the functionalities of an application <strong>without having knowledge of internal code structure, implementation details and internal paths</strong>."
+    },
+    {
+      q: "Black-box testing is also known by which names?",
+      options: [
+        "Structural testing and path testing",
+        "Specification-based testing and behavior-based testing",
+        "Unit testing and integration testing",
+        "Glass-box testing and clear-box testing"
+      ],
+      answer: 1,
+      explain: "Black box testing is also known as <strong>specification-based testing</strong> and <strong>behavior-based testing</strong> — the tester focuses on what the software does, not how."
+    },
+    {
+      q: "Which two categories does black-box testing consist of?",
+      options: [
+        "Static testing and dynamic testing",
+        "Manual testing and automated testing",
+        "Functional testing and non-functional testing",
+        "Positive testing and negative testing"
+      ],
+      answer: 2,
+      explain: "Black box testing consists of <strong>functional testing</strong> and <strong>non-functional testing</strong>."
+    },
+    {
+      q: "Which of the following is NOT one of the six common black-box testing techniques listed?",
+      options: [
+        "Equivalence Class Testing",
+        "Boundary Value Testing",
+        "Basis Path Testing",
+        "Decision Tables Testing"
+      ],
+      answer: 2,
+      explain: "The six techniques are Equivalence Class, Boundary Value, Combinatorial/Pairwise, State Transition, Decision Tables, and Use Case testing. <strong>Basis Path Testing</strong> is a white-box technique."
+    },
+    {
+      q: "What is the core idea of Equivalence Class Testing (Equivalence Partitioning)?",
+      options: [
+        "Test every possible input value exhaustively.",
+        "Divide the input domain into classes of data and derive test cases based on these partitions.",
+        "Only test values at the boundaries of the input range.",
+        "Randomly select test inputs from the whole domain."
+      ],
+      answer: 1,
+      explain: "The idea is to <strong>divide or partition the input domain into classes of data</strong> and derive test cases based on these partitions, reducing the number of test cases while still covering maximum requirements."
+    },
+    {
+      q: "In equivalence partitioning, how does the system handle inputs within the same partition?",
+      options: [
+        "Each input is handled in a uniquely different way.",
+        "All input variations within a partition are handled in the same way.",
+        "Only the first input in a partition is processed.",
+        "Inputs within a partition are always rejected."
+      ],
+      answer: 1,
+      explain: "The system handles all test input variations <strong>within a partition in the same way</strong> — if one passes, all pass; if one fails, all fail."
+    },
+    {
+      q: "What distinguishes strong equivalence class test cases from weak ones?",
+      options: [
+        "Strong cases test only invalid inputs; weak cases test only valid inputs.",
+        "Strong cases use the full Cartesian product of equivalence classes (all combinations); weak cases cover each variable's classes but not all combinations.",
+        "Strong cases use boundary values; weak cases use nominal values.",
+        "There is no difference; the terms are interchangeable."
+      ],
+      answer: 1,
+      explain: "<strong>Strong</strong> equivalence class testing uses the full Cartesian product of classes (every combination), while <strong>weak</strong> testing covers each variable's classes but not all combinations."
+    },
+    {
+      q: "For the field accepting Age 18–56, how many equivalence classes are defined?",
+      options: [
+        "Two classes",
+        "Three classes (one valid, two invalid)",
+        "Four classes",
+        "Five classes"
+      ],
+      answer: 1,
+      explain: "Three classes: Valid (18–56), Invalid 1 (&lt;=17), and Invalid 2 (&gt;=57) — giving 3 test cases."
+    },
+    {
+      q: "In the Triangle Problem, which condition identifies an Equilateral triangle?",
+      options: [
+        "a != b && b != c && a != c",
+        "a == b && b == c",
+        "a + b <= c || b + c <= a || a + c <= b",
+        "a <= 0 || b <= 0 || c <= 0"
+      ],
+      answer: 1,
+      explain: "Equilateral is identified by <code>a == b &amp;&amp; b == c</code> (all three sides equal). Scalene uses all-unequal, and the error/not-a-triangle conditions are the others."
+    },
+    {
+      q: "What is the basic idea of Boundary Value Analysis?",
+      options: [
+        "Use values at the minimum, just above the minimum, a nominal value, just below the maximum, and the maximum.",
+        "Use only the nominal (middle) value of each variable.",
+        "Use random values spread across the entire range.",
+        "Use only the absolute minimum and maximum values."
+      ],
+      answer: 0,
+      explain: "BVA uses input values at their <strong>minimum, just above the minimum, a nominal value, just below the maximum, and the maximum</strong> — because errors tend to occur near the extreme values."
+    },
+    {
+      q: "What does the Single Fault Assumption state?",
+      options: [
+        "Every fault causes exactly one failure.",
+        "Failures are rarely the result of the simultaneous occurrence of two or more faults.",
+        "Only one fault can exist in a program at a time.",
+        "Faults at boundaries are the only faults worth testing."
+      ],
+      answer: 1,
+      explain: "The Single Fault assumption from reliability states: <strong>\"Failures are rarely the result of the simultaneous occurrence of two (or more) faults.\"</strong>"
+    },
+    {
+      q: "How does Robustness testing extend Boundary Value testing?",
+      options: [
+        "It includes values below the minimum and above the maximum (exceeds the limits).",
+        "It stays strictly within the limits.",
+        "It tests only nominal values.",
+        "It removes all invalid inputs from testing."
+      ],
+      answer: 0,
+      explain: "Robustness testing <strong>includes values below the minimum and above the maximum</strong> — it exceeds the limits, a form of negative testing checking how the program handles input errors."
+    },
+    {
+      q: "What distinguishes Worst-Case testing from ordinary Boundary Value testing?",
+      options: [
+        "It tests only one variable at a time.",
+        "It discards the Single Fault Assumption, allowing input values to simultaneously approach their boundaries.",
+        "It stays within the limits and uses fewer test cases.",
+        "It only applies to single-variable programs."
+      ],
+      answer: 1,
+      explain: "Worst-case testing <strong>discards the Single Fault Assumption</strong> and allows input values to simultaneously approach their boundaries (testing combinations of extremes)."
+    },
+    {
+      q: "For the Triangle Program with side lengths from 1 to 200, how many boundary value test cases are required for the 3 variables?",
+      options: [
+        "5 test cases",
+        "9 test cases",
+        "15 test cases (5 × 3)",
+        "200 test cases"
+      ],
+      answer: 2,
+      explain: "BVA requires 5 values per variable (min, min+, nominal, max-, max), so 3 variables require <strong>5 × 3 = 15 test cases</strong>."
+    },
+    {
+      q: "What does Pairwise (All-Pairs / Combinatorial) testing design test cases to execute?",
+      options: [
+        "All possible exhaustive combinations of every parameter.",
+        "All possible discrete combinations of each pair of input parameters.",
+        "Only the boundary values of each parameter.",
+        "A single random combination of all parameters."
+      ],
+      answer: 1,
+      explain: "Pairwise testing designs test cases to execute <strong>all possible discrete combinations of each pair of input parameters</strong> — much smaller than exhaustive yet still effective."
+    },
+    {
+      q: "Which automation tool for pairwise testing is provided by Microsoft?",
+      options: [
+        "ACTS (NIST)",
+        "FoCuS (IBM)",
+        "PICT — Pairwise Independent Combinatorial Testing",
+        "Selenium"
+      ],
+      answer: 2,
+      explain: "<strong>PICT</strong> — 'Pairwise Independent Combinatorial Testing' — is provided by Microsoft Corp. ACTS is from NIST and FoCuS is from IBM."
+    },
+    {
+      q: "In PICT modeling, what does 'aliasing' refer to?",
+      options: [
+        "Hard-coding all variable ranges explicitly.",
+        "Treating similar variables as equivalent (e.g. arial | tahoma) while still testing both.",
+        "Removing all invalid combinations from the output.",
+        "Increasing the order of combinations from 2-wise to 3-wise."
+      ],
+      answer: 1,
+      explain: "Aliasing means to <strong>alias (equivalence) similar variables</strong> — e.g. <code>font: arial | tahoma, ...</code> — when two values are similar but you still want to test both."
+    },
+    {
+      q: "When is State Transition Testing (STT) appropriate to use?",
+      options: [
+        "When testing a sequence of events and the system depends on past events/values.",
+        "When testing unrelated functionalities through exploratory testing.",
+        "When testing non-sequential input combinations only.",
+        "When measuring code coverage of internal statements."
+      ],
+      answer: 0,
+      explain: "STT is used for a finite set of input values, to test a <strong>sequence of events</strong>, and when the system <strong>depends on past events/values</strong>. It is NOT used for non-sequential combinations or exploratory testing."
+    },
+    {
+      q: "Which two elements are the components of a State Transition diagram?",
+      options: [
+        "Conditions and actions",
+        "States/Events/Actions (nodes) and Transitions (arrows)",
+        "Rules and stubs",
+        "Actors and use cases"
+      ],
+      answer: 1,
+      explain: "An STT diagram is built from <strong>States/Events/Actions</strong> (drawn as named oval nodes) and <strong>Transitions</strong> (drawn as named arrows between states)."
+    },
+    {
+      q: "What is the purpose of Decision Table Testing?",
+      options: [
+        "To determine test scenarios for complex business logic by examining the effects of combinations of inputs.",
+        "To test only the boundary values of a single input.",
+        "To measure the reliability of the software over time.",
+        "To test the sequence of state changes in an application."
+      ],
+      answer: 0,
+      explain: "Decision table testing is a black-box technique to <strong>determine the test scenarios for complex business logic</strong>, helping testers search the effects of <strong>combinations of different inputs</strong>."
+    },
+    {
+      q: "In a decision table, what is the difference between a Limited Entry and an Extended Entry table?",
+      options: [
+        "Limited entry tables have fewer rows; extended entry tables have more rows.",
+        "In a limited entry table each condition value is binary; in an extended entry table conditions can have values.",
+        "Limited entry tables list actions; extended entry tables list conditions.",
+        "Extended entry tables are always inconsistent."
+      ],
+      answer: 1,
+      explain: "In a <strong>limited entry</strong> decision table each condition value is binary (T/F); in an <strong>extended entry</strong> table conditions can have values (more abstract entries)."
+    },
+    {
+      q: "In a decision table, what does each column represent?",
+      options: [
+        "A condition stub",
+        "An action stub",
+        "A rule, which is a test case",
+        "A don't-care value"
+      ],
+      answer: 2,
+      explain: "Each column is a <strong>rule</strong>, and each rule is a test case. The condition stub lists conditions and the action stub lists actions."
+    },
+    {
+      q: "A decision table where two rules have identical condition entries but different action entries is described as:",
+      options: [
+        "Redundant (no ambiguity, just repetition)",
+        "Inconsistent (implies non-determinism — can't tell which rule applies)",
+        "Complete",
+        "Optimized"
+      ],
+      answer: 1,
+      explain: "When the condition entries are identical but the action entries differ, the table is <strong>inconsistent</strong>, and the inconsistency implies non-determinism — you can't tell which rule to apply. (Identical actions would just be redundant.)"
+    },
+    {
+      q: "What is Use Case Testing primarily helpful for?",
+      options: [
+        "Deriving test cases for integration, system, and acceptance testing by covering actor–system interactions.",
+        "Testing individual internal code paths in isolation.",
+        "Measuring boundary values of numeric inputs.",
+        "Generating pairwise combinations of GUI parameters."
+      ],
+      answer: 0,
+      explain: "Use case testing helps identify test cases that cover the entire system, and is helpful for deriving test cases for <strong>integration testing, system testing and acceptance testing</strong> — each use case describes the interaction between actor and system."
+    }
+  ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.1–2 · Introduction to SQA — SQA Study Journal</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="reading-progress" id="rprog"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span>SQA&nbsp;Study&nbsp;Journal</a>
+  <span class="spacer"></span>
+  <span class="score-chip" id="scoreChip">Quiz <b>0</b>/0</span>
+  <a class="back" href="index.html">← Contents</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển Sáng/Tối" title="Sáng / Tối">
+    <span class="moon">🌙</span><span class="sun">☀️</span>
+  </button>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero reveal">
+    <p class="eyebrow">Chapter 1–2 · Slides 5–33</p>
+    <h1>Introduction to Software Quality Assurance</h1>
+    <p class="lede">Quality software does not just happen — it has to be planned,
+       measured, and built into the development process. This chapter reviews the
+       people, process, product and project view of quality, software metrics,
+       reviews, and software configuration management.</p>
+    <div class="meta">
+      <span>Theory review</span>
+      <span>16-question quiz</span>
+      <span>Immediate feedback</span>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY ===================== -->
+  <article class="theory">
+
+    <section class="sec">
+      <p class="kicker">01 — Foundations</p>
+      <h2>The Four P's in Software Development</h2>
+      <p>The central question of the chapter is: <em>“How can we achieve software
+         quality?”</em> Quality emerges from the interaction of four P's:</p>
+      <ul>
+        <li><span class="term">Process</span> — a set of activities; provides a <em>template</em> for the project, guided by measurement &amp; feedback.</li>
+        <li><span class="term">People</span> — the software engineers who <em>participate</em> in the project; developed through education &amp; training.</li>
+        <li><span class="term">Product</span> — the set of artifacts that <em>result</em> from the project; validated through testing &amp; measurement.</li>
+        <li><span class="term">Project</span> — the work itself, kept on track through management &amp; monitoring.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">02 — What SQA Is</p>
+      <h2>Software Quality Assurance</h2>
+      <div class="def">
+        <span class="label">Definition — E.H. Bersoff</span>
+        <p>“Quality assurance consists of those procedures, techniques, and tools
+           applied by professionals to ensure that a product meets or exceeds
+           pre-specified standards during it's development cycle.”</p>
+        <cite>— E.H. Bersoff</cite>
+      </div>
+      <p>It follows that SQA:</p>
+      <ul>
+        <li>is an essential activity for any business that produces products used by others;</li>
+        <li>needs to be <strong>planned and systematic</strong> — it does not just happen;</li>
+        <li>needs to be <strong>built into the development process</strong> — a natural outcome of software engineering;</li>
+        <li>has <strong>continuous improvement</strong> as its overall goal.</li>
+      </ul>
+
+      <h3>SQA — an umbrella activity</h3>
+      <p>Quality sits at the centre of six supporting activities:
+         <span class="term">Methods and Tools</span>, <span class="term">Standards and Procedures</span>,
+         <span class="term">Metrics and Measurement</span>, <span class="term">Formal Technical Reviews</span>,
+         <span class="term">Software Configuration Management</span>, and <span class="term">Testing</span>.</p>
+
+      <h3>Why SQA activities pay off</h3>
+      <p>The cost to find and fix a defect rises sharply across the lifecycle —
+         SQA pays off in the early phases because defects are cheap to fix:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Phase</th><th>Reqmts</th><th>Design</th><th>Code</th><th>Test</th><th>System&nbsp;test</th><th>Field&nbsp;use</th></tr></thead>
+          <tbody><tr><td>Relative cost</td><td>1.00</td><td>1.30</td><td>2.00</td><td>4.00</td><td>13.00</td><td>80–130</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">03 — Quality &amp; Principles</p>
+      <h2>Software Quality</h2>
+      <p>What is software quality, and how do we measure it?</p>
+      <ul>
+        <li>customer's viewpoint → <strong>meets specifications</strong></li>
+        <li>developer's viewpoint → <strong>easy to maintain, test, …</strong></li>
+      </ul>
+      <div class="note">Software quality is <b>not</b> just about meeting specifications
+        and removing defects! Other attributes also affect quality:</div>
+      <div class="tbl-wrap">
+        <table class="t grid">
+          <tbody>
+            <tr><td>safety</td><td>understandability</td><td>portability</td></tr>
+            <tr><td>security</td><td>testability</td><td>usability</td></tr>
+            <tr><td>reliability</td><td>adaptability</td><td>reusability</td></tr>
+            <tr><td>resilience</td><td>modularity</td><td>efficiency</td></tr>
+            <tr><td>robustness</td><td>complexity</td><td>learnability</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>We need to select critical quality attributes early in the development
+         process and plan for how to achieve them.</p>
+
+      <h3>Principles of Software Quality Assurance</h3>
+      <ol>
+        <li>We have a set of standards and quality attributes that a software product must meet. → <em>There is a goal to achieve.</em></li>
+        <li>We can <strong>measure the quality</strong> of a software product. <strong>(key point)</strong> → <em>There is a way to determine how well the product conforms.</em></li>
+        <li>We track the values of the quality attributes. → <em>It is possible to assess how well we are doing.</em></li>
+        <li>We use information about software quality to improve future products. → <em>There is feedback into the development process.</em></li>
+      </ol>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">04 — Standards, Metrics &amp; Formal Approaches</p>
+      <h2>Software Standards</h2>
+      <div class="duo">
+        <div class="box accent"><h4>Product standards</h4>
+          define the characteristics all product artifacts should exhibit so as to have quality.</div>
+        <div class="box teal"><h4>Process standards</h4>
+          define how the software process should be conducted to ensure quality software.</div>
+      </div>
+      <p>Standards matter because they encapsulate <strong>best practices</strong>, provide a
+         framework around which to implement the SQA process, and assist in ensuring
+         continuity of project work. Each project decides which standards should be
+         <em>ignored, used as is, modified, or created</em>.</p>
+
+      <h2>Software Metrics</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">metric</span>: any type of measurement that relates to a
+           software system, process or related artifact.</p>
+      </div>
+      <div class="duo">
+        <div class="box accent"><h4>Control metrics</h4>
+          used to plan, manage and control the development process (e.g., effort expended, elapsed time, disk usage).</div>
+        <div class="box teal"><h4>Predictor metrics</h4>
+          used to predict an associated product quality (e.g., cyclomatic complexity can predict ease of maintenance).</div>
+      </div>
+      <div class="duo">
+        <div class="box"><h4>External attribute</h4>
+          something we can only discover <em>after</em> the software has been put into use (e.g., ease of maintenance).</div>
+        <div class="box"><h4>Internal attribute</h4>
+          something we can measure directly from the software itself (e.g., cyclomatic complexity).</div>
+      </div>
+      <p>We want to use <strong>internal</strong> attributes to predict the value of
+         <strong>external</strong> attributes.</p>
+
+      <h3>Product quality: design quality metrics</h3>
+      <p>For a design component, the key quality attribute is <span class="term">maintainability</span>,
+         which is related to:</p>
+      <ul>
+        <li><span class="term">cohesion</span> — how closely related is the functionality of the component?</li>
+        <li><span class="term">coupling</span> — how independent is the component?</li>
+        <li><span class="term">understandability</span> — how easy is it to understand what the component does?</li>
+        <li><span class="term">adaptability</span> — how easy is it to change the component?</li>
+      </ul>
+      <p>Most of these cannot be measured directly, so we infer a relationship with a
+         component's <strong>complexity</strong>. Using <strong>fan-in / fan-out</strong>:</p>
+      <ul>
+        <li><span class="term">fan-in</span> — number of calls to a component by other components → high fan-in ⇒ high coupling.</li>
+        <li><span class="term">fan-out</span> — number of components called by a component → high fan-out ⇒ high complexity.</li>
+      </ul>
+      <pre><code>complexity = component-length x (fan-in x fan-out)²</code></pre>
+      <p>Other measures: the <span class="term">design structure quality index (DSQI)</span> (0–1,
+         from IEEE Std 982.1-1988) and the <span class="term">software maturity index (SMI)</span> (0–1) —
+         as SMI approaches 1, the product begins to stabilize.</p>
+
+      <h3>Product quality: formal approaches</h3>
+      <ul>
+        <li><strong>Proving programs/specifications correct</strong> — logically prove requirements were correctly transformed into programs.</li>
+        <li><strong>Statistical Quality Assurance</strong> — categorize defects and find causes; the <span class="term">80-20 rule</span>: 80% of defects can be traced to 20% of causes.</li>
+        <li><strong>The Cleanroom Process</strong> — a combination of the above two approaches.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">05 — Reviews</p>
+      <h2>Project Quality: Reviews</h2>
+      <p>Reviews are the principal method of validating the quality of a project, and
+         lead to early discovery of defects — each phase is paired with a walkthrough
+         or review (requirements walkthroughs, analysis walkthroughs, design
+         walkthroughs, code walkthroughs, test plan review).</p>
+      <div class="note">Requirements, Analysis and Design introduce <b>50–60%</b> of all
+        defects — and formal technical reviews can uncover <b>75%</b> of these!</div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">06 — Configuration Management</p>
+      <h2>Software Configuration Management (SCM)</h2>
+      <p>SCM is an activity executed throughout the system life cycle to control change
+         of products and life cycle artifacts. Its activities are
+         <span class="term">identify, control, audit, report,</span> and <span class="term">support</span>.</p>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">configuration item</span>: an artifact to which we want to
+           control changes. Each must be identified and described (unique name, type,
+           project identifier, change/version information, resources, and a pointer to
+           the actual item).</p>
+      </div>
+
+      <h3>Baselines</h3>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p>A <span class="term">baseline</span> is a time/phase in the software development
+           (usually a project milestone) after which any changes must be formalized
+           (e.g., go through a formal change control procedure).</p>
+      </div>
+      <p>To become a baseline, a configuration item must first pass a set of formal review
+         procedures and join the project software library; afterwards a check-out
+         procedure controls access and change.</p>
+
+      <h3>Version control</h3>
+      <div class="duo">
+        <div class="box accent"><h4>version</h4>
+          item<sub>k</sub> is obtained by modifying item<sub>i</sub> (bug fixes, enhanced functionality); created in a linear order.</div>
+        <div class="box teal"><h4>branch</h4>
+          a concurrent development path requiring independent configuration management.</div>
+      </div>
+      <div class="duo">
+        <div class="box"><h4>variant</h4>
+          different configurations intended to <em>coexist</em> (e.g., Oracle for Windows / Oracle for Linux).</div>
+        <div class="box"><h4>change control</h4>
+          a change request is evaluated by a change control authority, which issues an engineering change order if approved.</div>
+      </div>
+
+      <h3>Audit, status reporting &amp; support</h3>
+      <ul>
+        <li><span class="term">Audit</span> — ensures that changes have been properly implemented (have the proper steps and procedures been followed?).</li>
+        <li><span class="term">Status reporting</span> — keeps all parties informed and up-to-date on the status of a change.</li>
+      </ul>
+      <p>A software library supports SCM through three tiers:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Tier</th><th>Used by</th><th>Tracks</th></tr></thead>
+          <tbody>
+            <tr><td>developer's workspace</td><td>a single developer</td><td>everyday development</td></tr>
+            <tr><td>master directory</td><td>other developers</td><td>promotions (after check-in/check-out)</td></tr>
+            <tr><td>software repository</td><td>users</td><td>releases (after SQA)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">07 — Process &amp; People</p>
+      <h2>Process Quality</h2>
+      <p>Does process quality ⇒ product quality? Software development has unique factors
+         that affect quality: software is <strong>designed, not manufactured</strong>;
+         development is <strong>creative, not mechanical</strong>; individual skills and
+         experience have significant influence; and external factors (novelty, commercial
+         pressure) intrude. So processes are organization specific, people and technology
+         may matter more than process, and insufficient resources always hurt quality.</p>
+
+      <h3>ISO 9001 / 9000-3 and the SEI CMM</h3>
+      <p>The <span class="term">ISO 9000 quality model</span> is a generic quality model,
+         instantiated as an organizational quality process — its focus is on
+         <strong>process management</strong> (certification is easy and can be a marketing ploy).
+         The <span class="term">SEI Capability Maturity Model (CMM)</span> helps an organization
+         improve its development processes — its focus is on <strong>process improvement</strong>:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Level</th><th>CMM process</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Initial process (ad hoc)</td></tr>
+            <tr><td>2</td><td>Repeatable process (intuitive)</td></tr>
+            <tr><td>3</td><td>Defined process (qualitative)</td></tr>
+            <tr><td>4</td><td>Managed process (quantitative)</td></tr>
+            <tr><td>5</td><td>Optimizing process</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>People Quality: People CMM (PCMM)</h3>
+      <p>The <span class="term">People Capability Maturity Model (PCMM)</span> is intended to
+         improve the knowledge and skill of people — its focus is on
+         <strong>people improvement</strong> — across the same five levels (Initial,
+         Repeatable, Defined, Managed, Optimizing).</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">08 — Takeaways</p>
+      <h2>Summary — Software Quality</h2>
+      <div class="note"><b>Quality software does not just happen!</b></div>
+      <p>Quality assurance mechanisms should be built into the software development
+         process. Developing quality software requires management support and
+         involvement, the gathering and use of software metrics, policies and procedures
+         that everyone follows, and commitment to following them even when things get rough.</p>
+      <div class="def">
+        <span class="label">Remember</span>
+        <p>Testing is an important part of quality assurance, but it's not all there is
+           to obtaining a quality software product.</p>
+      </div>
+    </section>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section class="quiz-sec">
+    <div class="quiz-head">
+      <h2>Check your understanding</h2>
+    </div>
+    <p class="quiz-intro">Pick an answer to lock it in — you'll get immediate feedback and
+       a short explanation. Your running score is shown in the top bar.</p>
+
+    <div id="quiz"></div>
+
+    <div class="results" id="results">
+      <div class="ring"><i>0%</i></div>
+      <div class="msg">
+        <h3>You scored 0 / 0</h3>
+        <p>Review and try again any time.</p>
+      </div>
+      <button class="btn" onclick="location.reload()">Retake quiz ↺</button>
+    </div>
+  </section>
+
+  <nav class="footnav">
+    <a href="index.html">← All chapters</a>
+    <a href="chapter-03-sqa-management.html">Chapter 3 · SQA Management →</a>
+  </nav>
+</main>
+
+<script>
+window.STUDY = {
+  quiz: [
+    {
+      q: "What are the “Four P's” in software development that together help achieve software quality?",
+      options: [
+        "Process, People, Product, Project",
+        "Planning, Programming, Procedures, Performance",
+        "People, Practice, Productivity, Process",
+        "Product, Plan, Process, Performance"
+      ],
+      answer: 0,
+      explain: "The Four P's are <strong>Process</strong> (a template), <strong>People</strong> (who participate), <strong>Product</strong> (the resulting artifacts) and <strong>Project</strong> (managed and monitored)."
+    },
+    {
+      q: "According to E.H. Bersoff, quality assurance consists of procedures, techniques and tools applied to ensure that a product meets or exceeds ___ during its development cycle.",
+      options: [
+        "customer expectations",
+        "pre-specified standards",
+        "the project budget",
+        "defect-free code"
+      ],
+      answer: 1,
+      explain: "Bersoff's definition ends “…to ensure that a product meets or exceeds <strong>pre-specified standards</strong> during it's development cycle.”"
+    },
+    {
+      q: "Which of the following is <em>not</em> one of the six activities surrounding “Quality” in the SQA umbrella?",
+      options: [
+        "Formal Technical Reviews",
+        "Software Configuration Management",
+        "Risk Management",
+        "Metrics and Measurement"
+      ],
+      answer: 2,
+      explain: "The six umbrella activities are Methods and Tools, Standards and Procedures, Metrics and Measurement, Formal Technical Reviews, Software Configuration Management, and Testing. <strong>Risk Management</strong> is not among them."
+    },
+    {
+      q: "On the “cost to find and fix a defect” scale (relative to a cost of 1.00 at Requirements), what is the relative cost during <em>Field use</em>?",
+      options: [ "4.00", "13.00", "80–130", "2.00" ],
+      answer: 2,
+      explain: "Costs escalate from 1.00 (Reqmts) up to <strong>80–130</strong> in Field use — which is exactly why SQA pays off early, when defects are cheap to fix."
+    },
+    {
+      q: "Software quality from the <em>customer's</em> viewpoint primarily means the software…",
+      options: [
+        "is easy to maintain and test",
+        "meets specifications",
+        "has the lowest possible complexity",
+        "uses the fewest resources"
+      ],
+      answer: 1,
+      explain: "Customer's viewpoint → <strong>meets specifications</strong>; developer's viewpoint → easy to maintain, test, etc. But quality is <em>not</em> just meeting specs and removing defects."
+    },
+    {
+      q: "In the Principles of Software Quality Assurance, which principle is marked as the “(key point)”?",
+      options: [
+        "We have a set of standards and quality attributes that a product must meet",
+        "We can measure the quality of a software product",
+        "We track the values of the quality attributes",
+        "We use information about quality to improve future products"
+      ],
+      answer: 1,
+      explain: "Principle 2 — “<strong>We can measure the quality</strong> of a software product” — is the key point: it means there is a way to determine how well the product conforms."
+    },
+    {
+      q: "Standards that “define how the software process should be conducted to ensure quality software” are called ___ standards.",
+      options: [ "product", "process", "external", "predictor" ],
+      answer: 1,
+      explain: "<strong>Process</strong> standards define how the process is conducted; <strong>product</strong> standards define characteristics the product artifacts should exhibit."
+    },
+    {
+      q: "Using cyclomatic complexity to predict ease of maintenance is an example of a ___ metric.",
+      options: [ "control", "predictor", "control and external", "baseline" ],
+      answer: 1,
+      explain: "<strong>Predictor metrics</strong> predict an associated product quality. <strong>Control metrics</strong> (effort, elapsed time, disk usage) are used to plan, manage and control the process."
+    },
+    {
+      q: "An attribute we can only discover <em>after</em> the software has been put into use (e.g., ease of maintenance) is a(n) ___ attribute.",
+      options: [ "internal", "external", "control", "predictor" ],
+      answer: 1,
+      explain: "That is an <strong>external attribute</strong>. An <strong>internal attribute</strong> (e.g., cyclomatic complexity) can be measured directly from the software itself."
+    },
+    {
+      q: "For a design component, the slides state that the key quality attribute is ___.",
+      options: [ "reliability", "maintainability", "usability", "portability" ],
+      answer: 1,
+      explain: "The key design quality attribute is <strong>maintainability</strong>, related to cohesion, coupling, understandability and adaptability."
+    },
+    {
+      q: "In design quality metrics, <code>fan-in</code> is the number of calls to a component by other components, and a high fan-in implies ___.",
+      options: [
+        "high complexity in the calling component",
+        "high coupling",
+        "high cohesion",
+        "a low maturity index"
+      ],
+      answer: 1,
+      explain: "High <strong>fan-in ⇒ high coupling</strong>; high <strong>fan-out</strong> means the calling component has high complexity. complexity = component-length × (fan-in × fan-out)²."
+    },
+    {
+      q: "In Statistical Quality Assurance, the “80-20 rule” states that 80% of defects can be traced to ___ of the causes.",
+      options: [ "50%", "20%", "80%", "13%" ],
+      answer: 1,
+      explain: "The <strong>80-20 rule</strong>: 80% of defects can be traced to <strong>20%</strong> of causes — so effort is directed at isolating and correcting that 20%."
+    },
+    {
+      q: "According to the Reviews slide, Requirements, Analysis and Design introduce 50–60% of all defects, and formal technical reviews can uncover ___ of these.",
+      options: [ "50%", "60%", "75%", "100%" ],
+      answer: 2,
+      explain: "Formal technical reviews can uncover <strong>75%</strong> of the defects introduced during Requirements, Analysis and Design — leading to early discovery of defects."
+    },
+    {
+      q: "Different configurations that are intended to <em>coexist</em> (e.g., Oracle for Windows and Oracle for Linux) are called a ___.",
+      options: [ "version", "branch", "variant", "baseline" ],
+      answer: 2,
+      explain: "A <strong>variant</strong> = different configurations intended to coexist. A <strong>version</strong> is created in linear order by modifying a prior item; a <strong>branch</strong> is a concurrent development path."
+    },
+    {
+      q: "In the SCM software library, which tier is “used by a single developer” and tracks everyday development?",
+      options: [
+        "master directory",
+        "software repository",
+        "developer's workspace",
+        "configuration baseline"
+      ],
+      answer: 2,
+      explain: "The <strong>developer's workspace</strong> is used by a single developer. The <strong>master directory</strong> serves other developers (promotions); the <strong>software repository</strong> serves users (releases, after SQA)."
+    },
+    {
+      q: "The People Capability Maturity Model (PCMM) places its focus on ___, whereas the SEI CMM focuses on process improvement.",
+      options: [
+        "people improvement",
+        "product certification",
+        "process management",
+        "defect prevention"
+      ],
+      answer: 0,
+      explain: "PCMM is intended to improve the knowledge and skill of people — its focus is on <strong>people improvement</strong>. (ISO 9000's focus is process management; CMM's is process improvement.)"
+    }
+  ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

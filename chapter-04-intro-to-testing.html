@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.4 · Introduction to Software Testing — SQA Study Journal</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="reading-progress" id="rprog"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span>SQA&nbsp;Study&nbsp;Journal</a>
+  <span class="spacer"></span>
+  <span class="score-chip" id="scoreChip">Quiz <b>0</b>/0</span>
+  <a class="back" href="index.html">← Contents</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển Sáng/Tối" title="Sáng / Tối">
+    <span class="moon">🌙</span><span class="sun">☀️</span>
+  </button>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero reveal">
+    <p class="eyebrow">Chapter 4 · Slides 65–101</p>
+    <h1>Introduction to Software Testing</h1>
+    <p class="lede">Software quality is the degree to which a system, component, or process
+       meets specified requirements. This chapter reviews the IEEE definition of quality;
+       the distinction between error, fault and failure; the causes and high cost of
+       software defects; the definitions of software testing; the 7 principles of testing;
+       why testing is necessary and its objectives; and the five stages of the fundamental
+       test process.</p>
+    <div class="meta">
+      <span>Theory review</span>
+      <span>18-question quiz</span>
+      <span>Immediate feedback</span>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY ===================== -->
+  <article class="theory">
+
+    <section class="sec">
+      <p class="kicker">01 — Quality</p>
+      <h2>What is Software Quality?</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Software quality</span> — IEEE definition: <em>the degree to
+           which a <strong>system</strong>, <strong>component</strong>, or
+           <strong>process</strong> meets <strong>specified requirements</strong>.</em></p>
+      </div>
+      <p>Quality is ultimately reflected in <strong>customer satisfaction</strong>, which the
+         slides rate on a scale from <em>Very Poor</em> and <em>Poor</em>, through
+         <em>Average</em>, up to <em>Good</em> and <em>Excellent</em>.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">02 — Error · Fault · Failure</p>
+      <h2>Error? Fault? Failure?</h2>
+      <p>These three terms are distinct and must not be used interchangeably:</p>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Error</span> — also known as a <em>mistake</em>. A software
+           error is made by <strong>human action</strong> which produces an incorrect
+           result. An error can be a <strong>Syntax</strong> (grammatical) error or a
+           <strong>Logic</strong> error.</p>
+      </div>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Fault</span> — also known as a <em>defect</em> or <em>bug</em>.
+           A fault is a <strong>manifestation of an error in software</strong>. All software
+           errors may <strong>not</strong> cause software faults.</p>
+      </div>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Failure</span> — a fault becomes a failure if it is
+           <strong>activated / executed</strong>. A failure is a <strong>deviation of the
+           software from its expected delivery or service</strong>. Not all faults result in
+           failures; some stay <strong>dormant</strong> in the code and we may never notice
+           them.</p>
+      </div>
+      <div class="note"><b>Failure is an event; Fault is a state of the software, caused by an error.</b></div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">03 — The Chain</p>
+      <h2>A Person Makes an Error</h2>
+      <p>The slides illustrate a three-step chain of causation:</p>
+      <ol>
+        <li><strong>A person makes an error …</strong></li>
+        <li><strong>… that creates a fault in the software …</strong></li>
+        <li><strong>… that can cause a failure in operation.</strong></li>
+      </ol>
+      <p>Viewed across the <span class="term">software development process</span>, errors
+         lead to faults, and <em>some</em> of those faults propagate down to failures — but
+         not all of them do.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">04 — Causes</p>
+      <h2>Causes of Software Errors</h2>
+      <p>Errors may occur for many reasons, such as:</p>
+      <ul>
+        <li><span class="term">Time pressure</span>;</li>
+        <li><span class="term">Human is error prone</span>;</li>
+        <li><span class="term">Inexperienced or insufficiently skilled</span> project participants;</li>
+        <li><span class="term">Miscommunication</span> between project participants, including miscommunication about requirements and design;</li>
+        <li><span class="term">Complexity</span> of the code, design, architecture, the underlying problem to be solved, and the technologies used;</li>
+        <li><span class="term">New, unfamiliar technologies</span>.</li>
+      </ul>
+      <h3>The 5 Causes of Software Errors</h3>
+      <p>The slides' mind map groups the causes into five categories:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>#</th><th>Cause</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Inadequate / poorly specified system or project requirements</td></tr>
+            <tr><td>2</td><td>Logical design errors (e.g. erroneous algorithm, erroneous definition of boundary conditions)</td></tr>
+            <tr><td>3</td><td>Coding errors — too many to list (syntax, logic, run-time errors)</td></tr>
+            <tr><td>4</td><td>Non-compliance with documentation and coding procedures</td></tr>
+            <tr><td>5</td><td>Deliberate deviation from software requirements (e.g. reuse, budget / schedule pressure)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">05 — The Cost</p>
+      <h2>High Cost of Software Defects</h2>
+      <p>Testing is <strong>the way to remove defects</strong>, and the economic stakes are
+         enormous:</p>
+      <ul>
+        <li><strong>$59.5 billion / year</strong> in the USA — <em>"The Economic Impacts of
+           Inadequate Infrastructure for Software Testing"</em> report for the National
+           Institute of Standards &amp; Technology (NIST), US Department of Commerce, 2002.</li>
+        <li>Research by <span class="term">CISQ</span> (Consortium for Information &amp;
+           Software Quality) found that, in 2018, poor quality software cost organizations
+           <strong>$2.8 trillion</strong> in the US alone.</li>
+        <li>On average, software developers make <strong>100 to 150 errors for every
+           thousand lines of code</strong>.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">06 — Definitions</p>
+      <h2>Definitions of Software Testing</h2>
+      <p>There is a variety of definitions for software testing:</p>
+      <ul>
+        <li>Testing is the process of <strong>executing a program with intention of finding errors</strong> (<em>Myers</em>).</li>
+        <li>The purpose of testing is to find errors; testing is the process of trying to discover <strong>every conceivable fault or weakness</strong> in a work product (<em>Myers, Kit</em>).</li>
+        <li>The process of <strong>searching for errors</strong> (<em>Kaner</em>).</li>
+        <li>The process of <strong>finding errors and of validating</strong> the program / system (<em>Jorgensen</em>).</li>
+        <li>The purpose of software testing is to find errors and to <strong>get them fixed</strong> (<em>Bitzenhofer</em>).</li>
+        <li>The purpose of software testing is to <strong>reduce risk</strong> (<em>E&amp;M</em>).</li>
+      </ul>
+      <h3>The Formal Definition</h3>
+      <p>Software testing is a <span class="term">formal</span> process carried out by a
+         <span class="term">specialized testing team</span> in which a software unit, several
+         integrated software units or an entire software package are examined by
+         <span class="term">running the programs on a computer</span>. All associated tests
+         are performed according to <span class="term">approved test procedures</span> on
+         <span class="term">approved test cases</span>.</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Keyword</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Formal</td><td>Scheduled in advance; central in the development process; not ad hoc.</td></tr>
+            <tr><td>Specialized Testing Team</td><td>Independent test team or external consultancy. Unit tests by developers — okay, but that is it.</td></tr>
+            <tr><td>Running the program</td><td>A must; nothing static.</td></tr>
+            <tr><td>Approved Test Procedures</td><td>Use a plan that is approved.</td></tr>
+            <tr><td>Approved Test Cases</td><td>All planned; all tests undertaken.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p>Software testing is the <strong>process</strong> consisting of <strong>all
+           lifecycle activities</strong>, both <strong>static</strong> and
+           <strong>dynamic</strong>, concerned with planning, preparation and evaluation of
+           software products and related work products to <strong>determine</strong> that
+           they satisfy specified requirements, to <strong>demonstrate</strong> that they are
+           fit for purpose, and to <strong>detect</strong> defects.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">07 — The 7 Principles</p>
+      <h2>Principles of Testing</h2>
+      <p>There are <strong>seven principles of testing</strong>:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>#</th><th>Principle</th><th>What it means</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><span class="term">Testing shows the presence of defects</span></td><td>Testing can show that defects are present, but <strong>cannot prove that there are no defects</strong>.</td></tr>
+            <tr><td>2</td><td><span class="term">Exhaustive testing is impossible</span></td><td>Testing everything — all preconditions and combinations of inputs — is impossible; testers should apply <strong>risk analysis and set priorities</strong>.</td></tr>
+            <tr><td>3</td><td><span class="term">Early testing</span></td><td>Testing activities should start <strong>as early as possible</strong> in the life cycle and be focused on defined objectives.</td></tr>
+            <tr><td>4</td><td><span class="term">Defects clustering</span></td><td>A <strong>small number of modules</strong> contain most of the defects discovered during pre-release testing or show the most operational failures.</td></tr>
+            <tr><td>5</td><td><span class="term">Pesticide paradox</span></td><td>Repeating the same tests eventually finds no new bugs; test cases must be <strong>regularly reviewed and revised</strong>, with new and different tests written.</td></tr>
+            <tr><td>6</td><td><span class="term">Testing is context dependent</span></td><td>Testing is done differently in different contexts — e.g. <strong>safety-critical software</strong> is tested differently from an <strong>e-commerce site</strong>.</td></tr>
+            <tr><td>7</td><td><span class="term">Absence of errors fallacy</span></td><td>Finding and fixing defects does not help if the system is <strong>unusable</strong> and does not fulfill the users' needs and expectations.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Why Exhaustive Testing is Impossible</h3>
+      <p>The slides estimate the effort for a system with 20 screens, an average of 4 menus
+         with 3 options per menu, 10 fields per screen, and 2 input types per field with
+         around 100 possible values:</p>
+      <pre><code>20 × 4 × 3 × 10 × 2 × 100 = 480,000 tests
+
+At 1 second per test  →  8000 mins  →  133 hrs  →  17.7 days
+At 10 secs per test   →  34 weeks
+At 1 min per test     →  4 years
+At 10 min per test    →  40 years</code></pre>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">08 — Why &amp; What For</p>
+      <h2>Why Testing is Necessary &amp; Objectives</h2>
+      <h3>Why Testing is Necessary</h3>
+      <ul>
+        <li>All software has <strong>defects (bugs)</strong>;</li>
+        <li>Software products are getting <strong>larger and more complicated</strong>;</li>
+        <li>Software is written by people — <strong>people make mistakes</strong>;</li>
+        <li>Some problems might be trivial, but others can be <strong>costly and damaging</strong> — loss of money, time, or business reputation — and may even result in <strong>injury or death</strong>;</li>
+        <li>Not all software systems carry the <strong>same level of risk</strong>, and not all problems have the same impact when they occur.</li>
+      </ul>
+      <p>The <span class="term">cost of defects</span> rises considerably across the life
+         cycle — on a logarithmic scale, the cost of repair grows from roughly
+         <strong>1</strong> at <em>Specification</em>, to <strong>10</strong> at
+         <em>Design</em>, to <strong>100</strong> at <em>Programming</em>, to
+         <strong>1000</strong> in <em>Production</em>. Testing therefore looks to find the
+         <strong>most important defects as early as possible</strong>, increasing confidence
+         that the software meets specification and helping to <strong>measure the quality</strong>
+         of software.</p>
+      <h3>Software Testing Objectives</h3>
+      <ul>
+        <li>To <strong>identify and reveal as many errors as possible</strong>;</li>
+        <li>To gain confidence about the <em>level of quality</em>;</li>
+        <li>To <strong>prevent defects</strong>;</li>
+        <li>To provide <strong>information for decision-making</strong> (stakeholders);</li>
+        <li>To <strong>reduce the level of risk</strong> of inadequate software quality;</li>
+        <li>To make sure the system <strong>works as expected</strong> and meets the user requirements;</li>
+        <li>To comply with <strong>contractual, legal or regulatory</strong> requirements or standards.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">09 — The Process</p>
+      <h2>The Fundamental Test Process</h2>
+      <p>The fundamental test process has <strong>five stages</strong>, running in sequence
+         with feedback loops back up and a <strong>Control</strong> activity running
+         alongside throughout:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>#</th><th>Stage</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><span class="term">Test Planning</span> (and Control)</td></tr>
+            <tr><td>2</td><td><span class="term">Analysis and Design</span></td></tr>
+            <tr><td>3</td><td><span class="term">Implementation and Execution</span></td></tr>
+            <tr><td>4</td><td><span class="term">Evaluating Exit Criteria and Reporting</span></td></tr>
+            <tr><td>5</td><td><span class="term">Test Closure Activities</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1. Test Planning</h3>
+      <p><em>"A goal without a plan is just a wish."</em> Major tasks are: identify the
+         objectives of testing; determine scope; determine the test approach; determine the
+         required test resources; implement the test policy and/or the test strategy;
+         schedule test analysis and design tasks; schedule test implementation, execution and
+         evaluation; and <strong>determine the exit criteria</strong>.</p>
+      <p><span class="term">Test Control</span> is the ongoing activity of comparing actual
+         progress against the plan, reporting status (including deviations from the plan), and
+         taking actions necessary to meet the mission and objectives of the project. Major
+         control tasks: measure and analyze results; monitor and document progress, test
+         coverage and exit criteria; initiate corrective actions; and make decisions.</p>
+
+      <h3>2. Analysis and Design</h3>
+      <p><em>"Analysis gain better understanding."</em> Review the <span class="term">Test
+         Basis</span> — evaluating the testability of the Test Basis and Test Object(s);
+         identify and prioritize <span class="term">Test Conditions</span> and associated Test
+         Data (documented in a <strong>Test Design Specification</strong>); design and
+         prioritize the <span class="term">Test Cases</span>; identify required test data;
+         design the test environment set-up; and identify any required infrastructure and
+         tools.</p>
+
+      <h3>3. Implementation and Execution</h3>
+      <p><em>"Ideas are easy. Implementation is hard."</em> Develop, implement and prioritize
+         test cases; create the <span class="term">Test Scripts</span>; create test data;
+         write automated test scripts; and <strong>check the environment</strong> — verify
+         that the test environment has been set up correctly.</p>
+
+      <h3>4. Evaluating Exit Criteria and Reporting</h3>
+      <p><em>"Evaluation — learning tool to improve."</em> Evaluating exit criteria is the
+         activity where test execution is <strong>assessed against the defined
+         objectives</strong>. Exit criteria should be set and evaluated for each
+         <strong>test level</strong>; check test logs against the exit criteria specified in
+         the test planning; assess if more tests are needed or if the exit criteria should be
+         changed; and write a <strong>test summary report</strong> to stakeholders.</p>
+      <p>How to measure exit criteria? All planned requirements must be met; all high
+         priority bugs should be closed; all test cases should be executed; if the scheduled
+         time out is arrived; and the <strong>test manager must sign off the release</strong>.
+         <em>Note: all these parameters can be met by percentages (not 100%).</em></p>
+
+      <h3>5. Test Closure Activities</h3>
+      <p><em>"Closure — way to start a new beginning."</em> Collect data from the complete
+         test activity; finalize and <strong>archive the test ware</strong> (scripts, test
+         environment, etc.); and evaluate how testing went, analyzing
+         <strong>lessons learned</strong> for future releases and projects.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">10 — Takeaways</p>
+      <h2>Summary</h2>
+      <div class="note"><b>Testing shows the presence of defects, but can never prove their absence — so start early, prioritize by risk, and follow a planned, formal process.</b></div>
+      <p>Quality is meeting specified requirements. A person makes an <em>error</em> that
+         creates a <em>fault</em> that can cause a <em>failure</em>, though not all faults
+         fail. Because defects are costly, testing — a formal, lifecycle-wide process guided
+         by seven principles — exists to reveal errors, build confidence, and reduce risk,
+         delivered through the five-stage fundamental test process.</p>
+    </section>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section class="quiz-sec">
+    <div class="quiz-head">
+      <h2>Check your understanding</h2>
+    </div>
+    <p class="quiz-intro">A focused set of questions drawn from the course question bank,
+       covering each topic in this chapter. Pick an answer to lock it in — you'll get
+       immediate feedback and a short explanation. Your running score is shown in the top bar.</p>
+
+    <div id="quiz"></div>
+
+    <div class="results" id="results">
+      <div class="ring"><i>0%</i></div>
+      <div class="msg">
+        <h3>You scored 0 / 0</h3>
+        <p>Review and try again any time.</p>
+      </div>
+      <button class="btn" onclick="location.reload()">Retake quiz ↺</button>
+    </div>
+  </section>
+
+  <nav class="footnav">
+    <a href="chapter-03-sqa-management.html">← Chapter 3 · SQA Management</a>
+    <a href="chapter-05-testing-in-sdlc.html">Chapter 5 · Software Testing in the SDLC →</a>
+  </nav>
+</main>
+
+<script>
+window.STUDY = {
+  quiz: [
+    {
+      q: "According to the IEEE definition, software quality is the degree to which a system, component, or process meets what?",
+      options: [
+        "Customer expectations only",
+        "Specified requirements",
+        "Industry best practices",
+        "The development schedule"
+      ],
+      answer: 1,
+      explain: "The IEEE definition: software quality is <strong>the degree to which a system, component, or process meets specified requirements</strong>."
+    },
+    {
+      q: "What is a software <em>error</em> (also known as a mistake)?",
+      options: [
+        "A deviation of the software from its expected service",
+        "A dormant defect in the code that is never executed",
+        "Something made by human action which produces an incorrect result",
+        "A successful test case"
+      ],
+      answer: 2,
+      explain: "An <strong>error</strong> (mistake) is a software error made by <strong>human action</strong> which produces an incorrect result — it can be a syntax or logic error."
+    },
+    {
+      q: "What does a software failure correspond to?",
+      options: [
+        "The presence of unused code",
+        "A missing feature in the software",
+        "A delay in the software release",
+        "Erroneous or unexpected runtime behavior observed by a user"
+      ],
+      answer: 3,
+      explain: "A failure is a <strong>deviation of the software from its expected delivery or service</strong> — observed at runtime. Remember: <em>Failure is an event</em>."
+    },
+    {
+      q: "What is a software fault?",
+      options: [
+        "A hardware malfunction",
+        "A static software characteristic that can cause a failure",
+        "A new feature in the software",
+        "A network issue affecting the software"
+      ],
+      answer: 1,
+      explain: "A fault is a <strong>manifestation of an error in software</strong> — a static characteristic that can cause a failure. Remember: <em>Fault is a state of the software</em>."
+    },
+    {
+      q: "Does the presence of a fault in the software always lead to a failure?",
+      options: [
+        "Yes, faults always cause failures.",
+        "Yes, but only in large software systems.",
+        "No, the presence of a fault doesn’t necessarily imply the occurrence of a failure.",
+        "No, faults only cause failures in certain programming languages."
+      ],
+      answer: 2,
+      explain: "<strong>Not all faults result in failures</strong>; some stay dormant in the code and we may never notice them. A fault becomes a failure only if it is activated / executed."
+    },
+    {
+      q: "Which of the following best describes the relationship between faults and failures in software?",
+      options: [
+        "A failure is the root cause of all faults.",
+        "A fault is a potential cause of a failure, but not all faults result in failures.",
+        "Faults and failures are the same and can be used interchangeably.",
+        "A failure always occurs before a fault is identified."
+      ],
+      answer: 1,
+      explain: "A fault is a manifestation of an error and a <strong>potential cause of a failure</strong>, but not all faults result in failures — some remain dormant."
+    },
+    {
+      q: "What is the correct chain of causation the slides describe?",
+      options: [
+        "A failure creates a fault, which leads to an error.",
+        "A fault creates an error, which causes a failure.",
+        "A person makes an error that creates a fault that can cause a failure.",
+        "An error causes a failure that later becomes a fault."
+      ],
+      answer: 2,
+      explain: "The slides show: <strong>a person makes an error … that creates a fault in the software … that can cause a failure in operation</strong>."
+    },
+    {
+      q: "Which of the following is listed as a cause of software errors?",
+      options: [
+        "Excessive testing",
+        "Time pressure",
+        "Too much documentation",
+        "Using only familiar technologies"
+      ],
+      answer: 1,
+      explain: "Causes of software errors include <strong>time pressure</strong>, humans being error prone, inexperience, miscommunication, complexity, and new/unfamiliar technologies."
+    },
+    {
+      q: "Which is NOT one of the five categories of causes of software errors from the slides' mind map?",
+      options: [
+        "Logical design errors",
+        "Coding errors",
+        "Excessive code reviews",
+        "Deliberate deviation from software requirements"
+      ],
+      answer: 2,
+      explain: "The five causes are: inadequate requirements, logical design errors, coding errors, non-compliance with documentation/coding procedures, and deliberate deviation from requirements. <strong>Excessive code reviews</strong> is not listed."
+    },
+    {
+      q: "According to the slides, on average how many errors do software developers make for every thousand lines of code?",
+      options: [
+        "1 to 5 errors",
+        "10 to 20 errors",
+        "100 to 150 errors",
+        "500 to 1000 errors"
+      ],
+      answer: 2,
+      explain: "On average, developers make <strong>100 to 150 errors for every thousand lines of code</strong>. CISQ also found poor quality software cost US organizations $2.8 trillion in 2018."
+    },
+    {
+      q: "Which definition matches the formal definition of software testing in the slides?",
+      options: [
+        "An informal, ad hoc check done whenever a developer has spare time",
+        "A formal process by a specialized testing team, running the programs on a computer, using approved test procedures and approved test cases",
+        "A purely static review of documents with no program execution",
+        "A marketing activity to demonstrate product features"
+      ],
+      answer: 1,
+      explain: "Software testing is a <strong>formal</strong> process carried out by a <strong>specialized testing team</strong>, examined by <strong>running the programs on a computer</strong>, using <strong>approved test procedures</strong> and <strong>approved test cases</strong>."
+    },
+    {
+      q: "In the broader definition, software testing is concerned with which lifecycle activities?",
+      options: [
+        "Only dynamic activities",
+        "Only static activities",
+        "Both static and dynamic activities",
+        "Only the coding activities"
+      ],
+      answer: 2,
+      explain: "Software testing is the process consisting of <strong>all lifecycle activities, both static and dynamic</strong> — to determine requirements are met, demonstrate fitness for purpose, and detect defects."
+    },
+    {
+      q: "What does Principle 1, 'Testing shows the presence of defects', state?",
+      options: [
+        "Testing proves that software has no defects.",
+        "Testing can show defects are present, but cannot prove there are none.",
+        "Testing guarantees defect-free software after one pass.",
+        "Testing should only be done after release."
+      ],
+      answer: 1,
+      explain: "Principle 1: testing can show that <strong>defects are present, but cannot prove that there are no defects</strong>."
+    },
+    {
+      q: "Which principle states that testing everything — all preconditions and combinations of inputs — cannot be done, so testers apply risk analysis and set priorities?",
+      options: [
+        "Defects clustering",
+        "Pesticide paradox",
+        "Exhaustive testing is impossible",
+        "Absence of errors fallacy"
+      ],
+      answer: 2,
+      explain: "Principle 2, <strong>Exhaustive testing is impossible</strong>: testers should apply <strong>risk analysis and set priorities</strong> to focus testing efforts."
+    },
+    {
+      q: "The 'pesticide paradox' principle says that if the same tests are repeated over and over again, what happens?",
+      options: [
+        "They find exponentially more bugs each run.",
+        "Eventually the same set of test cases will no longer find any new bugs.",
+        "The software automatically becomes defect-free.",
+        "The tests become invalid and must be deleted."
+      ],
+      answer: 1,
+      explain: "Principle 5, <strong>Pesticide paradox</strong>: repeating the same tests means eventually they find no new bugs, so test cases must be <strong>regularly reviewed and revised</strong>."
+    },
+    {
+      q: "Which principle is illustrated by the fact that safety-critical software is tested differently from an e-commerce site?",
+      options: [
+        "Early testing",
+        "Defects clustering",
+        "Testing is context dependent",
+        "Testing shows the presence of defects"
+      ],
+      answer: 2,
+      explain: "Principle 6, <strong>Testing is context dependent</strong>: testing is done differently in different contexts — e.g. safety-critical software vs. an e-commerce site."
+    },
+    {
+      q: "Which is a stated objective of software testing?",
+      options: [
+        "To increase the number of defects in the system",
+        "To prevent defects and reduce the level of risk of inadequate software quality",
+        "To eliminate the need for any requirements",
+        "To replace stakeholders' decision-making"
+      ],
+      answer: 1,
+      explain: "Objectives include preventing defects, reducing the level of risk of inadequate quality, revealing as many errors as possible, gaining confidence about quality, and providing information for decision-making."
+    },
+    {
+      q: "Which is the correct order of the five stages of the fundamental test process?",
+      options: [
+        "Analysis and Design → Planning → Execution → Closure → Reporting",
+        "Test Planning → Analysis and Design → Implementation and Execution → Evaluating Exit Criteria and Reporting → Test Closure Activities",
+        "Implementation → Planning → Closure → Analysis → Reporting",
+        "Test Closure → Test Planning → Reporting → Analysis → Execution"
+      ],
+      answer: 1,
+      explain: "The five stages run: <strong>Test Planning → Analysis and Design → Implementation and Execution → Evaluating Exit Criteria and Reporting → Test Closure Activities</strong>, with Control running throughout."
+    }
+  ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

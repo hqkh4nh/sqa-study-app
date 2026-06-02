@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.6.1 · Methods &amp; Techniques — SQA Study Journal</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="reading-progress" id="rprog"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span>SQA&nbsp;Study&nbsp;Journal</a>
+  <span class="spacer"></span>
+  <span class="score-chip" id="scoreChip">Quiz <b>0</b>/0</span>
+  <a class="back" href="index.html">← Contents</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển Sáng/Tối" title="Sáng / Tối">
+    <span class="moon">🌙</span><span class="sun">☀️</span>
+  </button>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero reveal">
+    <p class="eyebrow">Chapter 6.1 · Slides 166–186</p>
+    <h1>Software Testing Methods &amp; Techniques</h1>
+    <p class="lede">Software testing follows two complementary approaches: static testing,
+       which checks defects <strong>without executing code</strong>, and dynamic testing,
+       which validates functionality by <strong>executing the code</strong>. This chapter
+       reviews static testing (review and static analysis), the dynamic testing process,
+       and how static and dynamic testing compare.</p>
+    <div class="meta">
+      <span>Theory review</span>
+      <span>16-question quiz</span>
+      <span>Immediate feedback</span>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY ===================== -->
+  <article class="theory">
+
+    <section class="sec">
+      <p class="kicker">01 — The Two Approaches</p>
+      <h2>Software Testing Approaches</h2>
+      <p>Testing branches into two approaches. Both target defects, but they differ in
+         whether the code is run:</p>
+      <div class="duo">
+        <div class="box accent"><h4>Static testing</h4>
+          A type of software testing method used to check defects <strong>without
+          executing code</strong>.</div>
+        <div class="box teal"><h4>Dynamic testing</h4>
+          The type of testing that validates the functionality of an application by
+          <strong>executing the code</strong>.</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">02 — Static Testing</p>
+      <h2>1. Static Testing</h2>
+      <p><span class="term">Static testing</span> is a type of software testing method used
+         to check defects <strong>without executing code</strong>. Its primary goal is
+         <strong>to catch defects in the documentation phase</strong>, which helps prevent
+         errors at later stages and is therefore cost-effective.</p>
+      <p>There are mainly two technique types used in static testing:</p>
+      <div class="duo">
+        <div class="box accent"><h4>Review</h4>
+          A process to find potential defects. Forms: <span class="term">Informal</span>,
+          <span class="term">Walkthrough</span>, <span class="term">Peer review</span>,
+          <span class="term">Inspection</span>.</div>
+        <div class="box teal"><h4>Static Analysis</h4>
+          Examines source code and models without execution. Types:
+          <span class="term">Data flow</span>, <span class="term">Control flow</span>,
+          <span class="term">Cyclomatic complexity</span>.</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">03 — Review</p>
+      <h2>1.1 Review</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Review</span> is a process or technique that is performed to
+           <em>find the potential defects in the design of the software.</em></p>
+      </div>
+      <p>Review is performed to identify and correct errors found in documents such as
+         <strong>requirements, design, implementation, test cases, and maintenance</strong>.</p>
+
+      <h3>Types of Review — Levels of Formality</h3>
+      <p>The different review types are ordered by their <span class="term">level of
+         formality</span>. From the lowest formality at the top to the highest formality at
+         the bottom:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Review type</th><th>Level of formality</th></tr></thead>
+          <tbody>
+            <tr><td>Informal</td><td>Low</td></tr>
+            <tr><td>Walkthrough</td><td>↓</td></tr>
+            <tr><td>Technical review</td><td>↓</td></tr>
+            <tr><td>Inspection</td><td>High</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Informal Review</h3>
+      <ul>
+        <li>Applied in the <strong>early stages</strong> of the life cycle of the document.</li>
+        <li>Conducted between <strong>two persons</strong>; the main purpose is for
+            <strong>"discussion"</strong>.</li>
+        <li>Not based on a procedure and <strong>not documented</strong>.</li>
+      </ul>
+
+      <h3>Walkthrough</h3>
+      <ul>
+        <li>A formal review process which usually happens in the <strong>meeting room</strong>.</li>
+        <li>It is <strong>led by the authors</strong>.</li>
+        <li>The author guides participants through the document according to his or her
+            thought process to <strong>achieve a common understanding and to gather
+            feedback</strong>.</li>
+        <li>Goal: <strong>finding defects</strong> and helping team members gain an
+            understanding of the content of the document.</li>
+      </ul>
+
+      <h3>Technical Review (Peer Review)</h3>
+      <ul>
+        <li>Technical reviews are <strong>documented</strong>.</li>
+        <li>A discussion meeting that focuses on the <strong>technical content</strong> of
+            the document.</li>
+        <li><strong>Defects are found by the experts</strong> (such as architects,
+            designers, key users) who focus on the content of the document.</li>
+        <li>Goal: to ensure the value of technical concepts are used correctly.</li>
+      </ul>
+
+      <h3>Inspection</h3>
+      <ul>
+        <li>It is the <strong>most formal review technique</strong>.</li>
+        <li>It is led by <strong>trained moderators</strong>.</li>
+        <li>It reviews business requirements, functional requirements, system design, code,
+            and testing activities.</li>
+        <li>Inspection has <strong>defined entry and exit criteria</strong> for the product
+            under review.</li>
+        <li>Goal: finding defects as early as possible; improving the quality of the
+            document under inspection; reports/documents are maintained and kept for future
+            records.</li>
+      </ul>
+
+      <h3>Inspection Review Process (Formal Review)</h3>
+      <p>The formal inspection process is a repeating cycle of six stages:</p>
+      <div class="tbl-wrap">
+        <table class="t grid">
+          <tbody>
+            <tr><td>1. Planning</td><td>2. Kick-off</td><td>3. Preparation</td></tr>
+            <tr><td>4. Review Meeting</td><td>5. Rework</td><td>6. Follow-up</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">04 — Static Analysis</p>
+      <h2>1.2 Static Analysis</h2>
+      <p><span class="term">Static analysis</span> is performed on requirements, design or
+         code <strong>without actually executing the software</strong> or before the code is
+         actually run. The goal is to <strong>find defects in software source code</strong>
+         and software models.</p>
+      <h3>Typical Defects Discovered by Static Analysis Tools</h3>
+      <ul>
+        <li>Unused variables</li>
+        <li>Dead code (or unreachable code)</li>
+        <li>Infinite loops</li>
+        <li>Variable with undefined value</li>
+        <li>Security vulnerabilities</li>
+        <li>Syntax violations of code and software models</li>
+      </ul>
+
+      <h3>Benefits of Static Analysis</h3>
+      <ul>
+        <li><strong>Early detection of defects</strong> prior to test execution.</li>
+        <li>Early warning about suspicious aspects of the code or design, by the calculation
+            of <strong>metrics</strong> such as a high-complexity measure.</li>
+        <li>Identification of defects <strong>not easily found by dynamic testing</strong>.</li>
+        <li>Improved maintainability of code and design.</li>
+        <li>Prevention of defects.</li>
+      </ul>
+
+      <h3>Three Types of Static Analysis</h3>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><span class="term">Data Flow</span></td><td>Related to the stream processing.</td></tr>
+            <tr><td><span class="term">Control Flow</span></td><td>Basically how the statements or instructions are executed.</td></tr>
+            <tr><td><span class="term">Cyclomatic Complexity</span></td><td>The measurement of the complexity of the program, basically related to the number of independent paths in the control flow graph of the program.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">05 — Dynamic Testing</p>
+      <h2>2. Dynamic Testing</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Dynamic testing</span> is the type of testing that validates
+           the functionality of an application by <em>executing the code</em> — testing the
+           application by giving input values and validating the expected output with the
+           actual output.</p>
+      </div>
+      <p>Dynamic testing is divided into two categories:</p>
+      <ul>
+        <li><span class="term">White box testing</span></li>
+        <li><span class="term">Black box testing</span></li>
+      </ul>
+      <div class="note"><b>Example:</b> Testing login functionality where the requirement is
+         that the Username is restricted to Alphanumeric — supplying inputs and checking the
+         actual output against the expected output.</div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">06 — The Process</p>
+      <h2>Dynamic Testing Process</h2>
+      <p>The dynamic testing process flows through five steps:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Step</th><th>Activity</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><span class="term">Test case design</span></td><td>Design test cases based on the requirements; identify features to be tested; derive the test conditions; derive the coverage items.</td></tr>
+            <tr><td>2</td><td><span class="term">Test environment setup</span></td><td>Install the build and manage the test machines; make sure the testing environment is always comparable to the production environment.</td></tr>
+            <tr><td>3</td><td><span class="term">Test case execution</span></td><td>Test cases are actually executed.</td></tr>
+            <tr><td>4</td><td><span class="term">Test analysis &amp; evaluation</span></td><td>Analyze and evaluate the findings by comparing the actual results with the expected results.</td></tr>
+            <tr><td>5</td><td><span class="term">Bug reporting</span></td><td>If the actual results and expected results are not the same, the test case is marked as <strong>Fail</strong> and a bug should be logged.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">07 — The Comparison</p>
+      <h2>Static Testing vs Dynamic Testing</h2>
+      <div class="duo">
+        <div class="box accent"><h4>Static testing</h4>
+          Examines work products <strong>without executing the code</strong>;
+          <strong>finds defects</strong>; aims at finding defects <strong>early</strong> in
+          the life cycle; rework cost is relatively <strong>low</strong>; includes the
+          <strong>verification</strong> process; assesses the documentation and code.</div>
+        <div class="box teal"><h4>Dynamic testing</h4>
+          Involves the <strong>execution of the code</strong>; finds the
+          <strong>failures</strong> in the system; carried out <strong>during and
+          after</strong> the development phase; rework cost is relatively
+          <strong>high</strong>; includes the <strong>validation</strong> process; finds the
+          bugs in the software system.</div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Static testing</th><th>Dynamic testing</th></tr></thead>
+          <tbody>
+            <tr><td>It involves examining work products without executing the code</td><td>It involves the execution of the code</td></tr>
+            <tr><td>Finds defects</td><td>Finds the failures in the system</td></tr>
+            <tr><td>Aims at finding defects early in the life cycle</td><td>Is carried out during and after the development phase</td></tr>
+            <tr><td>Rework cost is relatively low</td><td>Rework cost is relatively high</td></tr>
+            <tr><td>Includes the verification process</td><td>Includes the validation process</td></tr>
+            <tr><td>Assesses the documentation and code</td><td>Finds the bugs in the software system</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">08 — Takeaways</p>
+      <h2>Summary</h2>
+      <div class="note"><b>Static testing finds defects without running the code; dynamic
+         testing finds failures by running it — together they cover the life cycle.</b></div>
+      <p>Static testing uses <span class="term">review</span> (informal, walkthrough,
+         technical review, inspection) and <span class="term">static analysis</span> (data
+         flow, control flow, cyclomatic complexity) to catch defects early and cheaply
+         through verification. Dynamic testing executes the code through a five-step process
+         to validate behavior and find failures.</p>
+    </section>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section class="quiz-sec">
+    <div class="quiz-head">
+      <h2>Check your understanding</h2>
+    </div>
+    <p class="quiz-intro">A focused set of questions drawn from the course question bank,
+       covering each topic in this chapter. Pick an answer to lock it in — you'll get
+       immediate feedback and a short explanation. Your running score is shown in the top bar.</p>
+
+    <div id="quiz"></div>
+
+    <div class="results" id="results">
+      <div class="ring"><i>0%</i></div>
+      <div class="msg">
+        <h3>You scored 0 / 0</h3>
+        <p>Review and try again any time.</p>
+      </div>
+      <button class="btn" onclick="location.reload()">Retake quiz ↺</button>
+    </div>
+  </section>
+
+  <nav class="footnav">
+    <a href="chapter-05-testing-in-sdlc.html">← Chapter 5 · Software Testing in the SDLC</a>
+    <a href="chapter-06-2-black-box.html">Chapter 6.2 · Black-Box Testing →</a>
+  </nav>
+</main>
+
+<script>
+window.STUDY = {
+  quiz: [
+    {
+      q: "Into which two approaches is software testing divided?",
+      options: [
+        "Manual testing and automated testing",
+        "Static testing and dynamic testing",
+        "White box testing and grey box testing",
+        "Verification and acceptance"
+      ],
+      answer: 1,
+      explain: "Testing branches into two approaches: <strong>Static testing</strong> and <strong>Dynamic testing</strong>."
+    },
+    {
+      q: "What distinguishes static testing?",
+      options: [
+        "It checks defects without executing code.",
+        "It validates functionality by executing the code.",
+        "It can only be performed after release.",
+        "It requires giving input values to the application."
+      ],
+      answer: 0,
+      explain: "Static testing is a type of software testing method used to check defects <strong>without executing code</strong>."
+    },
+    {
+      q: "What is the primary goal of static testing?",
+      options: [
+        "To execute every line of code at least once",
+        "To catch defects in the documentation phase",
+        "To find failures in the running system",
+        "To measure the speed of the application"
+      ],
+      answer: 1,
+      explain: "The primary goal of static testing is <strong>to catch defects in the documentation phase</strong>, which helps prevent errors at later stages and is therefore cost-effective."
+    },
+    {
+      q: "What are the two main technique types used in static testing?",
+      options: [
+        "White box and black box",
+        "Data flow and control flow",
+        "Review and static analysis",
+        "Verification and validation"
+      ],
+      answer: 2,
+      explain: "There are mainly two technique types used in static testing: <strong>Review</strong> and <strong>Static Analysis</strong>."
+    },
+    {
+      q: "What is a review performed to do?",
+      options: [
+        "Execute the code under varied inputs",
+        "Find the potential defects in the design of the software",
+        "Measure cyclomatic complexity automatically",
+        "Set up the test environment"
+      ],
+      answer: 1,
+      explain: "Review is a process or technique performed to <strong>find the potential defects in the design of the software</strong>, identifying errors in documents such as requirements, design, implementation, test cases and maintenance."
+    },
+    {
+      q: "Ordered from lowest to highest level of formality, which sequence of review types is correct?",
+      options: [
+        "Inspection, Technical review, Walkthrough, Informal",
+        "Informal, Walkthrough, Technical review, Inspection",
+        "Walkthrough, Informal, Inspection, Technical review",
+        "Technical review, Inspection, Informal, Walkthrough"
+      ],
+      answer: 1,
+      explain: "By level of formality (low to high): <strong>Informal → Walkthrough → Technical review → Inspection</strong>."
+    },
+    {
+      q: "Which statement best describes an informal review?",
+      options: [
+        "It is led by trained moderators with entry and exit criteria.",
+        "It is documented and focuses on technical content.",
+        "It is conducted between two persons for discussion and is not documented.",
+        "It is led by the authors in a meeting room."
+      ],
+      answer: 2,
+      explain: "Informal reviews are applied early, conducted <strong>between two persons</strong> for <strong>\"discussion\"</strong>, and are <strong>not based on a procedure and not documented</strong>."
+    },
+    {
+      q: "Who leads a walkthrough?",
+      options: [
+        "Trained moderators",
+        "The authors",
+        "Key users only",
+        "An external auditor"
+      ],
+      answer: 1,
+      explain: "A walkthrough is a formal review process, usually in a meeting room, that is <strong>led by the authors</strong>, who guide participants through the document to achieve common understanding and gather feedback."
+    },
+    {
+      q: "In a technical review (peer review), who finds the defects?",
+      options: [
+        "Trained moderators",
+        "The document author alone",
+        "Experts such as architects, designers and key users",
+        "Automated static analysis tools"
+      ],
+      answer: 2,
+      explain: "Technical reviews are documented and focus on technical content; <strong>defects are found by the experts</strong> such as architects, designers and key users."
+    },
+    {
+      q: "Which review technique is the most formal and is led by trained moderators with defined entry and exit criteria?",
+      options: [
+        "Informal review",
+        "Walkthrough",
+        "Technical review",
+        "Inspection"
+      ],
+      answer: 3,
+      explain: "Inspection is the <strong>most formal review technique</strong>, led by trained moderators, with <strong>defined entry and exit criteria</strong> for the product under review."
+    },
+    {
+      q: "Which sequence correctly lists the formal inspection review process?",
+      options: [
+        "Planning → Kick-off → Preparation → Review Meeting → Rework → Follow-up",
+        "Kick-off → Planning → Review Meeting → Preparation → Follow-up → Rework",
+        "Preparation → Planning → Rework → Kick-off → Review Meeting → Follow-up",
+        "Review Meeting → Planning → Kick-off → Rework → Preparation → Follow-up"
+      ],
+      answer: 0,
+      explain: "The formal inspection process cycles through <strong>Planning → Kick-off → Preparation → Review Meeting → Rework → Follow-up</strong>."
+    },
+    {
+      q: "Which of the following is a typical defect discovered by static analysis tools?",
+      options: [
+        "Slow network latency under load",
+        "Dead code (unreachable code)",
+        "Incorrect production database credentials",
+        "User interface color mismatches"
+      ],
+      answer: 1,
+      explain: "Static analysis tools typically discover defects such as unused variables, <strong>dead code (unreachable code)</strong>, infinite loops, variables with undefined value, security vulnerabilities, and syntax violations."
+    },
+    {
+      q: "Which is a stated benefit of static analysis?",
+      options: [
+        "It replaces the need for any dynamic testing",
+        "It identifies defects not easily found by dynamic testing",
+        "It guarantees zero failures in production",
+        "It executes the code faster than dynamic testing"
+      ],
+      answer: 1,
+      explain: "Benefits include early detection of defects, early metric-based warnings, <strong>identification of defects not easily found by dynamic testing</strong>, improved maintainability, and prevention of defects."
+    },
+    {
+      q: "Cyclomatic complexity, one of the three types of static analysis, measures what?",
+      options: [
+        "The stream processing of data",
+        "How statements or instructions are executed",
+        "The number of independent paths in the control flow graph of the program",
+        "The number of test cases needed for the application"
+      ],
+      answer: 2,
+      explain: "Cyclomatic complexity is the measurement of program complexity, basically related to the <strong>number of independent paths in the control flow graph</strong> of the program. (Data flow relates to stream processing; control flow is how instructions are executed.)"
+    },
+    {
+      q: "What does dynamic testing do?",
+      options: [
+        "Validates functionality by executing the code",
+        "Checks defects without executing code",
+        "Only reviews documentation",
+        "Calculates code metrics before the code runs"
+      ],
+      answer: 0,
+      explain: "Dynamic testing validates the functionality of an application by <strong>executing the code</strong> — giving input values and validating expected output against actual output. It is divided into white box and black box testing."
+    },
+    {
+      q: "According to the comparison, which pairing is correct?",
+      options: [
+        "Static testing includes validation; dynamic testing includes verification",
+        "Static testing finds failures; dynamic testing finds defects",
+        "Static testing has high rework cost; dynamic testing has low rework cost",
+        "Static testing includes verification; dynamic testing includes validation"
+      ],
+      answer: 3,
+      explain: "Static testing <strong>includes the verification process</strong> (finds defects, low rework cost, early in the life cycle); dynamic testing <strong>includes the validation process</strong> (finds failures, higher rework cost, during/after development)."
+    }
+  ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

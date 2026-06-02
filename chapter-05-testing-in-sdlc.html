@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.5 · Software Testing in the SDLC — SQA Study Journal</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="reading-progress" id="rprog"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span>SQA&nbsp;Study&nbsp;Journal</a>
+  <span class="spacer"></span>
+  <span class="score-chip" id="scoreChip">Quiz <b>0</b>/0</span>
+  <a class="back" href="index.html">← Contents</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển Sáng/Tối" title="Sáng / Tối">
+    <span class="moon">🌙</span><span class="sun">☀️</span>
+  </button>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero reveal">
+    <p class="eyebrow">Chapter 5 · Slides 102–165</p>
+    <h1>Software Testing in the SDLC</h1>
+    <p class="lede">A software development life cycle captures the initial requirements, expands
+       them into the detail needed for code production, then writes and tests the product ready
+       for release. This chapter reviews the role of testing in the SDLC, the V-Model, the
+       difference between verification and validation and between QA and QC, the test levels —
+       component, integration, system and acceptance — and the test types: functional,
+       non-functional, structural, and testing related to changes.</p>
+    <div class="meta">
+      <span>Theory review</span>
+      <span>18-question quiz</span>
+      <span>Immediate feedback</span>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY ===================== -->
+  <article class="theory">
+
+    <section class="sec">
+      <p class="kicker">01 — Role in the SDLC</p>
+      <h2>The Role of Software Testing in the SDLC</h2>
+      <p>A <span class="term">development life cycle</span> for a software product involves
+         capturing the initial requirements from the customer, expanding on these to provide the
+         detail required for code production, writing the code and testing the product, ready for
+         release. There are two common families of models:</p>
+      <ul>
+        <li><span class="term">Sequential development models</span> — Waterfall, V-model, …</li>
+        <li><span class="term">Iterative and incremental development models</span> — Scrum, Spiral, Agile, Kanban, Rational Unified Process, …</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">02 — The V-Model</p>
+      <h2>The V-Model</h2>
+      <p>The two branches of the V symbolise the relationship between development and testing.
+         The <span class="term">left branch</span> represents the development process; the
+         <span class="term">right branch</span> defines a test level for each specification and
+         construction level. Each left-branch level is connected horizontally to its corresponding
+         right-branch test level (Verification &amp; Validation), while implementation flows down
+         the left and integration flows up the right (Implementation &amp; Integration).</p>
+
+      <h3>Left branch — the development process</h3>
+      <ul>
+        <li><span class="term">Requirements definition</span> — capturing of user needs.</li>
+        <li><span class="term">Functional specification</span> — definition of functions required to meet user needs.</li>
+        <li><span class="term">Technical system design</span> — technical design of functions identified in the functional specification.</li>
+        <li><span class="term">Component specification</span> — detailed design of each module or unit to be built to meet required functionality.</li>
+        <li><span class="term">Programming</span> — use a programming language to build the specified component (module, unit, class…).</li>
+      </ul>
+
+      <h3>Right branch — a test level for each level</h3>
+      <p>The right branch defines a test level for each specification and construction level, each
+         linked horizontally to its matching development level:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Development level (left)</th><th>Test level (right)</th><th>What it verifies</th></tr></thead>
+          <tbody>
+            <tr><td>Component specification</td><td><strong>Component test</strong></td><td>Verifies whether each software component correctly fulfills its specification.</td></tr>
+            <tr><td>Technical system design</td><td><strong>Integration test</strong></td><td>Checks if groups of components interact in the way specified by the technical system design.</td></tr>
+            <tr><td>Functional system design</td><td><strong>System test</strong></td><td>Verifies whether the system as a whole meets the specified requirements.</td></tr>
+            <tr><td>Requirements definition</td><td><strong>Acceptance test</strong></td><td>Checks if the system meets the customer requirements (as in the contract) and/or user needs and expectations.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Characteristics of the V-Model</h3>
+      <ul>
+        <li>For every development activity, there is a corresponding testing activity.</li>
+        <li>Each test level has test objectives specific to that level.</li>
+        <li>Test analysis and design for a given test level begin during the corresponding development activity.</li>
+        <li>The tester should be involved in reviewing documents as soon as drafts are available in the development life cycle.</li>
+        <li>The V-model illustrates the testing aspects of <span class="term">verification</span> and <span class="term">validation</span>.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">03 — Verification vs Validation</p>
+      <h2>Verification vs Validation</h2>
+      <div class="duo">
+        <div class="box accent"><h4>Verification</h4>
+          Are we building the product <strong>right</strong>? To ensure that work products meet
+          their specified requirements.</div>
+        <div class="box teal"><h4>Validation</h4>
+          Are we building the <strong>right</strong> product? To ensure that the product actually
+          meets the user's needs, and that the specifications were correct in the first place.</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">04 — QA vs QC</p>
+      <h2>Quality Assurance vs Quality Control</h2>
+      <div class="duo">
+        <div class="box accent"><h4>Quality Assurance (QA)</h4>
+          A process that focuses on <strong>providing assurance that the quality request will be
+          achieved</strong>. Aims to <strong>prevent causes of defect</strong> and correct them
+          early in the development process. QA involves the full software development life cycle.</div>
+        <div class="box teal"><h4>Quality Control (QC)</h4>
+          A process that focuses on <strong>fulfilling the quality requested</strong>. Aims to
+          <strong>identify and fix defects</strong>. QC involves the full software testing life
+          cycle. QC activities are only a part of the total range of QA activities.</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">05 — Test Levels</p>
+      <h2>Test Levels</h2>
+      <p>A <span class="term">test level</span> (test stage) is a group of test activities that
+         are organised and managed together; a test level is linked to the responsibilities in a
+         project. The test levels are:</p>
+      <ul>
+        <li><span class="term">Component Testing</span></li>
+        <li><span class="term">Integration Testing</span></li>
+        <li><span class="term">System Testing</span></li>
+        <li><span class="term">Acceptance Testing</span></li>
+        <li><span class="term">Regression Testing</span></li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">06 — Component Testing</p>
+      <h2>Component Testing</h2>
+      <p>Also known as <span class="term">unit testing</span>, module testing, or program testing.
+         It is the testing of individual program units — such as procedures, functions, methods,
+         or classes — in <em>isolation</em>.</p>
+      <div class="def">
+        <span class="label">Goal</span>
+        <p>The goal of unit testing is to <em>ensure that the code written for the unit meets its
+           specification</em>, prior to its integration with other units. It tests both
+           functionality and non-functional characteristics.</p>
+      </div>
+      <ul>
+        <li>Component testing is (usually) performed by the <strong>developer</strong>.</li>
+        <li>In <span class="term">test-driven development (TDD)</span>, which relates to the Agile model, unit tests are prepared by developers <em>before the code was written</em>.</li>
+        <li>As unit testing is made in isolation from the rest of the system, there can be missing parts of software.</li>
+      </ul>
+      <h3>Stubs and Drivers</h3>
+      <p><span class="term">Stubs</span> and <span class="term">drivers</span> are used to replace
+         the missing software and simulate the interface between the software components in a simple
+         manner. A <strong>stub is called</strong> from the software component to be tested; a
+         <strong>driver calls</strong> a component to be tested.</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Stubs</th><th>Drivers</th></tr></thead>
+          <tbody>
+            <tr><td>Used in the <strong>top-down</strong> testing approach.</td><td>Used in the <strong>bottom-up</strong> testing approach.</td></tr>
+            <tr><td>Used when the major module is ready to test, but the sub-modules are not ready yet.</td><td>Used when the sub-modules are ready, but the main module is not ready yet.</td></tr>
+            <tr><td>Stubs are "called" programs.</td><td>Drivers are "calling" programs.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">07 — Integration Testing</p>
+      <h2>Integration Testing</h2>
+      <p>Once the units have been written, the next stage is to put them together to create the
+         system — this is called <span class="term">integration</span>; it involves building
+         something large from a number of smaller pieces. Integration testing <em>tests interfaces
+         between components</em>, <em>interactions to different parts of a system</em> (such as an
+         operating system, file system and hardware) or <em>interfaces between systems</em>.</p>
+      <div class="duo">
+        <div class="box accent"><h4>Component integration testing</h4>
+          Verifies the interactions between software components and is done after component testing.
+          Usually carried out by <strong>developers</strong>.</div>
+        <div class="box teal"><h4>System integration testing</h4>
+          Verifies the interactions between different systems and may be done after system testing
+          each individual system. Usually carried out by <strong>testers</strong>.</div>
+      </div>
+      <p>There are three commonly used integration strategies:
+         <span class="term">Big-bang integration</span> and
+         <span class="term">Incremental integration</span> (which is further divided into
+         <span class="term">top-down</span> and <span class="term">bottom-up</span>).</p>
+
+      <h3>Big-Bang Integration</h3>
+      <p>All components or modules are integrated simultaneously, after which everything is tested
+         as a whole. Individual modules are not integrated until and unless all the modules are
+         ready. In theory, if we have already tested the components, combining them all at once
+         seems to save time — but this is based on the false assumption of no faults.</p>
+      <div class="duo">
+        <div class="box accent"><h4>Advantage</h4>
+          Everything is finished before integration testing starts.</div>
+        <div class="box teal"><h4>Disadvantages</h4>
+          Very time consuming; very difficult to trace the cause of failures because of the late
+          integration; higher chance of critical failures from integrating everything at once; hard
+          to detach modules to find the root cause of a bug; high probability of critical bugs in
+          the production environment.</div>
+      </div>
+
+      <h3>Incremental Integration</h3>
+      <p>Builds up tested baselines: <strong>Baseline 0</strong> = a tested component;
+         <strong>Baseline 1</strong> = two components; <strong>Baseline 2</strong> = three
+         components, etc. Advantages: easier fault location and fix; easier recovery from disaster /
+         problems; interfaces should have been tested in component tests; you simply add to a tested
+         baseline.</p>
+
+      <h3>Top-Down Integration</h3>
+      <p>Baselines grow from the top: baseline 0 = component a; baseline 1 = a + b; baseline 2 =
+         a + b + c; baseline 3 = a + b + c + d; etc. It needs to call lower-level components not yet
+         integrated, so <span class="term">stubs</span> simulate the missing components.</p>
+      <div class="duo">
+        <div class="box accent"><h4>Advantages</h4>
+          Critical control structure tested first and most often; can demonstrate the system early
+          (show working menus).</div>
+        <div class="box teal"><h4>Disadvantages</h4>
+          Needs stubs; detail left until last; may be difficult to "see" detailed output (should
+          have been tested in component test); may look more finished than it is.</div>
+      </div>
+
+      <h3>Bottom-Up Integration</h3>
+      <p>Baselines grow from the bottom: baseline 0 = component n; baseline 1 = n + i; baseline 2 =
+         n + i + o; baseline 3 = n + i + o + d; etc. It needs <span class="term">drivers</span> to
+         call the baseline configuration, and also needs stubs for some baselines.</p>
+      <div class="duo">
+        <div class="box accent"><h4>Advantages</h4>
+          Lowest levels tested first and most thoroughly (should have been tested in unit testing);
+          good for testing interfaces to the external environment (hardware, network); visibility of
+          detail.</div>
+        <div class="box teal"><h4>Disadvantages</h4>
+          No working system until the last baseline; needs both drivers and stubs; major control
+          problems found last.</div>
+      </div>
+
+      <h3>Minimum Capability Integration (also called Functional)</h3>
+      <p>Baselines: baseline 0 = a; baseline 1 = a + b; baseline 2 = a + b + d; baseline 3 =
+         a + b + d + i; etc. It needs stubs and shouldn't need drivers (if top-down).</p>
+      <div class="duo">
+        <div class="box accent"><h4>Advantages</h4>
+          Control level tested first and most often; visibility of detail; a real working partial
+          system earliest.</div>
+        <div class="box teal"><h4>Disadvantage</h4>
+          Needs stubs.</div>
+      </div>
+
+      <h3>Thread Integration (also called Functional)</h3>
+      <p>The order of processing some event (interrupt, user transaction) determines the integration
+         order — it is "minimum capability in time".</p>
+      <div class="duo">
+        <div class="box accent"><h4>Advantages</h4>
+          Critical processing first; early warning of performance problems.</div>
+        <div class="box teal"><h4>Disadvantage</h4>
+          May need complex drivers and stubs.</div>
+      </div>
+
+      <h3>Integration Guidelines</h3>
+      <ul>
+        <li>Minimise support software needed.</li>
+        <li>Integrate each component only once.</li>
+        <li>Each baseline should produce an easily verifiable result.</li>
+        <li>Integrate small numbers of components at once — one at a time for critical or fault-prone components; combine simple related components.</li>
+      </ul>
+
+      <h3>Integration Planning</h3>
+      <p>Integration should be planned in the <span class="term">architectural design phase</span>.
+         The integration order then determines the build order: components are completed in time for
+         their baseline, and component development and integration testing can be done in parallel,
+         which saves time.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">08 — System Testing</p>
+      <h2>System Testing</h2>
+      <p>System testing is testing an integrated system to verify that it meets specified
+         requirements. It may include tests based on risks and/or requirement specifications,
+         business process, use cases, or other high-level descriptions of system behavior,
+         interactions with the operating system, and system resources.</p>
+      <ul>
+        <li>Carried out by <strong>professional testers or independent testers</strong>.</li>
+        <li>Non-functional tests include <strong>performance and reliability</strong>; testers may also need to deal with incomplete or undocumented requirements.</li>
+        <li>Functional requirements testing starts by using the most appropriate <span class="term">specification-based (black-box)</span> techniques.</li>
+        <li>System testing requires a <strong>product environment</strong>.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">09 — Acceptance Testing</p>
+      <h2>Acceptance Testing</h2>
+      <p>Acceptance testing is software testing performed on software prior to its delivery. Its
+         goal is <strong>not to find defects</strong>, but to provide the end users with confidence
+         that the system will function according to their expectations and can be released. How much
+         acceptance testing is needed depends on the <span class="term">product risk</span>.</p>
+      <h3>Four typical forms</h3>
+      <ul>
+        <li>Contract and regulation acceptance testing</li>
+        <li>User acceptance testing (UAT)</li>
+        <li>Operational acceptance testing (OAT)</li>
+        <li>Alpha and beta testing</li>
+      </ul>
+      <div class="duo">
+        <div class="box accent"><h4>Alpha testing</h4>
+          Testing by potential users or an independent test team <strong>at the developing
+          organization's site</strong>, before the product is released to external customers. It is
+          a form of <strong>internal</strong> acceptance testing.</div>
+        <div class="box teal"><h4>Beta testing</h4>
+          Testing by a group of customers / potential users who use the product at their own
+          locations and provide feedback <strong>at the customer's site</strong>, before release. It
+          is a form of <strong>external</strong> acceptance testing.</div>
+      </div>
+      <div class="note"><b>Alpha and beta testing are usually performed on commercial off-the-shelf
+         software (COTS) — software developed for the mass market — to get feedback before release.
+         Alpha testing is done before beta testing.</b></div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">10 — Test Types</p>
+      <h2>Test Types</h2>
+      <p>A <span class="term">test type</span> is a group of test activities aimed at testing a
+         component or system focused on a specific test objective. The test types are:</p>
+      <ul>
+        <li><span class="term">Functional testing</span></li>
+        <li><span class="term">Non-functional testing</span></li>
+        <li><span class="term">Structural testing</span></li>
+        <li><span class="term">Testing related to changes</span> (re-testing and regression testing)</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">11 — Functional Testing</p>
+      <h2>Functional Testing</h2>
+      <p>Functional testing is testing of functions — <strong>testing what the system does</strong>.
+         Its objective is to test each function of the software application by providing appropriate
+         input and verifying the output against the functional requirements. It is also called
+         <span class="term">specification-based testing</span>.</p>
+      <ul>
+        <li>The functionality is usually described in functional specifications, requirements specifications, business requirements, use cases and user stories.</li>
+        <li>Functional testing mainly involves <strong>black box testing</strong> and is not concerned about the source code of the application.</li>
+        <li>It focuses on: <span class="term">Security</span>, <span class="term">Suitability</span>, <span class="term">Accuracy</span>, <span class="term">Interoperability (compatibility)</span> and <span class="term">Compliance</span>.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">12 — Non-Functional Testing</p>
+      <h2>Non-Functional Testing</h2>
+      <p>Non-functional testing is testing of non-functional software characteristics —
+         <strong>testing of how the system works</strong>. Its objective is the non-functional
+         characteristics that do not relate to the functionality of a software application:
+         <span class="term">Reliability</span>, <span class="term">Usability</span>,
+         <span class="term">Efficiency</span>, <span class="term">Maintainability</span> and
+         <span class="term">Portability</span>.</p>
+
+      <h3>Performance testing</h3>
+      <p><span class="term">Performance testing</span> determines how efficiently a product handles
+         a variety of events (e.g. measuring the response time of a website). The tester needs to
+         check the product's <strong>speed</strong> (response is quick), <strong>scalability</strong>
+         (can handle the maximum user load) and <strong>stability</strong> (stable under varying
+         load). Performance testing includes the following sub-types:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Sub-type</th><th>Definition (per slides)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Load testing</strong></td><td>Evaluates the performance of the system under the <em>expected workload</em> to determine what load can be handled (e.g. numbers of parallel users, numbers of transactions).</td></tr>
+            <tr><td><strong>Stress testing</strong></td><td>Evaluates a system or component <em>at or beyond the limits</em> of its anticipated or specified workloads, or with reduced availability of resources such as memory or servers.</td></tr>
+            <tr><td><strong>Endurance testing</strong></td><td>Checks system performance under specific load conditions over an <em>extended / longer amount of time</em>. Also known as <strong>soak testing</strong> (reveals issues like memory leaks).</td></tr>
+            <tr><td><strong>Volume testing</strong></td><td>Tests a software application or product with a certain <em>amount of data</em> (e.g. expanding a database to a specific size, then testing performance on it).</td></tr>
+            <tr><td><strong>Spike testing</strong></td><td>Subjects the system to a <em>short burst of concurrent load</em> (e.g. an auction or e-commerce site where users increase suddenly in a very short duration).</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Other non-functional test types</h3>
+      <ul>
+        <li><span class="term">Document testing</span> — verifies the technical accuracy and readability of user manuals, tutorials and online help (spelling and grammar checks, manual review to remove ambiguity or inconsistency). Can start at the very beginning of the software process, saving large amounts of money.</li>
+        <li><span class="term">Installation testing</span> — checks that the software has been correctly installed with all inherent features and works as expected; also known as <strong>implementation testing</strong>; done in the last phase of testing before the end user's first interaction.</li>
+        <li><span class="term">Reliability testing</span> — ensures the software is reliable, satisfies its purpose for a specified amount of time in a given environment, and is capable of rendering a fault-free operation.</li>
+        <li><span class="term">Security testing</span> — determines if an information system protects data and maintains functionality as intended (e.g. passwords stored encrypted, invalid users blocked, checking cookies and session time).</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">13 — Structural Testing</p>
+      <h2>Structural Testing</h2>
+      <p>Structural testing is the testing of the structure of the system or component — testing
+         through assessment of <span class="term">coverage</span> of a type of structure. It is
+         often referred to as <span class="term">'white box' testing</span>, because we are
+         interested in what is happening <em>inside the system/application</em>.</p>
+      <ul>
+        <li>Can be used at <strong>all levels</strong> of testing.</li>
+        <li>Developers use structural testing in component testing and component integration testing, especially where there is good tool support for <span class="term">code coverage</span>.</li>
+        <li>Coverage measurement tools assess the percentage of executable elements (e.g. statements or decision outcomes) that have been exercised (i.e. covered) by a test suite.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">14 — Testing Related to Changes</p>
+      <h2>Testing Related to Changes</h2>
+      <p>The objective is to test changes related to defects that have been fixed, and to look for
+         unintended changes. When a defect has been corrected, two types of tests should be executed:
+         <span class="term">confirmation testing (re-testing)</span> and
+         <span class="term">regression testing</span>.</p>
+      <div class="def">
+        <span class="label">Confirmation testing (re-testing)</span>
+        <p>Testing a defect again <em>after it has been fixed</em>. When developers have fixed the
+           defect, it is assigned for testers to re-test the test cases with the <strong>same
+           inputs, data and environment</strong> to <strong>confirm</strong> the defect was really
+           fixed.</p>
+      </div>
+      <div class="def">
+        <span class="label">Regression testing</span>
+        <p>Testing of a previously tested program following modification, to ensure that defects have
+           not been introduced or uncovered in <strong>unchanged areas</strong> of the software as a
+           result of the changes made. New defects can appear when the software was changed
+           (adding/fixing functionality, refactoring) or when the environment was changed.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Regression Testing</th><th>Re-Testing</th></tr></thead>
+          <tbody>
+            <tr><td>Includes test cases that <strong>passed</strong> earlier — checks functionality that was working earlier.</td><td>Includes test cases that <strong>failed</strong> earlier — checks functionality that failed in an earlier build.</td></tr>
+            <tr><td>Can be done by automation tools.</td><td>Cannot be done by automation test cases.</td></tr>
+            <tr><td>Defect verification is <strong>not</strong> part of regression testing.</td><td>Defect verification <strong>is</strong> part of re-testing.</td></tr>
+            <tr><td>Checks for unexpected side-effects.</td><td>Makes sure that the original fault has been corrected.</td></tr>
+            <tr><td>Done only where modification/changes become mandatory in an existing project.</td><td>Executes a defect with the same data and environment, with different inputs, on a new build.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><b>Regression testing = find new bugs (locates bugs after updates or changes
+         to the code or UI). Re-testing = confirm bugs were fixed (a bug found and addressed by a
+         developer was <em>actually</em> fixed).</b></div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">15 — Takeaways</p>
+      <h2>Summary</h2>
+      <div class="note"><b>For every development activity there is a corresponding testing activity —
+         the V-Model pairs each specification/construction level with its own test level.</b></div>
+      <p>Testing in the SDLC distinguishes verification (building the product right) from validation
+         (building the right product), and QA (prevention, across the whole development life cycle)
+         from QC (detection and fixing, across the testing life cycle). The test levels run from
+         component, through integration (big-bang or incremental: top-down, bottom-up, minimum
+         capability and thread), to system and acceptance, while the test types cover functional,
+         non-functional, structural, and testing related to changes.</p>
+    </section>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section class="quiz-sec">
+    <div class="quiz-head">
+      <h2>Check your understanding</h2>
+    </div>
+    <p class="quiz-intro">A focused set of questions drawn from the course question bank,
+       covering each topic in this chapter. Pick an answer to lock it in — you'll get
+       immediate feedback and a short explanation. Your running score is shown in the top bar.</p>
+
+    <div id="quiz"></div>
+
+    <div class="results" id="results">
+      <div class="ring"><i>0%</i></div>
+      <div class="msg">
+        <h3>You scored 0 / 0</h3>
+        <p>Review and try again any time.</p>
+      </div>
+      <button class="btn" onclick="location.reload()">Retake quiz ↺</button>
+    </div>
+  </section>
+
+  <nav class="footnav">
+    <a href="chapter-04-intro-to-testing.html">← Chapter 4 · Introduction to Software Testing</a>
+    <a href="chapter-06-1-methods-techniques.html">Chapter 6.1 · Methods &amp; Techniques →</a>
+  </nav>
+</main>
+
+<script>
+window.STUDY = {
+  quiz: [
+    {
+      q: "What does a software development life cycle involve?",
+      options: [
+        "Only writing and releasing code, with no requirements stage",
+        "Capturing the initial requirements, expanding them into detail for code production, then writing and testing the product ready for release",
+        "Testing the product only after it has already been released to customers",
+        "Replacing customer requirements with the developer's own assumptions"
+      ],
+      answer: 1,
+      explain: "A development life cycle involves <strong>capturing the initial requirements from the customer, expanding on these to provide the detail required for code production, writing the code and testing the product, ready for release</strong>."
+    },
+    {
+      q: "Which of these is a <strong>sequential</strong> development model?",
+      options: [
+        "Scrum",
+        "Kanban",
+        "V-model",
+        "Rational Unified Process"
+      ],
+      answer: 2,
+      explain: "Sequential development models include <strong>Waterfall and the V-model</strong>. Scrum, Spiral, Agile, Kanban and RUP are iterative and incremental models."
+    },
+    {
+      q: "In the V-Model, what does the <strong>left branch</strong> represent?",
+      options: [
+        "The development process",
+        "A test level for each construction level",
+        "Verification and validation only",
+        "The deployment and maintenance phases"
+      ],
+      answer: 0,
+      explain: "The two branches of the V symbolise the relationship: the <strong>left branch represents the development process</strong>, while the right branch defines a test level for each specification and construction level."
+    },
+    {
+      q: "In the V-Model, which test level corresponds to the <strong>Requirements definition</strong> development level?",
+      options: [
+        "Component test",
+        "Integration test",
+        "System test",
+        "Acceptance test"
+      ],
+      answer: 3,
+      explain: "The right branch pairs each development level with a test level. Requirements definition ↔ <strong>Acceptance test</strong>, which checks if the system meets the customer requirements and user needs and expectations."
+    },
+    {
+      q: "Which statement is a key characteristic of the V-Model?",
+      options: [
+        "Testing only begins after all development is complete",
+        "For every development activity, there is a corresponding testing activity",
+        "Testers should not review documents until the system is finished",
+        "Each test level shares a single common set of test objectives"
+      ],
+      answer: 1,
+      explain: "A key V-Model characteristic: <strong>for every development activity, there is a corresponding testing activity</strong>, and test analysis and design begin during the corresponding development activity."
+    },
+    {
+      q: "Which question best describes <strong>Validation</strong>?",
+      options: [
+        "Are we building the product right?",
+        "Are we building the right product?",
+        "Do work products meet their specified requirements?",
+        "Have we documented the development standards?"
+      ],
+      answer: 1,
+      explain: "Validation asks \"Are we building the <strong>right</strong> product?\" — ensuring the product actually meets the user's needs and that the specifications were correct. Verification asks \"Are we building the product right?\""
+    },
+    {
+      q: "How do Quality Assurance (QA) and Quality Control (QC) differ?",
+      options: [
+        "QA aims to identify and fix defects; QC aims to prevent causes of defect",
+        "QA aims to prevent causes of defect across the development life cycle; QC aims to identify and fix defects across the testing life cycle",
+        "QA and QC are identical processes with different names",
+        "QC involves the full development life cycle, while QA is only part of testing"
+      ],
+      answer: 1,
+      explain: "QA <strong>focuses on assurance and aims to prevent causes of defect</strong> across the full development life cycle; QC <strong>focuses on fulfilling the quality requested and aims to identify and fix defects</strong> across the testing life cycle. QC is only a part of QA activities."
+    },
+    {
+      q: "Component testing is also known by which other name?",
+      options: [
+        "Acceptance testing",
+        "Unit testing",
+        "System testing",
+        "Regression testing"
+      ],
+      answer: 1,
+      explain: "Component testing is also known as <strong>unit testing</strong>, module testing or program testing — the testing of individual program units (procedures, functions, methods, classes) in isolation."
+    },
+    {
+      q: "What is the difference between a stub and a driver?",
+      options: [
+        "A stub calls a component to be tested; a driver is called from the component",
+        "A stub is called from the component to be tested; a driver calls a component to be tested",
+        "Both stubs and drivers are 'calling' programs",
+        "Stubs are used in bottom-up testing; drivers are used in top-down testing"
+      ],
+      answer: 1,
+      explain: "A <strong>stub is called</strong> from the software component to be tested (used in top-down testing); a <strong>driver calls</strong> a component to be tested (used in bottom-up testing). Stubs are 'called' programs; drivers are 'calling' programs."
+    },
+    {
+      q: "What does integration testing focus on?",
+      options: [
+        "Testing individual units in isolation",
+        "Testing interfaces between components, interactions to different parts of a system, or interfaces between systems",
+        "Providing end users with confidence before release",
+        "Verifying the internal code structure of a single module"
+      ],
+      answer: 1,
+      explain: "Integration testing <strong>tests interfaces between components, interactions to different parts of a system</strong> (OS, file system, hardware) <strong>or interfaces between systems</strong>."
+    },
+    {
+      q: "Which is a disadvantage of <strong>Big-Bang integration</strong>?",
+      options: [
+        "It always finds faults faster than incremental integration",
+        "It is very difficult to trace the cause of failures because of the late integration",
+        "It requires only one tested baseline at a time",
+        "It demonstrates a working system earliest"
+      ],
+      answer: 1,
+      explain: "Big-bang integrates all modules simultaneously. A key disadvantage: it is <strong>very difficult to trace the cause of failures because of this late integration</strong>, and it is very time consuming."
+    },
+    {
+      q: "<strong>Top-down integration</strong> needs which support software to simulate missing lower-level components?",
+      options: [
+        "Drivers",
+        "Stubs",
+        "Both drivers and stubs equally",
+        "Neither stubs nor drivers"
+      ],
+      answer: 1,
+      explain: "Top-down integration needs to call lower-level components not yet integrated, so <strong>stubs simulate the missing components</strong>."
+    },
+    {
+      q: "Which is an advantage of <strong>bottom-up integration</strong>?",
+      options: [
+        "Critical control structure is tested first and most often",
+        "A working system is available from the very first baseline",
+        "It is good for testing interfaces to the external environment (hardware, network)",
+        "It needs neither drivers nor stubs"
+      ],
+      answer: 2,
+      explain: "Bottom-up advantages: lowest levels tested first and most thoroughly, <strong>good for testing interfaces to the external environment (hardware, network)</strong>, and visibility of detail. Its disadvantage is no working system until the last baseline."
+    },
+    {
+      q: "Which integration guideline is correct?",
+      options: [
+        "Integrate each component multiple times for safety",
+        "Maximise the amount of support software needed",
+        "Integrate each component only once, and integrate small numbers of components at once",
+        "Always integrate the largest possible number of components at once"
+      ],
+      answer: 2,
+      explain: "Integration guidelines: minimise support software, <strong>integrate each component only once</strong>, each baseline should produce an easily verifiable result, and <strong>integrate small numbers of components at once</strong>."
+    },
+    {
+      q: "What is the goal of <strong>acceptance testing</strong>?",
+      options: [
+        "To find as many defects as possible before release",
+        "Not to find defects, but to provide end users with confidence that the system will function according to their expectations and can be released",
+        "To verify the internal structure of the code",
+        "To test individual units in isolation"
+      ],
+      answer: 1,
+      explain: "The goal of acceptance testing is <strong>not to find defects, but to provide the end users with confidence that the system will function according to their expectations and can be released</strong>. How much is needed depends on product risk."
+    },
+    {
+      q: "Where is <strong>alpha testing</strong> performed, and what kind of acceptance testing is it?",
+      options: [
+        "At the customer's site; a form of external acceptance testing",
+        "At the developing organization's site; a form of internal acceptance testing",
+        "At an independent regulator's site; a form of contract acceptance testing",
+        "At the customer's site; a form of operational acceptance testing"
+      ],
+      answer: 1,
+      explain: "Alpha testing is done by potential users or an independent test team <strong>at the developing organization's site</strong> before release — a form of <strong>internal</strong> acceptance testing. Beta testing happens at the customer's site (external)."
+    },
+    {
+      q: "Functional testing is also called what, and which testing approach does it mainly involve?",
+      options: [
+        "Structural testing; mainly white-box testing",
+        "Specification-based testing; mainly black-box testing",
+        "Confirmation testing; mainly regression testing",
+        "Installation testing; mainly grey-box testing"
+      ],
+      answer: 1,
+      explain: "Functional testing — testing what the system does — is also called <strong>specification-based testing</strong> and mainly involves <strong>black box testing</strong>; it is not concerned about the source code of the application."
+    },
+    {
+      q: "Which non-functional performance test evaluates the system <strong>at or beyond the limits</strong> of its anticipated workloads, or with reduced resources?",
+      options: [
+        "Load testing",
+        "Endurance (soak) testing",
+        "Stress testing",
+        "Volume testing"
+      ],
+      answer: 2,
+      explain: "<strong>Stress testing</strong> evaluates a system or component at or beyond the limits of its anticipated or specified workloads, or with reduced availability of resources such as memory or servers. Load testing uses the <em>expected</em> workload."
+    },
+    {
+      q: "Endurance testing (also known as soak testing) checks system performance under what conditions?",
+      options: [
+        "Under a short burst of sudden concurrent load",
+        "Under specific load conditions over an extended or longer amount of time",
+        "With a certain large amount of data in the database",
+        "Strictly under the expected workload only"
+      ],
+      answer: 1,
+      explain: "<strong>Endurance testing</strong>, also known as <strong>soak testing</strong>, checks system performance under specific load conditions over an extended or longer amount of time — revealing issues such as memory leaks."
+    },
+    {
+      q: "Why is structural testing referred to as 'white box' testing?",
+      options: [
+        "Because it ignores the internal code and tests only inputs and outputs",
+        "Because we are interested in what is happening 'inside the system/application'",
+        "Because it is only used at the acceptance test level",
+        "Because it focuses solely on user documentation"
+      ],
+      answer: 1,
+      explain: "Structural testing is the testing of the structure of the system or component (coverage of a type of structure). It is called <strong>'white box' testing because we are interested in what is happening 'inside the system/application'</strong>."
+    },
+    {
+      q: "Which statement correctly distinguishes regression testing from re-testing?",
+      options: [
+        "Regression testing confirms the original fault was corrected; re-testing checks for side-effects",
+        "Regression testing checks for unexpected side-effects; re-testing makes sure the original fault has been corrected",
+        "Regression testing includes only test cases that failed earlier; re-testing includes only passed cases",
+        "Regression testing cannot be automated; re-testing can be automated"
+      ],
+      answer: 1,
+      explain: "<strong>Regression testing checks for unexpected side-effects</strong> (find new bugs, can be automated, uses cases that passed earlier), while <strong>re-testing makes sure the original fault has been corrected</strong> (confirm bugs were fixed, uses cases that failed earlier)."
+    }
+  ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

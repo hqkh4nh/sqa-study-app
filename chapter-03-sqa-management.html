@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.3 · SQA Management — SQA Study Journal</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="reading-progress" id="rprog"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span>SQA&nbsp;Study&nbsp;Journal</a>
+  <span class="spacer"></span>
+  <span class="score-chip" id="scoreChip">Quiz <b>0</b>/0</span>
+  <a class="back" href="index.html">← Contents</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển Sáng/Tối" title="Sáng / Tối">
+    <span class="moon">🌙</span><span class="sun">☀️</span>
+  </button>
+</header>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero reveal">
+    <p class="eyebrow">Chapter 3 · Slides 34–64</p>
+    <h1>SQA Management</h1>
+    <p class="lede">Software quality is conformance to explicitly stated functional and
+       performance requirements, documented development standards, and the implicit
+       characteristics expected of professionally developed software. This chapter
+       reviews what software quality is, the SQA activities that ensure it, quality
+       reviews, defect amplification, the formal technical review (FTR), and software
+       reliability.</p>
+    <div class="meta">
+      <span>Theory review</span>
+      <span>18-question quiz</span>
+      <span>Immediate feedback</span>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY ===================== -->
+  <article class="theory">
+
+    <section class="sec">
+      <p class="kicker">01 — What Quality Is</p>
+      <h2>What is Software Quality?</h2>
+      <p>Simplistically, quality is an attribute of software that implies the software
+         <strong>meets its specification</strong>. This definition is too simple for
+         ensuring quality in software systems, because:</p>
+      <ul>
+        <li>software specifications are often <strong>incomplete or ambiguous</strong>;</li>
+        <li>some quality attributes are <strong>difficult to specify</strong>;</li>
+        <li><strong>tension</strong> exists between some quality attributes, e.g. efficiency vs. reliability.</li>
+      </ul>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p>Software quality is <em>conformance to explicitly stated functional and
+           performance requirements, explicitly documented development standards, and
+           implicit characteristics that are expected of all professionally developed
+           software.</em></p>
+      </div>
+      <ul>
+        <li><span class="term">Software requirements</span> are the foundation from which quality is measured — <em>lack of conformance to requirements is lack of quality.</em></li>
+        <li><span class="term">Specified standards</span> define a set of development criteria that guide the manner in which software is engineered — <em>if the criteria are not met, lack of quality will almost surely result.</em></li>
+        <li><span class="term">Implicit requirements</span> often go unmentioned — <em>if software conforms to its explicit requirements but fails to meet its implicit requirements, software quality is suspect.</em></li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">02 — Ensuring Quality</p>
+      <h2>Software Quality Assurance — SQA</h2>
+      <p>To ensure quality in a software product, an organization must have a
+         <strong>three-prong approach</strong> to quality management:</p>
+      <ol>
+        <li><span class="term">Organization-wide</span> policies, procedures and standards must be established.</li>
+        <li><span class="term">Project-specific</span> policies, procedures and standards must be <strong>tailored</strong> from the organization-wide templates.</li>
+        <li>Quality must be <span class="term">controlled</span> — the organization must ensure that the appropriate procedures are followed for each project.</li>
+      </ol>
+      <p>Standards exist to help an organization draft an appropriate software quality
+         assurance plan — e.g. <span class="term">ISO 9000-3</span> and
+         <span class="term">ANSI/IEEE standards</span>. External entities can be
+         contracted to verify that an organization is <strong>standard-compliant</strong>.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">03 — The Activities</p>
+      <h2>SQA Activities</h2>
+      <ul>
+        <li><span class="term">Applying technical methods</span> — to help the analyst achieve a high quality specification and a high quality design.</li>
+        <li><span class="term">Conducting formal technical reviews</span> — a stylized meeting conducted by technical staff with the sole purpose of uncovering quality problems.</li>
+        <li><span class="term">Testing software</span> — a series of test case design methods that help ensure effective error detection.</li>
+        <li><span class="term">Enforcing standards</span>.</li>
+        <li><span class="term">Controlling change</span> — applied during software development and maintenance.</li>
+        <li><span class="term">Measurement</span> — track software quality and assess the ability of methodological and procedural changes to improve software quality.</li>
+        <li><span class="term">Record keeping and reporting</span> — provide procedures for the collection and dissemination of SQA information.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">04 — The Case For &amp; Against</p>
+      <h2>SQA Advantages &amp; Disadvantages</h2>
+      <div class="duo">
+        <div class="box accent"><h4>Advantages</h4>
+          Fewer latent defects (reduced testing &amp; maintenance effort); higher
+          reliability → greater customer satisfaction; maintenance costs can be reduced;
+          overall life cycle cost of software is reduced.</div>
+        <div class="box teal"><h4>Disadvantages</h4>
+          Difficult to institute in small organizations (resources are not available);
+          represents <em>cultural change</em> — and change is never easy; requires the
+          expenditure of dollars that would not otherwise be budgeted.</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">05 — Reviews</p>
+      <h2>Quality Reviews</h2>
+      <p>The <strong>fundamental method of validating the quality</strong> of a product or
+         a process. Applied during and/or at the end of each life cycle phase, in order to:</p>
+      <ul>
+        <li>point out needed improvements in the product of a single person or team;</li>
+        <li>confirm those parts of a product in which improvement is either not desired or not needed;</li>
+        <li>achieve technical work of more uniform, or at least more predictable, quality.</li>
+      </ul>
+      <p>Quality reviews can have different intents: <span class="term">review for defect
+         removal</span>, <span class="term">review for progress assessment</span>, and
+         <span class="term">review for consistency and conformance</span>.</p>
+      <p>The relative cost of finding and fixing a defect rises dramatically across the
+         life cycle — each phase is paired with its review:</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Phase</th><th>Requirements</th><th>Design</th><th>Code</th><th>Testing</th><th>Maintenance</th></tr></thead>
+          <tbody>
+            <tr><td>Relative cost</td><td>1×</td><td>3–6×</td><td>10×</td><td>15–70×</td><td>40–1000×</td></tr>
+            <tr><td>Paired review</td><td>Specification Review</td><td>Design Review</td><td>Code Review</td><td>Test Review</td><td>Customer Feedback</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">06 — Cost Impact</p>
+      <h2>Defect Amplification and Removal</h2>
+      <p>Each development step receives <strong>errors from previous steps</strong> and
+         passes errors to the next step. Within a step the model distinguishes:</p>
+      <ul>
+        <li><span class="term">Errors passed through</span> — defects entering from the prior step that are not detected here;</li>
+        <li><span class="term">Amplified errors (1:x)</span> — existing defects that spawn additional defects;</li>
+        <li><span class="term">Newly generated errors</span> — defects introduced in this step.</li>
+      </ul>
+      <p>A <span class="term">percent efficiency</span> for error detection is applied at
+         each step. Worked through the slides' example, an early design defect amplifies
+         to <strong>94 errors</strong> entering integration; with 50% detection efficiency
+         at integration, validation and system testing, <strong>12 latent errors</strong>
+         remain — illustrating why finding defects early (with reviews) is so valuable.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">07 — What to Check</p>
+      <h2>Review Checklists</h2>
+      <p>The chapter provides a dedicated review checklist for each life cycle activity, so
+         that reviewers ask consistent questions:</p>
+      <div class="tbl-wrap">
+        <table class="t grid">
+          <tbody>
+            <tr><td>System Engineering</td><td>Software Project Planning</td><td>Requirements Analysis</td></tr>
+            <tr><td>Software Design (Preliminary Design Review)</td><td>Software Design (Design Walkthrough)</td><td>Coding</td></tr>
+            <tr><td>Software Testing (Test Plan)</td><td>Software Testing (Test Procedure)</td><td>Maintenance</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">08 — The FTR</p>
+      <h2>Formal Technical Review (FTR)</h2>
+      <p>A software quality assurance activity performed by software engineering
+         practitioners, whose objectives are to <strong>uncover errors</strong> in
+         function, logic or implementation; <strong>verify</strong> that the software meets
+         its requirements; <strong>assure</strong> it has been represented according to
+         predefined standards; achieve software developed in a uniform manner; and make
+         projects more manageable.</p>
+      <p>FTR is actually a <strong>class of reviews</strong>:
+         <span class="term">walkthroughs</span>, <span class="term">inspections</span>,
+         <span class="term">round-robin reviews</span>, and other small group technical
+         assessments of the software.</p>
+
+      <h3>The Review Meeting</h3>
+      <div class="duo">
+        <div class="box accent"><h4>Constraints</h4>
+          Between <strong>3 and 5 people</strong> (typically); advance preparation should
+          involve no more than <strong>2 hours</strong> of work per person; duration should
+          be <strong>less than two hours</strong>.</div>
+        <div class="box teal"><h4>Components</h4>
+          <strong>Product</strong> (component to be reviewed), <strong>Producer</strong>
+          (who developed it), <strong>Review leader</strong> (evaluates readiness,
+          distributes materials), <strong>Reviewers</strong> (spend 1–2 hours reviewing),
+          <strong>Recorder</strong> (records all important issues raised).</div>
+      </div>
+
+      <h3>Review Reporting and Recordkeeping</h3>
+      <div class="duo">
+        <div class="box"><h4>Review Summary Report</h4>
+          What was reviewed? Who reviewed it? What were the findings and conclusions?</div>
+        <div class="box"><h4>Review Issues List</h4>
+          Identifies the problem areas within the product, and serves as an action item
+          checklist that guides the producer as corrections are made.</div>
+      </div>
+
+      <h3>Guidelines for FTR</h3>
+      <p>Key guidelines include: <strong>review the product, not the producer</strong>;
+         set an agenda and maintain it; limit debate and rebuttal; enunciate problem areas
+         but don't attempt to solve every problem; take written notes; limit participants
+         and insist upon advance preparation; develop a checklist for each product; and
+         conduct meaningful training for all reviewers.</p>
+
+      <h3>Reviewer's Preparation</h3>
+      <p>Understand the context of the material; <strong>skim</strong> all product material
+         to understand its location and format; then <strong>read and annotate a
+         hardcopy</strong>; pose your written comments <strong>as questions</strong>; avoid
+         issues of style; and inform the review leader if you cannot prepare.</p>
+
+      <h3>Results of Review Meeting</h3>
+      <p>All attendees of the FTR must <strong>make a decision</strong>:</p>
+      <ul>
+        <li><span class="term">Accept</span> the product without further modification;</li>
+        <li><span class="term">Reject</span> the product due to severe errors (and perform another review after corrections);</li>
+        <li><span class="term">Accept provisionally</span> — minor corrections are needed, but no further reviews are required.</li>
+      </ul>
+      <p>A <span class="term">sign-off</span> is completed, indicating participation and
+         concurrence with the review team's findings.</p>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">09 — Reliability</p>
+      <h2>Software Reliability</h2>
+      <div class="def">
+        <span class="label">Definition</span>
+        <p><span class="term">Software reliability</span>: the probability of
+           <em>failure-free operation for a specified time in a specified environment.</em></p>
+      </div>
+      <p>This is not an objective measure — it must be based on an <strong>operational
+         profile</strong>, and there are widely varying consequences for different errors.</p>
+      <h3>Software Reliability Improvements</h3>
+      <ul>
+        <li>Reliability improves when faults present in the <strong>most frequently used</strong> portions of the software are removed.</li>
+        <li>A removal of X% of faults <strong>doesn't necessarily mean</strong> an X% improvement in reliability — in a study by <strong>Mills et al. (1987)</strong>, removing 60% of faults resulted in only a <strong>3%</strong> improvement in reliability.</li>
+        <li>Removing faults with the <strong>most serious consequences</strong> is the primary objective.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <p class="kicker">10 — Takeaways</p>
+      <h2>Summary</h2>
+      <div class="note"><b>Quality must be planned, built in, measured, and reviewed — not added at the end.</b></div>
+      <p>SQA management establishes organization-wide and project-tailored standards,
+         controls that they are followed, applies technical methods and formal technical
+         reviews, tracks quality through measurement, and recognizes that reliability is
+         driven by removing the faults that matter most.</p>
+    </section>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section class="quiz-sec">
+    <div class="quiz-head">
+      <h2>Check your understanding</h2>
+    </div>
+    <p class="quiz-intro">A focused set of questions drawn from the course question bank,
+       covering each topic in this chapter. Pick an answer to lock it in — you'll get
+       immediate feedback and a short explanation. Your running score is shown in the top bar.</p>
+
+    <div id="quiz"></div>
+
+    <div class="results" id="results">
+      <div class="ring"><i>0%</i></div>
+      <div class="msg">
+        <h3>You scored 0 / 0</h3>
+        <p>Review and try again any time.</p>
+      </div>
+      <button class="btn" onclick="location.reload()">Retake quiz ↺</button>
+    </div>
+  </section>
+
+  <nav class="footnav">
+    <a href="chapter-01-intro-to-sqa.html">← Chapter 1–2 · Introduction to SQA</a>
+    <a href="chapter-04-intro-to-testing.html">Chapter 4 · Introduction to Software Testing →</a>
+  </nav>
+</main>
+
+<script>
+window.STUDY = {
+  quiz: [
+    {
+      q: "What does the simple definition of software quality imply?",
+      options: [
+        "Software functions without bugs.",
+        "Software meets its specifications.",
+        "Software is user-friendly.",
+        "Software is efficient."
+      ],
+      answer: 1,
+      explain: "Simplistically, quality is an attribute of software that implies the software <strong>meets its specification</strong>. The slides note this definition is too simple for ensuring quality."
+    },
+    {
+      q: "What is considered the foundation for measuring software quality?",
+      options: [ "Development tools", "Software requirements", "User feedback", "Code reviews" ],
+      answer: 1,
+      explain: "<strong>Software requirements are the foundation from which quality is measured</strong> — lack of conformance to requirements is lack of quality."
+    },
+    {
+      q: "What are implicit requirements in software development?",
+      options: [
+        "Requirements that are always explicitly documented.",
+        "Requirements that pertain only to the software interface.",
+        "Requirements that are irrelevant to software quality.",
+        "Requirements that are assumed and often go unmentioned."
+      ],
+      answer: 3,
+      explain: "There is a set of <strong>implicit requirements that often goes unmentioned</strong> — yet are expected of all professionally developed software."
+    },
+    {
+      q: "What happens if software conforms to its explicit requirements but fails to meet its implicit requirements?",
+      options: [
+        "Software quality is considered excellent.",
+        "Software meets all user expectations.",
+        "Software quality is considered questionable.",
+        "Software becomes more adaptable."
+      ],
+      answer: 2,
+      explain: "If software conforms to its explicit requirements but fails to meet its implicit requirements, <strong>software quality is suspect</strong> (questionable)."
+    },
+    {
+      q: "What is the first step in ensuring quality in a software product according to the three-prong approach?",
+      options: [
+        "Conducting user testing",
+        "Hiring external consultants",
+        "Developing the software",
+        "Establishing organization-wide policies, procedures, and standards"
+      ],
+      answer: 3,
+      explain: "The three-prong approach begins with establishing <strong>organization-wide policies, procedures and standards</strong>, which are then tailored per project and controlled."
+    },
+    {
+      q: "What must be done with organization-wide policies, procedures, and standards to make them applicable to specific projects?",
+      options: [
+        "They must be discarded.",
+        "They must be completely rewritten.",
+        "They must be tailored to fit the specific project.",
+        "They must be ignored."
+      ],
+      answer: 2,
+      explain: "Project-specific policies, procedures and standards must be <strong>tailored from the organization-wide templates</strong>."
+    },
+    {
+      q: "What role can external entities play in ensuring software quality?",
+      options: [
+        "They can be contracted to verify that an organization is standard-compliant.",
+        "They can replace the internal quality assurance team.",
+        "They can write the software code.",
+        "They can disregard existing standards."
+      ],
+      answer: 0,
+      explain: "<strong>External entities can be contracted to verify that an organization is standard-compliant.</strong>"
+    },
+    {
+      q: "What is the main objective of conducting formal technical reviews?",
+      options: [
+        "To increase team bonding",
+        "To speed up the development process",
+        "To uncover quality problems",
+        "To train new developers"
+      ],
+      answer: 2,
+      explain: "A formal technical review is a stylized meeting conducted by technical staff with the <strong>sole purpose of uncovering quality problems</strong>."
+    },
+    {
+      q: "How is measurement used in software quality assurance?",
+      options: [
+        "To track software quality and assess the effectiveness of methodological and procedural changes",
+        "To reduce the number of developers needed",
+        "To replace testing with automated tools",
+        "To increase the speed of code writing"
+      ],
+      answer: 0,
+      explain: "Measurement is used to <strong>track software quality and assess the ability of methodological and procedural changes to improve software quality</strong>."
+    },
+    {
+      q: "What is one of the primary advantages of implementing Software Quality Assurance (SQA)?",
+      options: [
+        "Increased complexity in the development process",
+        "Software will have fewer latent defects",
+        "Longer development times",
+        "Increased need for manual testing"
+      ],
+      answer: 1,
+      explain: "An SQA advantage: <strong>software will have fewer latent defects</strong>, reducing effort and time spent during testing and maintenance."
+    },
+    {
+      q: "Why is Software Quality Assurance (SQA) challenging to implement in small organizations?",
+      options: [
+        "Because it requires advanced technology",
+        "Because there is a lack of available resources to perform necessary activities",
+        "Because it is only useful in large organizations",
+        "Because it requires a large team of experts"
+      ],
+      answer: 1,
+      explain: "It is difficult to institute in small organizations, <strong>where available resources to perform necessary activities are not available</strong>."
+    },
+    {
+      q: "What is the fundamental purpose of quality reviews?",
+      options: [
+        "To validate the quality of a product or process",
+        "To increase project costs",
+        "To replace the need for testing",
+        "To reduce project duration"
+      ],
+      answer: 0,
+      explain: "Quality reviews are <strong>the fundamental method of validating the quality of a product or a process</strong>."
+    },
+    {
+      q: "When are quality reviews typically applied?",
+      options: [
+        "Only at the beginning of a project",
+        "During and/or at the end of each life cycle phase",
+        "Only after the product is released",
+        "Only during the design phase"
+      ],
+      answer: 1,
+      explain: "Quality reviews are applied <strong>during and/or at the end of each life cycle phase</strong>."
+    },
+    {
+      q: "What is the definition of software reliability?",
+      options: [
+        "Probability of failure during installation",
+        "Probability of perfect performance in any environment",
+        "Probability of failure during development",
+        "Probability of failure-free operation for a specified time in a specified environment"
+      ],
+      answer: 3,
+      explain: "Software reliability is the <strong>probability of failure-free operation for a specified time in a specified environment</strong>."
+    },
+    {
+      q: "True or False: Removing X% of faults always results in an X% improvement in reliability.",
+      options: [ "True", "False" ],
+      answer: 1,
+      explain: "<strong>False.</strong> A removal of X% of faults doesn't necessarily mean an X% improvement in reliability — Mills et al. (1987) found removing 60% of faults gave only a 3% improvement."
+    },
+    {
+      q: "What should you do if you cannot prepare for a review?",
+      options: [
+        "Annotate the hardcopy of the material",
+        "Inform the review leader",
+        "Skip the review entirely",
+        "Focus on issues of style"
+      ],
+      answer: 1,
+      explain: "Reviewer's preparation: <strong>inform the review leader if you cannot prepare</strong>."
+    },
+    {
+      q: "What must all attendees of the Formal Technical Review (FTR) do at the end of the review meeting?",
+      options: [
+        "Provide feedback anonymously",
+        "Make a decision regarding the product",
+        "Write a detailed report on the product's quality",
+        "Suggest new features for the product"
+      ],
+      answer: 1,
+      explain: "All attendees of the FTR must <strong>make a decision</strong>: accept, reject, or accept provisionally."
+    },
+    {
+      q: "What key information should be included in a Review Summary Report?",
+      options: [
+        "The salaries of the review team",
+        "What was reviewed, who reviewed it, and what the findings and conclusions were",
+        "The marketing plan for the product",
+        "A complete rewrite of the product"
+      ],
+      answer: 1,
+      explain: "The Review Summary Report answers: <strong>What was reviewed? Who reviewed it? What were the findings and conclusions?</strong>"
+    }
+  ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>
